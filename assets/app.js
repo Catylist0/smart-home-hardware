@@ -248,7 +248,6 @@ const COLS = [
   { id: "line", label: "Product line", get: p => p.family || null, hide: () => S.group === "line", cls: "c-line" },
   { id: "cat", label: "Category", get: p => CAT[p.domain]?.name || p.domain, hide: () => S.group === "cat" || S.cat.size === 1, cls: "c-cat" },
   { id: "price", label: "From", get: p => p._lo, num: true },
-  { id: "gulf", label: "Gulf price", get: p => p._gulf ? p._gulf.usd : null, num: true, cls: "c-gulf" },
   { id: "n", label: "Prices", get: p => p.prices.length || null, num: true, cls: "c-n" },
 ];
 const COL = Object.fromEntries(COLS.map(c => [c.id, c]));
