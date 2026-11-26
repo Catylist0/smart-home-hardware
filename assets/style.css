@@ -242,3 +242,47 @@ body.on-home .layout { grid-template-columns: minmax(0, 1fr); }
   .filters-head { display: flex; justify-content: flex-end; margin-bottom: 10px; }
   .pimg { max-width: 360px; }
 }
+
+/* Sortable product table */
+.sortinfo { font-size: 13px; margin: -4px 0 10px; color: var(--muted); }
+.grid { width: 100%; border-collapse: collapse; font-size: 14px; }
+.grid thead th { position: sticky; top: 67px; z-index: 3; background: var(--bg); border-bottom: 1px solid var(--line-strong); padding: 0; text-align: left; white-space: nowrap; }
+.grid thead th button { all: unset; box-sizing: border-box; display: flex; align-items: center; gap: 5px; width: 100%; padding: 10px 12px; cursor: pointer; user-select: none;
+  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); }
+.grid thead th.r button { justify-content: flex-end; }
+.grid thead th button:hover { color: var(--text); }
+.grid thead th button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.grid thead th.sorted button { color: var(--accent-text); }
+.grid thead th .unit { text-transform: none; letter-spacing: 0; font-weight: 500; opacity: .8; }
+.grid thead th .arr { font-size: 12px; opacity: .45; }
+.grid thead th.sorted .arr { opacity: 1; }
+.grid thead th sup { font-size: 10px; }
+.grid td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.grid td.r { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.grid tr.prow:hover td { background: var(--hover); }
+.grid td b { font-weight: 600; }
+.grid .none { font-size: 12.5px; color: var(--faint); }
+.grid .gp { color: var(--gulf); font-weight: 600; }
+.grid a.plain { color: var(--text); }
+.grid a.plain:hover { color: var(--accent-text); }
+.c-name { width: 100%; min-width: 300px; }
+.pcell { display: flex; gap: 14px; align-items: center; }
+.pcell > div { min-width: 0; }
+.pcell a.t { color: var(--text); font-weight: 600; font-size: 15px; }
+.pcell a.t:hover { color: var(--accent-text); text-decoration: none; }
+.pcell .desc { font-size: 13px; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.pcell .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+.pcell .th { flex: none; }
+.grid .c-line, .grid .c-cat { max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13.5px; }
+.grid tr.ghead td { padding: 0; border-bottom: 1px solid var(--line); }
+.grid tr.ghead td > div { display: flex; align-items: baseline; gap: 10px; padding: 22px 12px 8px; }
+.grid tr.ghead h2 { margin: 0; font-size: 16px; font-weight: 650; letter-spacing: -.01em; }
+.grid tr.ghead .n { color: var(--faint); font-size: 13px; }
+.grid tr.ghead .only { margin-left: auto; }
+@media (max-width: 1100px) { .grid .c-line, .grid .c-n { display: none; } }
+@media (max-width: 900px) {
+  .grid .c-cat, .grid .c-gulf { display: none; }
+  .grid thead th { top: 113px; }
+  .c-name { min-width: 0; }
+  .grid td, .grid thead th button { padding-left: 6px; padding-right: 6px; }
+}

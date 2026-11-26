@@ -47,7 +47,7 @@ const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } ca
 const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "";
 
 let D, P = [], BYID = {}, VEND = {}, shown = PAGE;
-const S = { q: "", cat: new Set(), brand: new Set(), proto: new Set(), pmin: "", pmax: "", priced: false, gulf: false, local: false, ha: false, ann: true, sort: "rel", group: "cat", p: "" };
+const S = { q: "", cat: new Set(), brand: new Set(), proto: new Set(), pmin: "", pmax: "", priced: false, gulf: false, local: false, ha: false, ann: true, sort: [], group: "cat", p: "" };
 let lastScroll = 0;
 
 // ---------- money ----------
@@ -124,7 +124,7 @@ function writeHash() {
   ["pmin", "pmax"].forEach(k => S[k] && h.set(k, S[k]));
   ["priced", "gulf", "local", "ha"].forEach(k => S[k] && h.set(k, "1"));
   if (!S.ann) h.set("ann", "0");
-  if (S.sort !== "rel") h.set("sort", S.sort);
+  if (S.sort.length) h.set("sort", S.sort.map(k => (k.desc ? "-" : "") + k.id).join(","));
   if (S.group !== "cat") h.set("group", S.group);
   if (S.p) h.set("p", S.p);
   const s = h.toString().replace(/%2C/g, ",").replace(/\+/g, "%20");
@@ -137,11 +137,11 @@ function readHash() {
   S.cat = set("cat"); S.brand = set("brand"); S.proto = set("works");
   S.pmin = h.get("pmin") || ""; S.pmax = h.get("pmax") || "";
   ["priced", "gulf", "local", "ha"].forEach(k => S[k] = h.get(k) === "1");
-  S.ann = h.get("ann") !== "0"; S.sort = h.get("sort") || "rel"; S.p = h.get("p") || "";
+  S.ann = h.get("ann") !== "0"; S.sort = (h.get("sort") || "").split(",").filter(Boolean).map(x => ({ id: x.replace(/^-/, ""), desc: x[0] === "-" })).filter(k => COL[k.id]); S.p = h.get("p") || "";
   S.group = h.get("group") || "cat";
 }
 function syncInputs() {
-  $("q").value = S.q; $("pmin").value = S.pmin; $("pmax").value = S.pmax; $("sort").value = S.sort; $("group").value = S.group;
+  $("q").value = S.q; $("pmin").value = S.pmin; $("pmax").value = S.pmax; $("group").value = S.group;
   ["priced", "gulf", "local", "ha"].forEach(k => $("f-" + k).checked = S[k]); $("f-ann").checked = S.ann;
 }
 
@@ -205,23 +205,49 @@ function renderHome() {
         <button class="opt" data-go-flag="priced">Has a public price<span class="n">${P.filter(p => p._lo != null).length}</span></button>
       </div></div></section>`;
 }
+// Sortable columns. Click a header to sort ascending, again for descending, a third time to clear.
+// Shift-click adds the column as a secondary sort. Empty values always sort last.
+const COLS = [
+  { id: "name", label: "Product", get: p => p.model },
+  { id: "brand", label: "Brand", get: p => p.vendor, hide: () => S.group === "brand" || S.group === "line" || S.brand.size === 1 },
+  { id: "line", label: "Product line", get: p => p.family || null, hide: () => S.group === "line", cls: "c-line" },
+  { id: "cat", label: "Category", get: p => CAT[p.domain]?.name || p.domain, hide: () => S.group === "cat" || S.cat.size === 1, cls: "c-cat" },
+  { id: "price", label: "From", get: p => p._lo, num: true },
+  { id: "gulf", label: "Gulf price", get: p => p._gulf ? p._gulf.usd : null, num: true, cls: "c-gulf" },
+  { id: "n", label: "Prices", get: p => p.prices.length || null, num: true, cls: "c-n" },
+];
+const COL = Object.fromEntries(COLS.map(c => [c.id, c]));
+function sortCmp() {
+  const keys = S.sort.filter(k => COL[k.id]);
+  if (!keys.length) return null;
+  return (a, b) => {
+    for (const { id, desc } of keys) {
+      const c = COL[id], x = c.get(a), y = c.get(b);
+      if (x == null || y == null) { if (x !== y) return x == null ? 1 : -1; continue; }
+      const r = c.num ? x - y : String(x).localeCompare(String(y), undefined, { numeric: true, sensitivity: "base" });
+      if (r) return desc ? -r : r;
+    }
+    return a.vendor.localeCompare(b.vendor) || a.model.localeCompare(b.model);
+  };
+}
+function clickSort(id, add) {
+  const i = S.sort.findIndex(k => k.id === id), cur = S.sort[i];
+  const next = !cur ? { id, desc: false } : !cur.desc ? { id, desc: true } : null;
+  if (add) { if (cur) S.sort.splice(i, 1, ...(next ? [next] : [])); else S.sort.push(next); }
+  else S.sort = next ? [next] : [];
+  update();
+}
 function renderResults() {
   const t = terms();
   let rows = P.filter(p => matches(p));
   const name = (a, b) => a.vendor.localeCompare(b.vendor) || a.model.localeCompare(b.model);
-  const inf = v => v ?? Infinity;
-  const sorts = {
-    rel: t.length ? (a, b) => score(b, t) - score(a, t) || name(a, b)
-      : (a, b) => catOrder(a.domain) - catOrder(b.domain) || ((b._lo != null) - (a._lo != null)) || name(a, b),
-    pa: (a, b) => inf(a._lo) - inf(b._lo) || name(a, b),
-    pd: (a, b) => (b._lo ?? -1) - (a._lo ?? -1) || name(a, b),
-    brand: name, name: (a, b) => a.model.localeCompare(b.model),
-  };
-  rows.sort(sorts[S.sort] || sorts.rel);
+  const def = t.length ? (a, b) => score(b, t) - score(a, t) || name(a, b)
+    : (a, b) => catOrder(a.domain) - catOrder(b.domain) || ((b._lo != null) - (a._lo != null)) || name(a, b);
+  rows.sort(sortCmp() || def);
   const gk = groupKey();
   if (gk) {
     const first = new Map(); rows.forEach((p, i) => { const k = gk.key(p); if (!first.has(k)) first.set(k, i); });
-    const keys = [...first.keys()].sort(gk.order || ((a, b) => S.sort === "rel" && t.length ? first.get(a) - first.get(b) : a.localeCompare(b)));
+    const keys = [...first.keys()].sort(gk.order || ((a, b) => !S.sort.length && t.length ? first.get(a) - first.get(b) : a.localeCompare(b)));
     const by = new Map(keys.map(k => [k, []])); rows.forEach(p => by.get(gk.key(p)).push(p));
     rows = keys.flatMap(k => by.get(k));
     rows._groups = by;
@@ -236,14 +262,22 @@ function renderResults() {
   [["priced", "Has price"], ["gulf", "Gulf price"], ["local", "Local control"], ["ha", "Home Assistant"]].forEach(([k, l]) => S[k] && crumbs.push([k, "", l]));
   if (!S.ann) crumbs.push(["ann", "", "Current only"]);
   $("crumbs").innerHTML = crumbs.map(([k, v, l]) => `<button class="crumb" data-un="${k}" data-v="${esc(v)}">${esc(l)} <i>✕</i></button>`).join("");
+  $("sortinfo").innerHTML = S.sort.length ? `Sorted by ${S.sort.map(k => `${esc(COL[k.id]?.label)} ${k.desc ? "↓" : "↑"}`).join(", then ")} · <button class="link" data-unsort>Reset</button>`
+    : `<span class="muted">Click a column to sort${gk ? " within each group" : ""}. Shift-click to add a second sort.</span>`;
   $("vendor").innerHTML = S.brand.size === 1 ? vendorPanel(VEND[[...S.brand][0]]) : "";
+  const cols = COLS.filter(c => !c.hide?.());
+  const head = `<thead><tr>${cols.map(c => {
+    const i = S.sort.findIndex(k => k.id === c.id), k = S.sort[i];
+    return `<th class="${c.num ? "r " : ""}${c.cls || ""}${k ? " sorted" : ""}" aria-sort="${k ? (k.desc ? "descending" : "ascending") : "none"}">
+      <button data-sort="${c.id}" title="Sort by ${esc(c.label)}">${esc(c.label)}${c.num && c.id !== "n" ? ` <span class="unit">AED</span>` : ""}<span class="arr">${k ? (k.desc ? "↓" : "↑") : "↕"}</span>${k && S.sort.length > 1 ? `<sup>${i + 1}</sup>` : ""}</button></th>`;
+  }).join("")}</tr></thead>`;
   let prev = null;
-  $("list").innerHTML = rows.length ? rows.slice(0, shown).map(p => {
+  $("list").innerHTML = rows.length ? `<table class="grid">${head}<tbody>${rows.slice(0, shown).map(p => {
     let h = "";
-    if (gk) { const k = gk.key(p); if (k !== prev) { prev = k; h = groupHead(gk, k, rows._groups.get(k)); } }
-    return h + rowHtml(p);
-  }).join("")
-    : `<li class="empty">No products match these filters. <button class="link" data-clear>Clear filters</button></li>`;
+    if (gk) { const k = gk.key(p); if (k !== prev) { prev = k; h = groupHead(gk, k, rows._groups.get(k), cols.length); } }
+    return h + rowHtml(p, cols);
+  }).join("")}</tbody></table>`
+    : `<div class="empty">No products match these filters. <button class="link" data-clear>Clear filters</button></div>`;
   $("more-wrap").hidden = rows.length <= shown;
   $("more").textContent = `Show more (${(rows.length - shown).toLocaleString()} left)`;
 }
@@ -253,30 +287,32 @@ function groupKey() {
   if (S.group === "line") return { kind: "line", key: p => `${p.vendor} · ${p.family || "Other"}`, label: k => k, sub: () => "" };
   return null;
 }
-function groupHead(gk, k, items) {
+function groupHead(gk, k, items, span) {
   const filt = gk.kind === "cat" ? (S.cat.size === 1 && S.cat.has(k) ? "" : `<button class="link only" data-go-cat="${esc(k)}" data-keep>Show only this</button>`)
     : gk.kind === "brand" ? (S.brand.size === 1 && S.brand.has(k) ? "" : `<button class="link only" data-go-brand="${esc(k)}" data-keep>Show only this</button>`) : "";
   const brands = gk.kind === "cat" ? new Set(items.map(p => p.vendor)).size : 0;
-  return `<li class="ghead"><h2>${esc(gk.label(k))}</h2><span class="n">${items.length}${brands ? ` · ${brands} brand${brands > 1 ? "s" : ""}` : ""}</span>${filt}</li>`;
+  return `<tr class="ghead"><td colspan="${span}"><div><h2>${esc(gk.label(k))}</h2><span class="n">${items.length}${brands ? ` · ${brands} brand${brands > 1 ? "s" : ""}` : ""}</span>${filt}</div></td></tr>`;
 }
 const ORDER = GROUPS.flatMap(([, cs]) => cs.map(([id]) => id));
 const catOrder = d => { const i = ORDER.indexOf(d); return i < 0 ? 99 : i; };
-function rowHtml(p) {
+function rowHtml(p, cols) {
   const tags = [];
-  if (S.group !== "cat" && S.cat.size !== 1) tags.push(`<span class="tag">${esc(CAT[p.domain]?.name || p.domain)}</span>`);
   if (p.status === "announced") tags.push(`<span class="tag a">Announced</span>`);
   (p.protocols || []).slice(0, 4).forEach(x => tags.push(`<span class="tag">${esc(PROTO[x] || x)}</span>`));
-  if (p.home_assistant && p.home_assistant !== "no") tags.push(`<span class="tag a">Home Assistant</span>`);
-  if (p._gulf) tags.push(`<span class="tag g">UAE / Gulf price</span>`);
-  const price = p._lo != null
-    ? `<small>from</small><b>${money(usdTo(p._lo))}</b>${p.prices.length > 1 ? `<small>${p.prices.length} prices</small>` : ""}`
-    : `<span class="none">No public price</span>`;
-  const by = [S.group !== "brand" && S.group !== "line" ? p.vendor : "", S.group !== "line" && p.family && p.family !== p.model ? p.family : ""].filter(Boolean).join(" · ");
-  return `<li class="row">${thumb(p, "th")}<div>
-      <a class="t" href="#p=${esc(p.id)}" data-p="${esc(p.id)}"><b>${esc(p.model)}</b>${by ? `<span class="by">${esc(by)}</span>` : ""}</a>
-      ${p.description ? `<div class="desc">${esc(p.description)}</div>` : ""}
-      ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}
-    </div><div class="price">${price}</div></li>`;
+  if (p.home_assistant && p.home_assistant !== "no") tags.push(`<span class="tag ok">Home Assistant</span>`);
+  const cell = {
+    name: () => `<td class="c-name"><div class="pcell">${thumb(p, "th")}<div>
+        <a class="t" href="#p=${esc(p.id)}" data-p="${esc(p.id)}">${esc(p.model)}</a>
+        ${p.description ? `<div class="desc">${esc(p.description)}</div>` : ""}
+        ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}</div></div></td>`,
+    brand: () => `<td><a href="#" class="plain" data-go-brand="${esc(p.vendor)}" data-keep>${esc(p.vendor)}</a></td>`,
+    line: () => `<td class="c-line muted">${esc(p.family || "")}</td>`,
+    cat: () => `<td class="c-cat muted">${esc(CAT[p.domain]?.name || p.domain)}</td>`,
+    price: () => `<td class="r"><b>${p._lo != null ? money(usdTo(p._lo)) : ""}</b>${p._lo == null ? `<span class="none">On request</span>` : ""}</td>`,
+    gulf: () => `<td class="r c-gulf">${p._gulf ? `<span class="gp">${money(usdTo(p._gulf.usd))}</span>` : ""}</td>`,
+    n: () => `<td class="r c-n muted">${p.prices.length || ""}</td>`,
+  };
+  return `<tr class="prow">${cols.map(c => cell[c.id]()).join("")}</tr>`;
 }
 function thumb(p, cls) {
   const src = safeUrl(p.image);
@@ -368,7 +404,6 @@ function bind() {
   ["pmin", "pmax"].forEach(id => $(id).addEventListener("change", e => { S[id] = e.target.value; update(); }));
   ["priced", "gulf", "local", "ha"].forEach(k => $("f-" + k).addEventListener("change", e => { S[k] = e.target.checked; update(); }));
   $("f-ann").addEventListener("change", e => { S.ann = e.target.checked; update(); });
-  $("sort").addEventListener("change", e => { S.sort = e.target.value; update(); });
   $("group").addEventListener("change", e => { S.group = e.target.value; update(); });
   $("more").addEventListener("click", () => { shown += PAGE * 2; renderResults(); });
   $("clear").addEventListener("click", clearAll);
@@ -376,9 +411,11 @@ function bind() {
   $("close-filters").addEventListener("click", closeFilters);
   $("scrim").addEventListener("click", closeFilters);
   document.addEventListener("click", e => {
-    const t = e.target.closest("[data-cat],[data-brand],[data-proto],[data-go-cat],[data-go-brand],[data-go-line],[data-go-flag],[data-p],[data-un],[data-close],[data-clear],[data-home],[data-copy]");
+    const t = e.target.closest("[data-cat],[data-brand],[data-proto],[data-go-cat],[data-go-brand],[data-go-line],[data-go-flag],[data-sort],[data-unsort],[data-p],[data-un],[data-close],[data-clear],[data-home],[data-copy]");
     if (!t) return;
     const d = t.dataset;
+    if (d.sort) { clickSort(d.sort, e.shiftKey); return; }
+    if ("unsort" in d) { S.sort = []; update(); return; }
     if (d.copy) { navigator.clipboard?.writeText(d.copy); t.textContent = "Copied"; setTimeout(() => t.textContent = d.copy, 900); return; }
     e.preventDefault();
     if (d.cat) { toggle(S.cat, d.cat); update(); }
