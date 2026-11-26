@@ -127,7 +127,8 @@ def main(src, img_dir=None):
     for p in products:
         if "link" not in p:
             continue
-        if len([x for x in urlparse(p["link"]).path.split("/") if x]) <= 1:
+        depth = len([x for x in urlparse(p["link"]).path.split("/") if x])
+        if depth == 0 or (depth == 1 and shared[(p["vendor"], p["link"])] >= 3):
             del p["link"]
         elif shared[(p["vendor"], p["link"])] >= 3:
             p["link_kind"] = "line"
