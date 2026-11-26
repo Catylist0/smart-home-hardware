@@ -45,14 +45,13 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch { return ""; } };
 const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "";
-const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
 
 let D, P = [], BYID = {}, VEND = {}, shown = PAGE;
-const S = { q: "", cat: new Set(), brand: new Set(), proto: new Set(), pmin: "", pmax: "", priced: false, gulf: false, local: false, ha: false, ann: true, sort: "rel", group: "cat", browse: "cat", p: "" };
+const S = { q: "", cat: new Set(), brand: new Set(), proto: new Set(), pmin: "", pmax: "", priced: false, gulf: false, local: false, ha: false, ann: true, sort: "rel", group: "cat", p: "" };
 let lastScroll = 0;
 
 // ---------- money ----------
-let CUR = store.get("cur") || "AED";
+const CUR = "AED";
 function usdTo(v, cur = CUR) { return cur === "AED" ? v * AED_PER_USD : cur === "USD" ? v : v / D.fx_usd[cur]; }
 function fromUsd(v, cur = CUR) { return cur === "AED" ? v / AED_PER_USD : cur === "USD" ? v : v * D.fx_usd[cur]; }
 function money(v, cur = CUR, exact = false) {
@@ -77,7 +76,6 @@ async function load() {
     BYID[p.id] = p;
     return p;
   });
-  $("gen").textContent = D.generated;
   if (P.some(p => p.protocols || p.local_control || p.home_assistant)) $("sec-proto").hidden = false;
 }
 function regionLabel(r) {
@@ -128,7 +126,6 @@ function writeHash() {
   if (!S.ann) h.set("ann", "0");
   if (S.sort !== "rel") h.set("sort", S.sort);
   if (S.group !== "cat") h.set("group", S.group);
-  if (S.browse !== "cat") h.set("browse", S.browse);
   if (S.p) h.set("p", S.p);
   const s = h.toString().replace(/%2C/g, ",").replace(/\+/g, "%20");
   if (location.hash.slice(1) !== s) history.replaceState(null, "", s ? "#" + s : location.pathname + location.search);
@@ -141,12 +138,11 @@ function readHash() {
   S.pmin = h.get("pmin") || ""; S.pmax = h.get("pmax") || "";
   ["priced", "gulf", "local", "ha"].forEach(k => S[k] = h.get(k) === "1");
   S.ann = h.get("ann") !== "0"; S.sort = h.get("sort") || "rel"; S.p = h.get("p") || "";
-  S.group = h.get("group") || "cat"; S.browse = h.get("browse") || "cat";
+  S.group = h.get("group") || "cat";
 }
 function syncInputs() {
-  $("q").value = S.q; $("pmin").value = S.pmin; $("pmax").value = S.pmax; $("sort").value = S.sort; $("group").value = S.group; $("cur").value = CUR;
+  $("q").value = S.q; $("pmin").value = S.pmin; $("pmax").value = S.pmax; $("sort").value = S.sort; $("group").value = S.group;
   ["priced", "gulf", "local", "ha"].forEach(k => $("f-" + k).checked = S[k]); $("f-ann").checked = S.ann;
-  $("price-unit").textContent = `(${CUR})`;
 }
 
 // ---------- render ----------
@@ -159,8 +155,13 @@ function render() {
   if (page) { $("home").hidden = $("results").hidden = true; renderPage(); return; }
   renderFilters();
   const home = !anyFilter();
+  document.body.classList.toggle("on-home", home);
+  $("filters").hidden = home;
   $("home").hidden = !home; $("results").hidden = home;
-  if (home) renderHome(); else renderResults();
+  const search = document.querySelector(".search"), focused = document.activeElement === $("q");
+  $("search-slot").appendChild(search);
+  if (home) { renderHome(); $("home-search").appendChild(search); } else renderResults();
+  if (focused) $("q").focus();
 }
 function openProduct(id) { if (!S.p) lastScroll = window.scrollY; S.p = id; render(); window.scrollTo(0, 0); }
 function closeProduct() { S.p = ""; render(); requestAnimationFrame(() => window.scrollTo(0, lastScroll)); }
@@ -170,16 +171,16 @@ function countBy(skip, key) {
 function renderFilters() {
   const cc = countBy("cat", "domain");
   $("f-cat").innerHTML = GROUPS.map(([g, cs]) => {
-    const items = cs.filter(([id]) => P.some(p => p.domain === id));
+    const items = cs.filter(([id]) => cc[id] || S.cat.has(id));
     if (!items.length) return "";
     return `<div class="fgroup"><b>${esc(g)}</b>${items.map(([id, name]) =>
-      `<button class="opt${S.cat.has(id) ? " on" : ""}${cc[id] ? "" : " zero"}" data-cat="${id}">${esc(name)}<span class="n">${cc[id] || 0}</span></button>`).join("")}</div>`;
+      `<button class="opt${S.cat.has(id) ? " on" : ""}" data-cat="${id}">${esc(name)}<span class="n">${cc[id] || 0}</span></button>`).join("")}</div>`;
   }).join("");
   const bc = countBy("brand", "vendor"), bq = $("brand-q").value.trim().toLowerCase();
   $("f-brand").innerHTML = D.vendors.map(v => v.name).sort((a, b) => a.localeCompare(b))
-    .filter(n => !bq || n.toLowerCase().includes(bq) || S.brand.has(n))
-    .sort((a, b) => (S.brand.has(b) - S.brand.has(a)) || ((bc[b] ? 1 : 0) - (bc[a] ? 1 : 0)))
-    .map(n => `<button class="opt${S.brand.has(n) ? " on" : ""}${bc[n] ? "" : " zero"}" data-brand="${esc(n)}">${esc(n)}<span class="n">${bc[n] || 0}</span></button>`).join("");
+    .filter(n => (bc[n] || S.brand.has(n)) && (!bq || n.toLowerCase().includes(bq) || S.brand.has(n)))
+    .sort((a, b) => S.brand.has(b) - S.brand.has(a))
+    .map(n => `<button class="opt${S.brand.has(n) ? " on" : ""}" data-brand="${esc(n)}">${esc(n)}<span class="n">${bc[n] || 0}</span></button>`).join("");
   const protos = [...new Set(P.flatMap(p => p.protocols || []))];
   $("f-proto").innerHTML = Object.keys(PROTO).filter(k => protos.includes(k))
     .map(k => `<button class="chip${S.proto.has(k) ? " on" : ""}" data-proto="${k}">${PROTO[k]}</button>`).join("");
@@ -187,42 +188,22 @@ function renderFilters() {
   $("fcount").textContent = n ? `(${n})` : "";
 }
 function renderHome() {
-  const priced = P.filter(p => p._lo != null).length, gulf = P.filter(p => p._gulf).length;
-  const cc = {}; P.forEach(p => cc[p.domain] = (cc[p.domain] || 0) + 1);
-  const brandsIn = id => new Set(P.filter(p => p.domain === id).map(p => p.vendor)).size;
-  const lo = id => { const v = P.filter(p => p.domain === id && p._lo != null).map(p => p._lo); return v.length ? Math.min(...v) : null; };
+  const cc = {}, bc = {};
+  P.forEach(p => { cc[p.domain] = (cc[p.domain] || 0) + 1; bc[p.vendor] = (bc[p.vendor] || 0) + 1; });
+  const opt = (attr, v, label, n) => `<button class="opt" ${attr}="${esc(v)}">${esc(label)}<span class="n">${n}</span></button>`;
+  const names = Object.keys(bc).sort((a, b) => a.localeCompare(b));
   $("home").innerHTML = `
-    <section class="hero">
-      <h1>Every current smart home product, in one place.</h1>
-      <p>Browse ${P.length.toLocaleString()} products from ${D.vendors.length} manufacturers by category or brand, or search by name or part number. Open any product to see its part numbers, every public price we found and where each price came from.</p>
-      <div class="stats">
-        <div><b>${P.length.toLocaleString()}</b><span>products</span></div>
-        <div><b>${D.vendors.length}</b><span>brands</span></div>
-        <div><b>${priced.toLocaleString()}</b><span>with public prices</span></div>
-        <div><b>${gulf.toLocaleString()}</b><span>priced in the Gulf</span></div>
-      </div>
-    </section>
-    <div class="seg" role="tablist"><button data-browse="cat" class="${S.browse === "cat" ? "on" : ""}">Browse by category</button><button data-browse="brand" class="${S.browse === "brand" ? "on" : ""}">Browse by brand</button></div>
-    ${S.browse === "brand" ? brandTiles() : GROUPS.map(([g, cs]) => {
-      const items = cs.filter(([id]) => cc[id]);
-      return items.length ? `<section class="group"><h2>${esc(g)}</h2><div class="tiles">${items.map(([id, name, desc]) => {
-        const l = lo(id);
-        return `<button class="tile" data-go-cat="${id}"><b>${esc(name)}</b><span class="d">${esc(desc)}</span>
-          <span class="meta">${cc[id]} products · ${brandsIn(id)} brands${l != null ? ` · from ${money(usdTo(l))}` : ""}</span></button>`;
-      }).join("")}</div></section>` : "";
-    }).join("")}`;
-}
-function brandTiles() {
-  const names = D.vendors.map(v => v.name).sort((a, b) => a.localeCompare(b));
-  return `<section class="group"><h2>${names.length} brands</h2><div class="tiles">${names.map(n => {
-    const ps = P.filter(p => p.vendor === n), c = {};
-    ps.forEach(p => c[p.domain] = (c[p.domain] || 0) + 1);
-    const top = Object.entries(c).sort((a, b) => b[1] - a[1]).slice(0, 4);
-    const pr = ps.filter(p => p._lo != null).map(p => p._lo), gulf = ps.filter(p => p._gulf).length;
-    return `<button class="tile" data-go-brand="${esc(n)}"><b>${esc(n)}</b>
-      <span class="cats">${top.map(([d]) => `<span class="tag">${esc(CAT[d]?.name || d)}</span>`).join("")}${Object.keys(c).length > 4 ? `<span class="tag">+${Object.keys(c).length - 4}</span>` : ""}</span>
-      <span class="meta">${ps.length} products · ${Object.keys(c).length} categories${pr.length ? ` · from ${money(usdTo(Math.min(...pr)))}` : ""}${gulf ? ` · ${gulf} Gulf prices` : ""}</span></button>`;
-  }).join("")}</div></section>`;
+    <div class="home-top"><div id="home-search"></div>
+      <div class="home-meta">${P.length.toLocaleString()} products · ${names.length} brands · ${P.filter(p => p._gulf).length} with Gulf prices</div></div>
+    <section class="hsec"><h2>Categories</h2><div class="hcols">
+      ${GROUPS.map(([g, cs]) => { const items = cs.filter(([id]) => cc[id]); return items.length ? `<div class="fgroup"><b>${esc(g)}</b>${items.map(([id, name]) => opt("data-go-cat", id, name, cc[id])).join("")}</div>` : ""; }).join("")}
+    </div></section>
+    <section class="hsec"><h2>Brands</h2><div class="hcols brands-cols">${names.map(n => opt("data-go-brand", n, n, bc[n])).join("")}</div></section>
+    <section class="hsec"><h2>Quick filters</h2><div class="hcols">
+      <div class="fgroup">
+        <button class="opt" data-go-flag="gulf">Priced in the UAE / Gulf<span class="n">${P.filter(p => p._gulf).length}</span></button>
+        <button class="opt" data-go-flag="priced">Has a public price<span class="n">${P.filter(p => p._lo != null).length}</span></button>
+      </div></div></section>`;
 }
 function renderResults() {
   const t = terms();
@@ -291,11 +272,16 @@ function rowHtml(p) {
     ? `<small>from</small><b>${money(usdTo(p._lo))}</b>${p.prices.length > 1 ? `<small>${p.prices.length} prices</small>` : ""}`
     : `<span class="none">No public price</span>`;
   const by = [S.group !== "brand" && S.group !== "line" ? p.vendor : "", S.group !== "line" && p.family && p.family !== p.model ? p.family : ""].filter(Boolean).join(" · ");
-  return `<li class="row"><div>
+  return `<li class="row">${thumb(p, "th")}<div>
       <a class="t" href="#p=${esc(p.id)}" data-p="${esc(p.id)}"><b>${esc(p.model)}</b>${by ? `<span class="by">${esc(by)}</span>` : ""}</a>
       ${p.description ? `<div class="desc">${esc(p.description)}</div>` : ""}
       ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}
     </div><div class="price">${price}</div></li>`;
+}
+function thumb(p, cls) {
+  const src = safeUrl(p.image);
+  return `<a class="${cls}${src ? "" : " noimg"}" href="#p=${esc(p.id)}" data-p="${esc(p.id)}" aria-hidden="true" tabindex="-1">${src
+    ? `<img src="${esc(src)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('noimg');this.remove()">` : ""}</a>`;
 }
 function vendorPanel(v) {
   if (!v) return "";
@@ -350,6 +336,7 @@ function renderPage() {
         ${alts.length ? `<section class="psec"><h2>Alternatives from other brands <small>${esc(cat?.name || "")}${p._lo != null ? ", closest in price" : ""}</small></h2>${mini(alts)}</section>` : ""}
       </div>
       <aside class="pside">
+        ${safeUrl(p.image) ? `<div class="pimg"><img src="${esc(p.image)}" alt="${esc(p.model)}" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"></div>` : ""}
         <div class="card">
           <div class="k">${p._lo != null ? "Lowest public price" : "Price"}</div>
           <div class="big">${p._lo != null ? money(usdTo(p._lo)) : "On request"}</div>
@@ -383,19 +370,13 @@ function bind() {
   $("f-ann").addEventListener("change", e => { S.ann = e.target.checked; update(); });
   $("sort").addEventListener("change", e => { S.sort = e.target.value; update(); });
   $("group").addEventListener("change", e => { S.group = e.target.value; update(); });
-  $("cur").addEventListener("change", e => {
-    const old = CUR; CUR = e.target.value; store.set("cur", CUR);
-    ["pmin", "pmax"].forEach(k => { if (S[k]) S[k] = String(Math.round(usdTo(fromUsd(+S[k], old)))); });
-    syncInputs(); render();
-  });
   $("more").addEventListener("click", () => { shown += PAGE * 2; renderResults(); });
   $("clear").addEventListener("click", clearAll);
-  $("about-btn").addEventListener("click", () => $("about").showModal());
   $("open-filters").addEventListener("click", () => { $("filters").classList.add("open"); $("scrim").hidden = false; });
   $("close-filters").addEventListener("click", closeFilters);
   $("scrim").addEventListener("click", closeFilters);
   document.addEventListener("click", e => {
-    const t = e.target.closest("[data-cat],[data-brand],[data-proto],[data-go-cat],[data-go-brand],[data-go-line],[data-browse],[data-p],[data-un],[data-close],[data-clear],[data-home],[data-copy]");
+    const t = e.target.closest("[data-cat],[data-brand],[data-proto],[data-go-cat],[data-go-brand],[data-go-line],[data-go-flag],[data-p],[data-un],[data-close],[data-clear],[data-home],[data-copy]");
     if (!t) return;
     const d = t.dataset;
     if (d.copy) { navigator.clipboard?.writeText(d.copy); t.textContent = "Copied"; setTimeout(() => t.textContent = d.copy, 900); return; }
@@ -406,10 +387,10 @@ function bind() {
     else if (d.goCat !== undefined) { if (d.keep === undefined) resetFilters(); S.p = ""; S.cat = new Set([d.goCat]); update(); window.scrollTo(0, 0); }
     else if (d.goBrand !== undefined) { if (d.keep === undefined) resetFilters(); S.p = ""; S.brand = new Set([d.goBrand]); update(); window.scrollTo(0, 0); }
     else if (d.goLine !== undefined) { const p = BYID[S.p]; resetFilters(); S.brand.add(p.vendor); S.q = p.family; S.group = "line"; syncInputs(); update(); window.scrollTo(0, 0); }
-    else if (d.browse) { S.browse = d.browse; render(); }
+    else if (d.goFlag) { resetFilters(); S[d.goFlag] = true; syncInputs(); update(); window.scrollTo(0, 0); }
     else if (d.p) { openProduct(d.p); }
-    else if (d.close) { closeProduct(); }
-    else if (d.clear || d.home !== undefined) { clearAll(); }
+    else if ("close" in d) { closeProduct(); }
+    else if ("clear" in d || "home" in d) { clearAll(); }
     else if (d.un) {
       const k = d.un;
       if (k === "q") S.q = ""; else if (k === "cat") S.cat.delete(d.v); else if (k === "brand") S.brand.delete(d.v);

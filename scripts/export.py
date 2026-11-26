@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """Build data/catalog.json and data/products.csv from a source catalogue directory.
 
-Usage: python3 scripts/export.py <catalogue-dir>
+Usage: python3 scripts/export.py <catalogue-dir> [images-dir]
+
+images-dir defaults to a catalog-images folder next to the catalogue, holding <slug>.json files
+that map model names to image URLs.
 
 The source holds one JSON file per vendor. Only public product information is copied:
 dealer, distributor and bulk prices, sourcing, manufacturer and margin fields are dropped.
@@ -67,13 +70,18 @@ def slugify(s):
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 
 
-def main(src):
+def main(src, img_dir=None):
+    img_dir = Path(img_dir) if img_dir else Path(src).resolve().parent / "catalog-images"
     vendors, products = [], []
     for f in sorted(Path(src).glob("*.json")):
         j = json.loads(f.read_text())
         if not isinstance(j.get("models"), list) or not j["models"]:
             continue
         name = j["Company"]
+        imgs = {}
+        if (img_dir / f.name).exists():
+            imgs = {k: v for k, v in json.loads((img_dir / f.name).read_text()).items()
+                    if not k.startswith("_") and isinstance(v, dict) and str(v.get("image", "")).startswith("https://")}
         vendors.append({
             "name": name, "slug": f.stem,
             "software": [{**{k: s[k] for k in ("name", "type", "notes") if s.get(k)},
@@ -103,6 +111,8 @@ def main(src):
             link = m.get("product_page") or m.get("product_url")
             if link:
                 p["link"] = link
+            if m.get("model") in imgs:
+                p["image"] = imgs[m["model"]]["image"]
             p["prices"] = [x for x in map(price, m.get("prices") or []) if x]
             products.append(p)
     out = Path(__file__).resolve().parent.parent / "data"
@@ -121,10 +131,11 @@ def main(src):
                         p.get("status", ""), p.get("description", ""), " ".join(p.get("protocols", [])),
                         p.get("local_control", ""), p.get("home_assistant", ""), f"{min(us):.2f}" if us else "",
                         f"{min(gulf):.0f}" if gulf else "", p.get("link", "")])
-    print(f"{len(vendors)} vendors, {len(products)} products, {sum(bool(p['prices']) for p in products)} priced")
+    print(f"{len(vendors)} vendors, {len(products)} products, {sum(bool(p['prices']) for p in products)} priced, "
+          f"{sum('image' in p for p in products)} with images")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) not in (2, 3):
         sys.exit(__doc__)
-    main(sys.argv[1])
+    main(*sys.argv[1:])
