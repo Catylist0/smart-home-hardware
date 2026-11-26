@@ -48,7 +48,8 @@ const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "";
 const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
 
 let D, P = [], BYID = {}, VEND = {}, shown = PAGE;
-const S = { q: "", cat: new Set(), brand: new Set(), proto: new Set(), pmin: "", pmax: "", priced: false, gulf: false, local: false, ha: false, ann: true, sort: "rel", p: "" };
+const S = { q: "", cat: new Set(), brand: new Set(), proto: new Set(), pmin: "", pmax: "", priced: false, gulf: false, local: false, ha: false, ann: true, sort: "rel", group: "cat", browse: "cat", p: "" };
+let lastScroll = 0;
 
 // ---------- money ----------
 let CUR = store.get("cur") || "AED";
@@ -126,6 +127,8 @@ function writeHash() {
   ["priced", "gulf", "local", "ha"].forEach(k => S[k] && h.set(k, "1"));
   if (!S.ann) h.set("ann", "0");
   if (S.sort !== "rel") h.set("sort", S.sort);
+  if (S.group !== "cat") h.set("group", S.group);
+  if (S.browse !== "cat") h.set("browse", S.browse);
   if (S.p) h.set("p", S.p);
   const s = h.toString().replace(/%2C/g, ",").replace(/\+/g, "%20");
   if (location.hash.slice(1) !== s) history.replaceState(null, "", s ? "#" + s : location.pathname + location.search);
@@ -138,9 +141,10 @@ function readHash() {
   S.pmin = h.get("pmin") || ""; S.pmax = h.get("pmax") || "";
   ["priced", "gulf", "local", "ha"].forEach(k => S[k] = h.get(k) === "1");
   S.ann = h.get("ann") !== "0"; S.sort = h.get("sort") || "rel"; S.p = h.get("p") || "";
+  S.group = h.get("group") || "cat"; S.browse = h.get("browse") || "cat";
 }
 function syncInputs() {
-  $("q").value = S.q; $("pmin").value = S.pmin; $("pmax").value = S.pmax; $("sort").value = S.sort; $("cur").value = CUR;
+  $("q").value = S.q; $("pmin").value = S.pmin; $("pmax").value = S.pmax; $("sort").value = S.sort; $("group").value = S.group; $("cur").value = CUR;
   ["priced", "gulf", "local", "ha"].forEach(k => $("f-" + k).checked = S[k]); $("f-ann").checked = S.ann;
   $("price-unit").textContent = `(${CUR})`;
 }
@@ -148,12 +152,18 @@ function syncInputs() {
 // ---------- render ----------
 function render() {
   writeHash();
+  const page = !!BYID[S.p];
+  document.body.classList.toggle("on-page", page);
+  $("filters").hidden = page;
+  $("page").hidden = !page;
+  if (page) { $("home").hidden = $("results").hidden = true; renderPage(); return; }
   renderFilters();
   const home = !anyFilter();
   $("home").hidden = !home; $("results").hidden = home;
   if (home) renderHome(); else renderResults();
-  renderDrawer();
 }
+function openProduct(id) { if (!S.p) lastScroll = window.scrollY; S.p = id; render(); window.scrollTo(0, 0); }
+function closeProduct() { S.p = ""; render(); requestAnimationFrame(() => window.scrollTo(0, lastScroll)); }
 function countBy(skip, key) {
   const c = {}; for (const p of P) if (matches(p, skip)) c[p[key]] = (c[p[key]] || 0) + 1; return c;
 }
@@ -192,16 +202,27 @@ function renderHome() {
         <div><b>${gulf.toLocaleString()}</b><span>priced in the Gulf</span></div>
       </div>
     </section>
-    ${GROUPS.map(([g, cs]) => {
+    <div class="seg" role="tablist"><button data-browse="cat" class="${S.browse === "cat" ? "on" : ""}">Browse by category</button><button data-browse="brand" class="${S.browse === "brand" ? "on" : ""}">Browse by brand</button></div>
+    ${S.browse === "brand" ? brandTiles() : GROUPS.map(([g, cs]) => {
       const items = cs.filter(([id]) => cc[id]);
       return items.length ? `<section class="group"><h2>${esc(g)}</h2><div class="tiles">${items.map(([id, name, desc]) => {
         const l = lo(id);
         return `<button class="tile" data-go-cat="${id}"><b>${esc(name)}</b><span class="d">${esc(desc)}</span>
           <span class="meta">${cc[id]} products · ${brandsIn(id)} brands${l != null ? ` · from ${money(usdTo(l))}` : ""}</span></button>`;
       }).join("")}</div></section>` : "";
-    }).join("")}
-    <section class="group"><h2>Brands</h2><div class="brands">${D.vendors.map(v => v.name).sort((a, b) => a.localeCompare(b))
-      .map(n => `<button data-go-brand="${esc(n)}">${esc(n)}<span>${P.filter(p => p.vendor === n).length}</span></button>`).join("")}</div></section>`;
+    }).join("")}`;
+}
+function brandTiles() {
+  const names = D.vendors.map(v => v.name).sort((a, b) => a.localeCompare(b));
+  return `<section class="group"><h2>${names.length} brands</h2><div class="tiles">${names.map(n => {
+    const ps = P.filter(p => p.vendor === n), c = {};
+    ps.forEach(p => c[p.domain] = (c[p.domain] || 0) + 1);
+    const top = Object.entries(c).sort((a, b) => b[1] - a[1]).slice(0, 4);
+    const pr = ps.filter(p => p._lo != null).map(p => p._lo), gulf = ps.filter(p => p._gulf).length;
+    return `<button class="tile" data-go-brand="${esc(n)}"><b>${esc(n)}</b>
+      <span class="cats">${top.map(([d]) => `<span class="tag">${esc(CAT[d]?.name || d)}</span>`).join("")}${Object.keys(c).length > 4 ? `<span class="tag">+${Object.keys(c).length - 4}</span>` : ""}</span>
+      <span class="meta">${ps.length} products · ${Object.keys(c).length} categories${pr.length ? ` · from ${money(usdTo(Math.min(...pr)))}` : ""}${gulf ? ` · ${gulf} Gulf prices` : ""}</span></button>`;
+  }).join("")}</div></section>`;
 }
 function renderResults() {
   const t = terms();
@@ -216,6 +237,14 @@ function renderResults() {
     brand: name, name: (a, b) => a.model.localeCompare(b.model),
   };
   rows.sort(sorts[S.sort] || sorts.rel);
+  const gk = groupKey();
+  if (gk) {
+    const first = new Map(); rows.forEach((p, i) => { const k = gk.key(p); if (!first.has(k)) first.set(k, i); });
+    const keys = [...first.keys()].sort(gk.order || ((a, b) => S.sort === "rel" && t.length ? first.get(a) - first.get(b) : a.localeCompare(b)));
+    const by = new Map(keys.map(k => [k, []])); rows.forEach(p => by.get(gk.key(p)).push(p));
+    rows = keys.flatMap(k => by.get(k));
+    rows._groups = by;
+  }
   $("count").textContent = `${rows.length.toLocaleString()} product${rows.length === 1 ? "" : "s"}`;
   const crumbs = [];
   if (S.q) crumbs.push(["q", "", `“${S.q}”`]);
@@ -227,16 +256,33 @@ function renderResults() {
   if (!S.ann) crumbs.push(["ann", "", "Current only"]);
   $("crumbs").innerHTML = crumbs.map(([k, v, l]) => `<button class="crumb" data-un="${k}" data-v="${esc(v)}">${esc(l)} <i>✕</i></button>`).join("");
   $("vendor").innerHTML = S.brand.size === 1 ? vendorPanel(VEND[[...S.brand][0]]) : "";
-  $("list").innerHTML = rows.length ? rows.slice(0, shown).map(rowHtml).join("")
+  let prev = null;
+  $("list").innerHTML = rows.length ? rows.slice(0, shown).map(p => {
+    let h = "";
+    if (gk) { const k = gk.key(p); if (k !== prev) { prev = k; h = groupHead(gk, k, rows._groups.get(k)); } }
+    return h + rowHtml(p);
+  }).join("")
     : `<li class="empty">No products match these filters. <button class="link" data-clear>Clear filters</button></li>`;
   $("more-wrap").hidden = rows.length <= shown;
   $("more").textContent = `Show more (${(rows.length - shown).toLocaleString()} left)`;
+}
+function groupKey() {
+  if (S.group === "cat") return { kind: "cat", key: p => p.domain, order: (a, b) => catOrder(a) - catOrder(b), label: k => CAT[k]?.name || k, sub: k => CAT[k]?.group || "" };
+  if (S.group === "brand") return { kind: "brand", key: p => p.vendor, label: k => k, sub: () => "" };
+  if (S.group === "line") return { kind: "line", key: p => `${p.vendor} · ${p.family || "Other"}`, label: k => k, sub: () => "" };
+  return null;
+}
+function groupHead(gk, k, items) {
+  const filt = gk.kind === "cat" ? (S.cat.size === 1 && S.cat.has(k) ? "" : `<button class="link only" data-go-cat="${esc(k)}" data-keep>Show only this</button>`)
+    : gk.kind === "brand" ? (S.brand.size === 1 && S.brand.has(k) ? "" : `<button class="link only" data-go-brand="${esc(k)}" data-keep>Show only this</button>`) : "";
+  const brands = gk.kind === "cat" ? new Set(items.map(p => p.vendor)).size : 0;
+  return `<li class="ghead"><h2>${esc(gk.label(k))}</h2><span class="n">${items.length}${brands ? ` · ${brands} brand${brands > 1 ? "s" : ""}` : ""}</span>${filt}</li>`;
 }
 const ORDER = GROUPS.flatMap(([, cs]) => cs.map(([id]) => id));
 const catOrder = d => { const i = ORDER.indexOf(d); return i < 0 ? 99 : i; };
 function rowHtml(p) {
   const tags = [];
-  if (!S.cat.size || S.cat.size > 1) tags.push(`<span class="tag">${esc(CAT[p.domain]?.name || p.domain)}</span>`);
+  if (S.group !== "cat" && S.cat.size !== 1) tags.push(`<span class="tag">${esc(CAT[p.domain]?.name || p.domain)}</span>`);
   if (p.status === "announced") tags.push(`<span class="tag a">Announced</span>`);
   (p.protocols || []).slice(0, 4).forEach(x => tags.push(`<span class="tag">${esc(PROTO[x] || x)}</span>`));
   if (p.home_assistant && p.home_assistant !== "no") tags.push(`<span class="tag a">Home Assistant</span>`);
@@ -244,8 +290,9 @@ function rowHtml(p) {
   const price = p._lo != null
     ? `<small>from</small><b>${money(usdTo(p._lo))}</b>${p.prices.length > 1 ? `<small>${p.prices.length} prices</small>` : ""}`
     : `<span class="none">No public price</span>`;
-  return `<li class="row" tabindex="0" data-p="${esc(p.id)}"><div>
-      <div class="t"><b>${esc(p.model)}</b><span class="by">${esc(p.vendor)}${p.family && p.family !== p.model ? " · " + esc(p.family) : ""}</span></div>
+  const by = [S.group !== "brand" && S.group !== "line" ? p.vendor : "", S.group !== "line" && p.family && p.family !== p.model ? p.family : ""].filter(Boolean).join(" · ");
+  return `<li class="row"><div>
+      <a class="t" href="#p=${esc(p.id)}" data-p="${esc(p.id)}"><b>${esc(p.model)}</b>${by ? `<span class="by">${esc(by)}</span>` : ""}</a>
       ${p.description ? `<div class="desc">${esc(p.description)}</div>` : ""}
       ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}
     </div><div class="price">${price}</div></li>`;
@@ -259,46 +306,69 @@ function vendorPanel(v) {
     ${sw ? `<details><summary>Apps, software and subscriptions (${v.software.length})</summary><ul>${sw}</ul></details>` : ""}
     ${sys ? `<details><summary>Example system costs (${v.systems.length})</summary><ul>${sys}</ul></details>` : ""}</div>`;
 }
-function renderDrawer() {
+function renderPage() {
   const p = BYID[S.p];
-  $("drawer").hidden = $("scrim").hidden = !p;
-  document.body.style.overflow = p ? "hidden" : "";
-  if (!p) return;
   const prices = [...p.prices].sort((a, b) => (b.gulf || 0) - (a.gulf || 0) || a.usd - b.usd);
-  const sib = P.filter(x => x !== p && x.vendor === p.vendor && p.family && x.family === p.family).slice(0, 12);
-  const link = safeUrl(p.link);
+  const line = P.filter(x => x !== p && x.vendor === p.vendor && p.family && x.family === p.family);
+  const alts = P.filter(x => x.domain === p.domain && x.vendor !== p.vendor)
+    .map(x => [x, p._lo != null && x._lo != null ? Math.abs(Math.log(x._lo / p._lo)) : p._lo == null ? (x._lo == null ? 1 : 2) : 9])
+    .sort((a, b) => a[1] - b[1]).slice(0, 10).map(a => a[0]);
+  const link = safeUrl(p.link), cat = CAT[p.domain];
   const compat = [
     p.protocols ? ["Connects over", p.protocols.map(x => PROTO[x] || x).join(", ")] : null,
-    p.local_control ? ["Local control", { yes: "Yes, works without the cloud", partial: "Partly", "cloud-only": "No, needs the vendor cloud" }[p.local_control] || p.local_control] : null,
-    p.home_assistant ? ["Home Assistant", { native: "Official integration", community: "Community integration", no: "Not supported" }[p.home_assistant] || p.home_assistant] : null,
+    p.local_control ? ["Local control", { yes: "Yes", partial: "Partly", "cloud-only": "Cloud only" }[p.local_control] || p.local_control] : null,
+    p.home_assistant ? ["Home Assistant", { native: "Official", community: "Community", no: "No" }[p.home_assistant] || p.home_assistant] : null,
   ].filter(Boolean);
-  $("drawer").innerHTML = `
-    <div class="dh"><div><div class="who">${esc(p.vendor)} · ${esc(CAT[p.domain]?.name || p.domain)}</div><h2>${esc(p.model)}</h2></div>
-      <button class="ghost x" data-close aria-label="Close">✕</button></div>
-    <div class="db">
-      ${p.description ? `<p>${esc(p.description)}</p>` : ""}
-      ${link ? `<a class="cta" href="${esc(link)}" target="_blank" rel="noopener">Manufacturer page ↗</a>` : ""}
-      <h3>Details</h3>
-      <dl class="kv">
-        <dt>Brand</dt><dd><a data-go-brand="${esc(p.vendor)}" href="#">${esc(p.vendor)}</a></dd>
-        ${p.family ? `<dt>Product line</dt><dd>${esc(p.family)}</dd>` : ""}
-        <dt>Category</dt><dd><a data-go-cat="${esc(p.domain)}" href="#">${esc(CAT[p.domain]?.name || p.domain)}</a></dd>
-        <dt>Status</dt><dd>${p.status === "announced" ? "Announced, not yet shipping" : "Current"}</dd>
-        ${p.variant_count > 1 ? `<dt>Variants</dt><dd>${p.variant_count}</dd>` : ""}
-        ${compat.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}
-      </dl>
-      ${(p.part_numbers || []).length ? `<h3>Part numbers</h3><div class="pn">${p.part_numbers.map(x => `<code title="Click to copy" data-copy="${esc(x)}">${esc(x)}</code>`).join("")}</div>` : ""}
-      <h3>Prices</h3>
-      ${prices.length ? `<table class="ptable"><thead><tr><th>Region</th><th>Source</th><th class="r">Price</th><th class="r">≈ ${CUR} ex VAT</th></tr></thead><tbody>
-        ${prices.map(x => `<tr><td>${esc(x.region || "—")}<small>${esc(x.type)}${x.variant ? " · " + esc(x.variant) : ""}</small></td>
-          <td>${safeUrl(x.source) ? `<a href="${esc(x.source)}" target="_blank" rel="noopener">${esc(host(x.source))}</a>` : "—"}<small>${x.seen ? "checked " + esc(x.seen) : ""}</small></td>
-          <td class="r">${money(x.amount, x.currency, true)}${x.amount_max ? "–" + x.amount_max.toLocaleString("en-US") : ""}${x.vat_removed ? `<small>incl. ${Math.round(x.vat_removed * 100)}% VAT</small>` : ""}</td>
-          <td class="r">${money(usdTo(x.usd))}</td></tr>`).join("")}</tbody></table>`
-        : `<div class="note">No public price found. Products like this are usually sold through installers, who quote per project.</div>`}
-      ${p.notes ? `<h3>Notes</h3><div class="note">${esc(p.notes)}</div>` : ""}
-      ${sib.length ? `<h3>More in ${esc(p.family)}</h3><ul class="sib">${sib.map(x => `<li><a data-p="${esc(x.id)}">${esc(x.model)}</a><span>${x._lo != null ? money(usdTo(x._lo)) : ""}</span></li>`).join("")}</ul>` : ""}
+  const mini = xs => `<ul class="mini-list">${xs.map(x => `<li><a href="#p=${esc(x.id)}" data-p="${esc(x.id)}"><span><b>${esc(x.model)}</b><span class="by">${esc(x.vendor === p.vendor ? (x.family || "") : x.vendor)}</span></span><span class="p">${x._lo != null ? money(usdTo(x._lo)) : "—"}</span></a></li>`).join("")}</ul>`;
+  const tags = [];
+  if (p.status === "announced") tags.push(`<span class="tag a">Announced</span>`);
+  (p.protocols || []).forEach(x => tags.push(`<span class="tag">${esc(PROTO[x] || x)}</span>`));
+  if (p.home_assistant && p.home_assistant !== "no") tags.push(`<span class="tag ok">Home Assistant</span>`);
+  if (p.local_control === "yes") tags.push(`<span class="tag ok">Local control</span>`);
+  if (p._gulf) tags.push(`<span class="tag g">Priced in the Gulf</span>`);
+  $("page").innerHTML = `
+    <button class="back" data-close>← Back to ${anyFilter() ? "results" : "directory"}</button>
+    <header class="ph">
+      <div class="trail"><a href="#" data-go-cat="${esc(p.domain)}">${esc(cat?.name || p.domain)}</a><span>/</span><a href="#" data-go-brand="${esc(p.vendor)}">${esc(p.vendor)}</a>${p.family ? `<span>/</span><span class="muted">${esc(p.family)}</span>` : ""}</div>
+      <h1>${esc(p.model)}</h1>
+      ${p.description ? `<p class="lede">${esc(p.description)}</p>` : ""}
+      ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}
+    </header>
+    <div class="pgrid">
+      <div>
+        <section class="psec"><h2>Prices <small>${prices.length ? `${prices.length} found · converted to ${CUR}, excluding VAT` : ""}</small></h2>
+          ${prices.length ? `<table class="ptable"><thead><tr><th>Region</th><th>Where</th><th class="r">Listed price</th><th class="r">≈ ${CUR} ex VAT</th></tr></thead><tbody>
+            ${prices.map(x => `<tr class="${x.gulf ? "gulf" : ""}"><td><b>${esc(x.region || "—")}</b><small>${esc(x.type)}${x.variant ? " · " + esc(x.variant) : ""}</small></td>
+              <td>${safeUrl(x.source) ? `<a href="${esc(x.source)}" target="_blank" rel="noopener">${esc(host(x.source))}</a>` : "—"}<small>${x.seen ? "checked " + esc(x.seen) : ""}</small></td>
+              <td class="r">${money(x.amount, x.currency, true)}${x.amount_max ? "–" + x.amount_max.toLocaleString("en-US") : ""}${x.vat_removed ? `<small>incl. ${Math.round(x.vat_removed * 100)}% VAT</small>` : ""}</td>
+              <td class="r">${money(usdTo(x.usd))}</td></tr>`).join("")}</tbody></table>`
+            : `<div class="note">No public price found. Products like this are usually sold through installers, who quote per project.</div>`}
+        </section>
+        ${(p.part_numbers || []).length ? `<section class="psec"><h2>Part numbers <small>${p.part_numbers.length} · click to copy</small></h2><div class="pn">${p.part_numbers.map(x => `<code data-copy="${esc(x)}">${esc(x)}</code>`).join("")}</div></section>` : ""}
+        ${p.notes ? `<section class="psec"><h2>Notes</h2><div class="note">${esc(p.notes)}</div></section>` : ""}
+        ${line.length ? `<section class="psec"><h2>More in ${esc(p.family)} <small>${line.length}</small></h2>${mini(line.slice(0, 20))}${line.length > 20 ? `<p><a href="#" data-go-line>See all ${line.length}</a></p>` : ""}</section>` : ""}
+        ${alts.length ? `<section class="psec"><h2>Alternatives from other brands <small>${esc(cat?.name || "")}${p._lo != null ? ", closest in price" : ""}</small></h2>${mini(alts)}</section>` : ""}
+      </div>
+      <aside class="pside">
+        <div class="card">
+          <div class="k">${p._lo != null ? "Lowest public price" : "Price"}</div>
+          <div class="big">${p._lo != null ? money(usdTo(p._lo)) : "On request"}</div>
+          <div class="muted" style="font-size:13px">${p._lo != null ? `ex VAT, across ${p._regions.length} region${p._regions.length === 1 ? "" : "s"}` : "Sold through installers"}</div>
+          ${p._gulf ? `<div class="gl"><div class="k">Gulf price</div><div style="font-weight:650;font-size:18px" class="num">${money(p._gulf.amount, p._gulf.currency, true)}</div><div class="muted" style="font-size:13px">${esc(p._gulf.region)} · ${esc(host(p._gulf.source))}</div></div>` : ""}
+          ${link ? `<a class="btn" href="${esc(link)}" target="_blank" rel="noopener">Manufacturer page ↗</a>` : ""}
+        </div>
+        <div class="card">
+          <dl class="facts">
+            <dt>Brand</dt><dd><a href="#" data-go-brand="${esc(p.vendor)}">${esc(p.vendor)}</a></dd>
+            ${p.family ? `<dt>Product line</dt><dd>${esc(p.family)}</dd>` : ""}
+            <dt>Category</dt><dd><a href="#" data-go-cat="${esc(p.domain)}">${esc(cat?.name || p.domain)}</a></dd>
+            <dt>Status</dt><dd>${p.status === "announced" ? "Announced" : "Current"}</dd>
+            ${p.variant_count > 1 ? `<dt>Variants</dt><dd>${p.variant_count}</dd>` : ""}
+            ${compat.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}
+          </dl>
+        </div>
+      </aside>
     </div>`;
-  $("drawer").scrollTop = 0;
 }
 
 // ---------- events ----------
@@ -312,6 +382,7 @@ function bind() {
   ["priced", "gulf", "local", "ha"].forEach(k => $("f-" + k).addEventListener("change", e => { S[k] = e.target.checked; update(); }));
   $("f-ann").addEventListener("change", e => { S.ann = e.target.checked; update(); });
   $("sort").addEventListener("change", e => { S.sort = e.target.value; update(); });
+  $("group").addEventListener("change", e => { S.group = e.target.value; update(); });
   $("cur").addEventListener("change", e => {
     const old = CUR; CUR = e.target.value; store.set("cur", CUR);
     ["pmin", "pmax"].forEach(k => { if (S[k]) S[k] = String(Math.round(usdTo(fromUsd(+S[k], old)))); });
@@ -322,9 +393,9 @@ function bind() {
   $("about-btn").addEventListener("click", () => $("about").showModal());
   $("open-filters").addEventListener("click", () => { $("filters").classList.add("open"); $("scrim").hidden = false; });
   $("close-filters").addEventListener("click", closeFilters);
-  $("scrim").addEventListener("click", () => { closeFilters(); S.p = ""; render(); });
+  $("scrim").addEventListener("click", closeFilters);
   document.addEventListener("click", e => {
-    const t = e.target.closest("[data-cat],[data-brand],[data-proto],[data-go-cat],[data-go-brand],[data-p],[data-un],[data-close],[data-clear],[data-home],[data-copy]");
+    const t = e.target.closest("[data-cat],[data-brand],[data-proto],[data-go-cat],[data-go-brand],[data-go-line],[data-browse],[data-p],[data-un],[data-close],[data-clear],[data-home],[data-copy]");
     if (!t) return;
     const d = t.dataset;
     if (d.copy) { navigator.clipboard?.writeText(d.copy); t.textContent = "Copied"; setTimeout(() => t.textContent = d.copy, 900); return; }
@@ -332,10 +403,12 @@ function bind() {
     if (d.cat) { toggle(S.cat, d.cat); update(); }
     else if (d.brand) { toggle(S.brand, d.brand); update(); }
     else if (d.proto) { toggle(S.proto, d.proto); update(); }
-    else if (d.goCat) { resetFilters(); S.cat.add(d.goCat); update(); window.scrollTo(0, 0); }
-    else if (d.goBrand) { resetFilters(); S.brand.add(d.goBrand); update(); window.scrollTo(0, 0); }
-    else if (d.p) { S.p = d.p; render(); }
-    else if (d.close) { S.p = ""; render(); }
+    else if (d.goCat !== undefined) { if (d.keep === undefined) resetFilters(); S.p = ""; S.cat = new Set([d.goCat]); update(); window.scrollTo(0, 0); }
+    else if (d.goBrand !== undefined) { if (d.keep === undefined) resetFilters(); S.p = ""; S.brand = new Set([d.goBrand]); update(); window.scrollTo(0, 0); }
+    else if (d.goLine !== undefined) { const p = BYID[S.p]; resetFilters(); S.brand.add(p.vendor); S.q = p.family; S.group = "line"; syncInputs(); update(); window.scrollTo(0, 0); }
+    else if (d.browse) { S.browse = d.browse; render(); }
+    else if (d.p) { openProduct(d.p); }
+    else if (d.close) { closeProduct(); }
     else if (d.clear || d.home !== undefined) { clearAll(); }
     else if (d.un) {
       const k = d.un;
@@ -344,10 +417,9 @@ function bind() {
       syncInputs(); update();
     }
   });
-  $("list").addEventListener("keydown", e => { if (e.key === "Enter" && e.target.dataset.p) { S.p = e.target.dataset.p; render(); } });
   document.addEventListener("keydown", e => {
     if (e.key === "/" && !/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)) { e.preventDefault(); $("q").focus(); }
-    if (e.key === "Escape" && S.p) { S.p = ""; render(); }
+    if (e.key === "Escape" && S.p) closeProduct();
   });
   window.addEventListener("hashchange", () => { readHash(); syncInputs(); render(); });
 }

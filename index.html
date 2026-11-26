@@ -51,19 +51,23 @@
   <main id="main">
     <div id="loading" class="empty">Loading catalogue…</div>
     <div id="home" hidden></div>
+    <article id="page" hidden></article>
     <div id="results" hidden>
       <div class="bar">
         <button id="open-filters" class="ghost only-mobile">Filters <span id="fcount"></span></button>
         <div id="crumbs" class="crumbs"></div>
         <div class="bar-right">
           <span id="count" class="muted"></span>
-          <select id="sort" aria-label="Sort">
-            <option value="rel">Sort: best match</option>
+          <label class="sel"><span>Group by</span><select id="group" aria-label="Group by">
+            <option value="cat">Category</option><option value="brand">Brand</option><option value="line">Product line</option><option value="none">No grouping</option>
+          </select></label>
+          <label class="sel"><span>Sort</span><select id="sort" aria-label="Sort">
+            <option value="rel">Best match</option>
             <option value="pa">Price: low to high</option>
             <option value="pd">Price: high to low</option>
             <option value="brand">Brand A–Z</option>
             <option value="name">Name A–Z</option>
-          </select>
+          </select></label>
         </div>
       </div>
       <div id="vendor"></div>
@@ -74,7 +78,6 @@
 </div>
 
 <div id="scrim" class="scrim" hidden></div>
-<aside id="drawer" class="drawer" aria-label="Product details" hidden></aside>
 
 <dialog id="about">
   <div class="about">
@@ -84,7 +87,7 @@
     <ul>
       <li>Only public prices are included: list, MSRP, retail and street prices. Installer and trade pricing is not.</li>
       <li>"From" is the lowest price we found in any region, converted at reference exchange rates. VAT is removed where the source price included it, so prices compare like for like.</li>
-      <li>The detail panel shows each price in its original currency and region, with the date it was checked. Prices change, so confirm with a supplier before quoting.</li>
+      <li>Each product page lists every price in its original currency and region, with the date it was checked. Prices change, so confirm with a supplier before quoting.</li>
       <li>Many high-end systems sell only through installers. Those products are listed without a price.</li>
     </ul>
     <h3>Data</h3>
