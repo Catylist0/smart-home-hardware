@@ -402,7 +402,7 @@ function renderPage() {
           <div class="big">${p._lo != null ? money(usdTo(p._lo)) : "On request"}</div>
           <div class="muted" style="font-size:13px">${p._lo != null ? `ex VAT, across ${p._regions.length} region${p._regions.length === 1 ? "" : "s"}` : "Sold through installers"}</div>
           ${p._gulf ? `<div class="gl"><div class="k">Gulf price</div><div style="font-weight:650;font-size:18px" class="num">${money(p._gulf.amount, p._gulf.currency, true)}</div><div class="muted" style="font-size:13px">${esc(p._gulf.region)} · ${esc(host(p._gulf.source))}</div></div>` : ""}
-          ${link ? `<a class="btn" href="${esc(link)}" target="_blank" rel="noopener">Manufacturer page ↗</a>` : ""}
+          ${link ? `<a class="btn" href="${esc(link)}" target="_blank" rel="noopener">${p.link_kind === "line" ? "Product line page" : "Manufacturer page"} ↗</a>` : ""}
         </div>
         <div class="card">
           <dl class="facts">

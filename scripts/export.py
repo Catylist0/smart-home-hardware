@@ -113,8 +113,24 @@ def main(src, img_dir=None):
                 p["link"] = link
             if m.get("model") in imgs:
                 p["image"] = imgs[m["model"]]["image"]
+                # The page an official image came from is the manufacturer's product page.
+                page = imgs[m["model"]].get("page")
+                if "link" not in p and imgs[m["model"]].get("kind") == "official" and str(page or "").startswith("https://"):
+                    p["link"] = page
             p["prices"] = [x for x in map(price, m.get("prices") or []) if x]
             products.append(p)
+    # A link shared by several products of one vendor is a product-line page, not a product page.
+    # Links to a site's front page or catalogue root are useless, so they are dropped.
+    from collections import Counter
+    from urllib.parse import urlparse
+    shared = Counter((p["vendor"], p["link"]) for p in products if "link" in p)
+    for p in products:
+        if "link" not in p:
+            continue
+        if len([x for x in urlparse(p["link"]).path.split("/") if x]) <= 1:
+            del p["link"]
+        elif shared[(p["vendor"], p["link"])] >= 3:
+            p["link_kind"] = "line"
     out = Path(__file__).resolve().parent.parent / "data"
     out.mkdir(exist_ok=True)
     (out / "catalog.json").write_text(json.dumps(
