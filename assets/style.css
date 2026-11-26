@@ -287,3 +287,8 @@ body.on-home .layout { grid-template-columns: minmax(0, 1fr); }
   .c-name { min-width: 0; }
   .grid td, .grid thead th button { padding-left: 6px; padding-right: 6px; }
 }
+
+/* Option rows bleed 8px each side for their hover background; give scroll boxes room so they never scroll sideways */
+.filters, .scroll { overflow-x: hidden; }
+.scroll { margin: 0 -8px; padding: 0 8px; }
+.filters { margin-left: -8px; padding-left: 8px; }
