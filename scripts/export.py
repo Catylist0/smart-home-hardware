@@ -115,7 +115,9 @@ def main(src, img_dir=None):
                 p["image"] = imgs[m["model"]]["image"]
                 # The page an official image came from is the manufacturer's product page.
                 page = imgs[m["model"]].get("page")
-                if "link" not in p and imgs[m["model"]].get("kind") == "official" and str(page or "").startswith("https://"):
+                # When the photo came from elsewhere, image_page holds that source and page is still the official one.
+                official = imgs[m["model"]].get("kind") == "official" or imgs[m["model"]].get("image_page")
+                if "link" not in p and official and str(page or "").startswith("https://"):
                     p["link"] = page
             p["prices"] = [x for x in map(price, m.get("prices") or []) if x]
             products.append(p)
