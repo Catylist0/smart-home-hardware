@@ -57,7 +57,7 @@ def price(p):
     return out
 
 
-PRIVATE_NOTE = re.compile(r"made_by|\bODM\b|\bOEM\b|margin|sourcing|dealer cost|markup", re.I)
+PRIVATE_NOTE = re.compile(r"made_by|\bODM\b|\bOEM\b|margin|sourcing|dealer cost|markup|revenue|per share", re.I)
 
 
 def public_notes(s):
@@ -84,7 +84,7 @@ def main(src, img_dir=None):
                     if not k.startswith("_") and isinstance(v, dict) and str(v.get("image", "")).startswith("https://")}
         vendors.append({
             "name": name, "slug": f.stem,
-            "software": [{**{k: s[k] for k in ("name", "type", "notes") if s.get(k)},
+            "software": [{**{k: s[k] for k in ("name", "type") if s.get(k)}, **({"notes": public_notes(s["notes"])} if public_notes(s.get("notes")) else {}),
                           "prices": [{k: q[k] for k in ("amount", "currency", "period", "region", "source") if q.get(k)}
                                      for q in s.get("prices") or [] if q.get("type", "list") in PUBLIC_PRICE]}
                          for s in j.get("software_and_services") or [] if s.get("type") != "dealer-tool"],
