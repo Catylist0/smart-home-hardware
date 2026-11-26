@@ -80,8 +80,11 @@ def main(src, img_dir=None):
         name = j["Company"]
         imgs = {}
         if (img_dir / f.name).exists():
-            imgs = {k: v for k, v in json.loads((img_dir / f.name).read_text()).items()
-                    if not k.startswith("_") and isinstance(v, dict) and str(v.get("image", "")).startswith("https://")}
+            # The site is served over https, so http image and page links are upgraded (every host involved serves https).
+            up = lambda u: "https://" + u[7:] if str(u or "").startswith("http://") else u
+            imgs = {k: {**v, "image": up(v.get("image")), "page": up(v.get("page"))}
+                    for k, v in json.loads((img_dir / f.name).read_text()).items()
+                    if not k.startswith("_") and isinstance(v, dict) and str(v.get("image", "")).startswith(("https://", "http://"))}
         vendors.append({
             "name": name, "slug": f.stem,
             "software": [{**{k: s[k] for k in ("name", "type") if s.get(k)}, **({"notes": public_notes(s["notes"])} if public_notes(s.get("notes")) else {}),

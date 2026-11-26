@@ -496,103 +496,103 @@ Apple,hvac-control,Apple Home Collection (LG),LG Smart Thermostat,,announced,"Th
 Apple,sensors,Apple Home Collection (LG),LG Temperature Sensor,,announced,Remote temperature sensor for the LG thermostat.,,,,39.95,,https://www.apple.com/shop/product/hsn02zm/a/lg-temperature-sensor
 Apple,hvac-control,Apple Home Collection (Schneider Home),Schneider Home Smart Thermostat,,announced,"Thermostat with a metal bezel, translucent display and proximity wake, temp/humidity sensing, EnergyKit Clean Energy Guidance, NFC pairing (works unpowered), Matter over Thread.",,,,199.95,,https://www.apple.com/shop/product/hsmv2zm/a/schneider-home-smart-thermostat
 Apple,sensors,Apple Home Collection (Schneider Home),Schneider Home Smart Thermostat Room Sensor,,announced,Room temperature and humidity sensor for the Schneider thermostat.,,,,39.95,,https://www.apple.com/shop/product/hsmw2zm/a/schneider-home-room-sensor-3
-Aqara,controllers,Hubs,Hub M3,DTC-US-HUB-M3 DTC-EU-HUB-M3,current,"Flagship hub: Zigbee 3.0 + Thread border router + Matter controller/bridge, IR blaster, Wi-Fi/Ethernet, PoE, local automations, 4-hub redundancy",,,,159.99,739,
-Aqara,controllers,Hubs,Hub M200,DTC-US-HUB-M200 DTC-EU-HUB-M200,current,"Mid hub (2025): Zigbee + Thread border router, Matter bridge/controller, Wi-Fi; FCC 2AKIT-HMG03",,,,69.99,,
-Aqara,controllers,Hubs,Hub M100,DTC-US-HUB-M100 DTC-EU-HUB-M100,current,"USB-stick hub: Zigbee + Thread, Matter bridge; FCC 2AKIT-HMG02",,,,29.99,,
+Aqara,controllers,Hubs,Hub M3,DTC-US-HUB-M3 DTC-EU-HUB-M3,current,"Flagship hub: Zigbee 3.0 + Thread border router + Matter controller/bridge, IR blaster, Wi-Fi/Ethernet, PoE, local automations, 4-hub redundancy",,,,159.99,739,https://us.aqara.com/products/hub-m3
+Aqara,controllers,Hubs,Hub M200,DTC-US-HUB-M200 DTC-EU-HUB-M200,current,"Mid hub (2025): Zigbee + Thread border router, Matter bridge/controller, Wi-Fi; FCC 2AKIT-HMG03",,,,69.99,,https://us.aqara.com/products/hub-m200
+Aqara,controllers,Hubs,Hub M100,DTC-US-HUB-M100 DTC-EU-HUB-M100,current,"USB-stick hub: Zigbee + Thread, Matter bridge; FCC 2AKIT-HMG02",,,,29.99,,https://us.aqara.com/products/hub-m100
 Aqara,controllers,Hubs,Hub M2,HM2-G01,current,"Older Zigbee 3.0 hub with IR blaster, Ethernet, Matter bridge via update; still sold in UAE (e& starter bundle hub)",,,,86.86,319,
-Aqara,controllers,Hubs,Hub M1S / M1S Gen 2,DTC-US-HUB-M1S DTC-EU-HUB-M1S-GEN2,current,"Zigbee 3.0 hub with night light and speaker/siren, Matter bridge",,,,59.99,299,
-Aqara,controllers,Hubs,Hub E1,DTC-US-HUB-E1 DTC-EU-HUB-E1,current,"Entry USB-dongle Zigbee 3.0 hub, Wi-Fi extender",,,,29.15,149,
+Aqara,controllers,Hubs,Hub M1S / M1S Gen 2,DTC-US-HUB-M1S DTC-EU-HUB-M1S-GEN2,current,"Zigbee 3.0 hub with night light and speaker/siren, Matter bridge",,,,59.99,299,https://us.aqara.com/products/hub-m1s
+Aqara,controllers,Hubs,Hub E1,DTC-US-HUB-E1 DTC-EU-HUB-E1,current,"Entry USB-dongle Zigbee 3.0 hub, Wi-Fi extender",,,,29.15,149,https://us.aqara.com/products/hub-e1
 Aqara,controllers,Hubs,Edge Hub M300,,announced,Edge hub filed at FCC Aug 2025 (2AKIT-HMG04); not yet in Aqara web stores,,,,,,
 Aqara,touchscreens,Panels,Panel Hub S1 Plus,,current,"In-wall 6-inch touchscreen panel with built-in Zigbee hub, 3 relay channels; China / Asia / Middle East market",,,,,,
 Aqara,touchscreens,Panels,MagicPad S1 Plus (SEA/ME),,current,Regional variant of the S1 Plus in-wall touch panel for South-East Asia and Middle East (UK-style box),,,,,,
 Aqara,touchscreens,Panels,Magic Switch S1E,,current,4-inch touchscreen scene switch with 3 relay channels (86 box),,,,81.42,299,
-Aqara,touchscreens,Panels,Touchscreen Switch S100 (US),DTC-US-CT-S100,current,"In-wall touchscreen light switch, decora form, Matter over Thread, relay; FCC 2AKIT-WSK06E",,,,76.28,,
-Aqara,touchscreens,Panels,Touchscreen Dial V1 (EU),DTC-EU-CT-TDV1,current,"EU in-wall touchscreen with rotary dial, relay, Zigbee/Matter controller; also desktop version",,,,161.99,,
+Aqara,touchscreens,Panels,Touchscreen Switch S100 (US),DTC-US-CT-S100,current,"In-wall touchscreen light switch, decora form, Matter over Thread, relay; FCC 2AKIT-WSK06E",,,,76.28,,https://us.aqara.com/products/touchscreen-switch-s100
+Aqara,touchscreens,Panels,Touchscreen Dial V1 (EU),DTC-EU-CT-TDV1,current,"EU in-wall touchscreen with rotary dial, relay, Zigbee/Matter controller; also desktop version",,,,161.99,,https://eu.aqara.com/products/aqara-touchscreen-dial-v1
 Aqara,touchscreens,Panels,Display Switch V1 (EU),,current,EU in-wall switch with small display,,,,,,
-Aqara,keypads,Light Switch H2,Light Switch H2 (US),SP-lightSwitchH2NA-2Buttons-1Channel SP-lightSwitchH2NA-2Buttons-2Channel SP-lightSwitchH2NA-2Buttons-3Channel,current,"Decora smart switch, Matter over Thread / Zigbee, neutral required, 1/2/3 relay channels, configurable buttons; FCC 2AKIT-WSK02E",,,,44.99,,
-Aqara,keypads,Light Switch H2,Light Switch H2 (EU),DTC-EU-CT-H2-2B1C DTC-EU-CT-H2-4B2C,current,"EU-box smart wall switch, Zigbee/Thread, 2-button 1-ch or 4-button 2-ch, neutral required",,,,45.35,,
-Aqara,keypads,Smart Wall Switch H1,Smart Wall Switch H1 (EU),DTC-EU-CT-SWSH1SR-GRAY DTC-EU-CT-SWSH1DR-WHITE,current,"EU rocker smart switch, Zigbee, no-neutral and with-neutral, single/double rocker",,,,34.55,213,
+Aqara,keypads,Light Switch H2,Light Switch H2 (US),SP-lightSwitchH2NA-2Buttons-1Channel SP-lightSwitchH2NA-2Buttons-2Channel SP-lightSwitchH2NA-2Buttons-3Channel,current,"Decora smart switch, Matter over Thread / Zigbee, neutral required, 1/2/3 relay channels, configurable buttons; FCC 2AKIT-WSK02E",,,,44.99,,https://us.aqara.com/products/aqara-light-switch-h2-us
+Aqara,keypads,Light Switch H2,Light Switch H2 (EU),DTC-EU-CT-H2-2B1C DTC-EU-CT-H2-4B2C,current,"EU-box smart wall switch, Zigbee/Thread, 2-button 1-ch or 4-button 2-ch, neutral required",,,,45.35,,https://eu.aqara.com/products/aqara-light-switch-h2
+Aqara,keypads,Smart Wall Switch H1,Smart Wall Switch H1 (EU),DTC-EU-CT-SWSH1SR-GRAY DTC-EU-CT-SWSH1DR-WHITE,current,"EU rocker smart switch, Zigbee, no-neutral and with-neutral, single/double rocker",,,,34.55,213,https://eu.aqara.com/products/aqara-smart-wall-switch-h1-no-neutral
 Aqara,keypads,Smart Light Switch (US),"Smart Light Switch (US, Zigbee)",DTC-US-CT-WS-WS DTC-US-CT-WS-WD DTC-US-CT-WS-NS,current,"US decora Zigbee smart switch, single/double rocker, neutral and no-neutral",,,,35.03,,https://us.aqara.com/products/light-switch
 Aqara,keypads,Smart Wall Switch D1,Smart Wall Switch D1,QBKG21LM QBKG24LM,current,"86-box Zigbee wall switch, 1-3 gang, neutral/no-neutral (UK/China style)",,,,54.46,200,
 Aqara,keypads,Smart Wall Switch Z1 Pro,Smart Wall Switch Z1 Pro,,current,86-box Zigbee/Thread wall switch with configurable buttons and energy metering (SEA / ME),,,,67.80,249,
 Aqara,keypads,Light Switch H2,Presence Switch H2 (US),,announced,"Decora smart switch with mmWave presence sensor, 1/2/3 channel; FCC 2AKIT-WSK04D (Nov 2025)",,,,,,
-Aqara,remotes,Wireless switches,Wireless Mini Switch (T1),DTC-US-SN-WMS DTC-EU-SN-WMS,current,"Battery Zigbee button, single/double/long press",,,,17.99,99,
-Aqara,remotes,Wireless switches,Wireless Remote Switch H1,DTC-EU-CT-WRSH1,current,"Battery wall-stick remote, single/double rocker, Zigbee",,,,31.31,130,
-Aqara,remotes,Cube,Cube T1 Pro,DTC-US-CT-CUBET1PRO DTC-EU-CT-CUBET1PRO,current,"Gesture controller cube (rotate, flip, shake), Zigbee",,,,22.99,109,
-Aqara,lighting-control,Dimmers,Dimmer Switch H2 (US),SP-DimmerH2NA-White,current,"Decora dimmer, Matter over Thread / Zigbee, neutral; FCC 2AKIT-WSK05E",,,,49.99,,
-Aqara,lighting-control,Dimmers,Dimmer Switch H2 (EU),DTC-EU-CT-DWH2-WHITE DTC-EU-CT-DWH2-GRAY,current,"EU-box rotary/touch dimmer, Zigbee/Thread",,,,53.99,,
+Aqara,remotes,Wireless switches,Wireless Mini Switch (T1),DTC-US-SN-WMS DTC-EU-SN-WMS,current,"Battery Zigbee button, single/double/long press",,,,17.99,99,https://us.aqara.com/products/wireless-mini-switch
+Aqara,remotes,Wireless switches,Wireless Remote Switch H1,DTC-EU-CT-WRSH1,current,"Battery wall-stick remote, single/double rocker, Zigbee",,,,31.31,130,https://eu.aqara.com/products/aqara-wireless-remote-switch-h1
+Aqara,remotes,Cube,Cube T1 Pro,DTC-US-CT-CUBET1PRO DTC-EU-CT-CUBET1PRO,current,"Gesture controller cube (rotate, flip, shake), Zigbee",,,,22.99,109,https://us.aqara.com/products/cube-t1-pro
+Aqara,lighting-control,Dimmers,Dimmer Switch H2 (US),SP-DimmerH2NA-White,current,"Decora dimmer, Matter over Thread / Zigbee, neutral; FCC 2AKIT-WSK05E",,,,49.99,,https://us.aqara.com/products/aqara-dimmer-switch-h2-us
+Aqara,lighting-control,Dimmers,Dimmer Switch H2 (EU),DTC-EU-CT-DWH2-WHITE DTC-EU-CT-DWH2-GRAY,current,"EU-box rotary/touch dimmer, Zigbee/Thread",,,,53.99,,https://eu.aqara.com/products/aqara-dimmer-switch-h2-eu
 Aqara,lighting-control,Dimmers,Presence Dimmer H2 (US),,announced,Decora dimmer with mmWave presence sensor; FCC 2AKIT-WSK05D (Apr 2025),,,,,,
-Aqara,lighting-control,Relay modules,Dual Relay Module T2,DTC-US-CT-DRMT2 DTC-EU-CT-DRMT2,current,"In-box 2-channel relay with power metering, dry-contact mode, Zigbee/Matter",,,,34.30,189,
+Aqara,lighting-control,Relay modules,Dual Relay Module T2,DTC-US-CT-DRMT2 DTC-EU-CT-DRMT2,current,"In-box 2-channel relay with power metering, dry-contact mode, Zigbee/Matter",,,,34.30,189,https://us.aqara.com/products/dual-relay-module-t2
 Aqara,lighting-control,Relay modules,Single Switch Module T1,SSM-U01 SSM-U02,current,"In-box 1-channel Zigbee relay, with-neutral or no-neutral",,,,43.29,159,
 Aqara,lighting-control,LED drivers,LED Strip Driver (Lightstrip Driver),,current,Zigbee driver for third-party LED strips,,,,32.40,119,
-Aqara,smart-lamps,LED Bulb T2,LED Bulb T2 (E26/E27),DTC-US-LT-T2-RGBE26 DTC-US-LT-T2-CCTE26 DTC-EU-LT-T2-RGBE27,current,"Matter over Thread / Zigbee bulb, CCT or RGB+CCT",,,,21.99,,
-Aqara,smart-lamps,LED Bulb T2,LED Bulb T2 (GU10),DTC-US-LT-T2-RGBGU10 DTC-EU-LT-T2-RGBGU10,current,"GU10 spot bulb, CCT or RGB+CCT, Thread/Zigbee",,,,21.99,,
-Aqara,smart-lamps,LED Bulb T2,LED Bulb T2 (E12/E14),DTC-EU-LT-LBT12-CCT DTC-EU-LT-LBT12-RGBCCT,current,"Candle bulb, CCT or RGB+CCT; FCC 2AKIT-LBL2 (Aug 2026)",,,,26.66,,
+Aqara,smart-lamps,LED Bulb T2,LED Bulb T2 (E26/E27),DTC-US-LT-T2-RGBE26 DTC-US-LT-T2-CCTE26 DTC-EU-LT-T2-RGBE27,current,"Matter over Thread / Zigbee bulb, CCT or RGB+CCT",,,,21.99,,https://us.aqara.com/products/led-bulb-t2-e26
+Aqara,smart-lamps,LED Bulb T2,LED Bulb T2 (GU10),DTC-US-LT-T2-RGBGU10 DTC-EU-LT-T2-RGBGU10,current,"GU10 spot bulb, CCT or RGB+CCT, Thread/Zigbee",,,,21.99,,https://us.aqara.com/products/led-bulb-t2-gu10
+Aqara,smart-lamps,LED Bulb T2,LED Bulb T2 (E12/E14),DTC-EU-LT-LBT12-CCT DTC-EU-LT-LBT12-RGBCCT,current,"Candle bulb, CCT or RGB+CCT; FCC 2AKIT-LBL2 (Aug 2026)",,,,26.66,,https://eu.aqara.com/products/led-bulb-t2-e14
 Aqara,smart-lamps,LED Bulb T1,LED Bulb T1,ZNLDP12LM,current,Older Zigbee tunable-white E27 bulb,,,,23.14,85,
-Aqara,smart-lamps,Downlights,LED Downlight T2,DTC-US-LT-LDT2RGBCCT4 DTC-EU-LT-LDT2-4CCT,current,"Recessed downlight 4/6-inch, CCT or RGB+CCT, Thread/Zigbee; FCC 2AKIT-LSL09",,,,46.99,219,
-Aqara,smart-lamps,LED strips,LED Strip T2,DTC-US-LT-LST298 DTC-EU-LT-LST2-5,current,"RGBIC+CCT strip, 2/5/10 m (US 3m/16.4ft/...), Matter; FCC 2AKIT-LSL07",,,,65.99,,
-Aqara,smart-lamps,LED strips,LED Strip T1 (+ extension),DTC-US-LT-STRIPT1 DTC-US-AC-STRIPT1-EX DTC-EU-LT-STRIPT1,current,"2 m RGBIC strip, Zigbee/Matter; 1 m extension sold separately (USD 12.99)",,,,43.19,219,
-Aqara,smart-lamps,Ceiling lights,Ceiling Light T1M,DTC-US-LT-T1M DTC-EU-LT-T1M,current,"Ceiling light with white main + RGB ring, Zigbee/Matter",,,,149.99,763,
+Aqara,smart-lamps,Downlights,LED Downlight T2,DTC-US-LT-LDT2RGBCCT4 DTC-EU-LT-LDT2-4CCT,current,"Recessed downlight 4/6-inch, CCT or RGB+CCT, Thread/Zigbee; FCC 2AKIT-LSL09",,,,46.99,219,https://us.aqara.com/products/led-downlight-t2
+Aqara,smart-lamps,LED strips,LED Strip T2,DTC-US-LT-LST298 DTC-EU-LT-LST2-5,current,"RGBIC+CCT strip, 2/5/10 m (US 3m/16.4ft/...), Matter; FCC 2AKIT-LSL07",,,,65.99,,https://us.aqara.com/products/led-strip-t2
+Aqara,smart-lamps,LED strips,LED Strip T1 (+ extension),DTC-US-LT-STRIPT1 DTC-US-AC-STRIPT1-EX DTC-EU-LT-STRIPT1,current,"2 m RGBIC strip, Zigbee/Matter; 1 m extension sold separately (USD 12.99)",,,,43.19,219,https://eu.aqara.com/products/aqara-led-strip-t1
+Aqara,smart-lamps,Ceiling lights,Ceiling Light T1M,DTC-US-LT-T1M DTC-EU-LT-T1M,current,"Ceiling light with white main + RGB ring, Zigbee/Matter",,,,149.99,763,https://us.aqara.com/products/ceiling-light-t1m
 Aqara,smart-lamps,Ceiling lights,Ceiling Light L1-350,ZNXDD01LM,current,"Zigbee tunable-white ceiling light, 350 mm",,,,73.25,269,
-Aqara,smart-lamps,Floor lamps,Floor Lamp T1,DTC-US-LT-FLT1 DTC-EU-LT-FLT1,current,"RGBIC floor lamp, Matter",,,,119.99,,
-Aqara,smart-lamps,Outdoor lights,Outdoor String Lights H1,DTC-US-LT-OSLH150 DTC-US-LT-OSLH1100,current,"Outdoor RGB string lights 50/100 ft, Matter; FCC 2AKIT-LBL14",,,,129.59,,
-Aqara,smart-lamps,Outdoor lights,Permanent Outdoor Lights H1,DTC-US-LT-POLH150 DTC-EU-LT-POLH1-100,current,"Permanent eave lights 50/100/150 ft, RGBIC, Matter; FCC 2AKIT-LBL17",,,,189.99,,
-Aqara,shading,Curtain drivers,Curtain Driver E1 (rod / track),DTC-US-CD-E1-ROD DTC-US-CD-E1-TRACK DTC-EU-CD-E1-TRACK,current,"Retrofit battery curtain robot for existing rod or track, Zigbee",,,,89.99,449,
-Aqara,shading,Roller shade,Roller Shade Driver E1,DTC-EU-CD-RSDE1 DTC-UK-CD-RSDE1,current,"Retrofit chain/cord-loop roller blind motor, battery, Zigbee",,,,64.79,319,
+Aqara,smart-lamps,Floor lamps,Floor Lamp T1,DTC-US-LT-FLT1 DTC-EU-LT-FLT1,current,"RGBIC floor lamp, Matter",,,,119.99,,https://us.aqara.com/products/floor-lamp-t1
+Aqara,smart-lamps,Outdoor lights,Outdoor String Lights H1,DTC-US-LT-OSLH150 DTC-US-LT-OSLH1100,current,"Outdoor RGB string lights 50/100 ft, Matter; FCC 2AKIT-LBL14",,,,129.59,,https://us.aqara.com/products/outdoor-string-lights-h1
+Aqara,smart-lamps,Outdoor lights,Permanent Outdoor Lights H1,DTC-US-LT-POLH150 DTC-EU-LT-POLH1-100,current,"Permanent eave lights 50/100/150 ft, RGBIC, Matter; FCC 2AKIT-LBL17",,,,189.99,,https://us.aqara.com/products/permanent-outdoor-light-h1
+Aqara,shading,Curtain drivers,Curtain Driver E1 (rod / track),DTC-US-CD-E1-ROD DTC-US-CD-E1-TRACK DTC-EU-CD-E1-TRACK,current,"Retrofit battery curtain robot for existing rod or track, Zigbee",,,,89.99,449,https://us.aqara.com/products/curtain-driver-e1
+Aqara,shading,Roller shade,Roller Shade Driver E1,DTC-EU-CD-RSDE1 DTC-UK-CD-RSDE1,current,"Retrofit chain/cord-loop roller blind motor, battery, Zigbee",,,,64.79,319,https://eu.aqara.com/products/aqara-roller-shade-driver-e1
 Aqara,shading,Curtain motors,Curtain Motor C3,,current,"Mains tubular track curtain motor, Zigbee (China / ME)",,,,171.27,629,
 Aqara,shading,Roller shade,Roller Shade Controller T1S / Smart Roller Shade Controller,,current,"Mains roller-shade tube motor controller, Zigbee",,,,179.44,659,
 Aqara,shading,Blinds,Vertical Blinds Controller H1,,current,"Motor for vertical blinds, Zigbee",,,,351.26,1290,
-Aqara,shading,Switches,Shutter Switch H2 (EU),DTC-EU-CD-SSH2,current,"EU-box shutter/blind wall switch with relay, Zigbee/Thread",,,,64.79,,
+Aqara,shading,Switches,Shutter Switch H2 (EU),DTC-EU-CD-SSH2,current,"EU-box shutter/blind wall switch with relay, Zigbee/Thread",,,,64.79,,https://eu.aqara.com/products/shutter-switch-h2-eu
 Aqara,shading,Blinds,Blind Tilt Controller C100,,announced,Retrofit blind tilt motor; FCC 2AKIT-CDM04 / LBL18 (Sep 2026),,,,,,
-Aqara,hvac-control,Thermostats,Thermostat Hub W200,DTC-US-TC-W200,current,US 24V HVAC thermostat with built-in Zigbee/Thread hub and Matter controller; FCC 2AKIT-SRTA06,,,,159.99,,
-Aqara,hvac-control,Thermostats,Thermostat Hub W200 C-Wire Adapter,DTC-US-AC-W200-C-WIRE,current,Common-wire adapter accessory for W200 installs without C wire,,,,26.27,,
-Aqara,hvac-control,Radiator thermostats,Radiator Thermostat W600,DTC-EU-SN-RTW600,current,"TRV, Thread/Matter, battery",,,,53.99,,
-Aqara,hvac-control,Floor heating,Floor Heating Thermostat W500,DTC-EU-SN-FHTW500,current,"In-wall electric/water underfloor heating thermostat, Zigbee/Matter",,,,75.59,,
+Aqara,hvac-control,Thermostats,Thermostat Hub W200,DTC-US-TC-W200,current,US 24V HVAC thermostat with built-in Zigbee/Thread hub and Matter controller; FCC 2AKIT-SRTA06,,,,159.99,,https://us.aqara.com/products/thermostat-hub-w200
+Aqara,hvac-control,Thermostats,Thermostat Hub W200 C-Wire Adapter,DTC-US-AC-W200-C-WIRE,current,Common-wire adapter accessory for W200 installs without C wire,,,,26.27,,https://us.aqara.com/products/thermostat-hub-w200-c-wire-adapter
+Aqara,hvac-control,Radiator thermostats,Radiator Thermostat W600,DTC-EU-SN-RTW600,current,"TRV, Thread/Matter, battery",,,,53.99,,https://eu.aqara.com/products/radiator-thermostat-w600
+Aqara,hvac-control,Floor heating,Floor Heating Thermostat W500,DTC-EU-SN-FHTW500,current,"In-wall electric/water underfloor heating thermostat, Zigbee/Matter",,,,75.59,,https://eu.aqara.com/products/aqara-floor-heating-thermostat-w500
 Aqara,hvac-control,Thermostats,Thermostat S3,,current,"In-wall touchscreen fan-coil/AC thermostat (China / ME, relevant to Gulf ducted FCU)",,,,190.33,699,
-Aqara,sensors,Sensors,Presence Sensor FP2,DTC-US-SN-PSFP2,current,"mmWave multi-person, multi-zone presence sensor, Wi-Fi",,,,82.99,419,
-Aqara,sensors,Sensors,Presence Sensor FP1E,DTC-US-SN-PSFP1E,current,"mmWave presence sensor, Zigbee, mains",,,,49.99,,
-Aqara,sensors,Sensors,Presence Multi-Sensor FP300,DTC-US-SN-PSFP300,current,"Battery mmWave+PIR presence with temp/humidity/light, Thread/Zigbee; FCC 2AKIT-PSS04",,,,49.99,,
-Aqara,sensors,Sensors,Spatial Multi-Sensor FP400,DTC-US-SN-SMSFP400 DTC-EU-SN-FP400,current,Ceiling mmWave spatial/zone presence multi-sensor; FP400 Pro filed at FCC Jun 2026,,,,58.39,,
-Aqara,sensors,Sensors,Motion Sensor P1,DTC-US-SN-MSP1,current,"PIR motion, Zigbee, battery",,,,22.99,134,
-Aqara,sensors,Sensors,Motion and Light Sensor P2,DTC-US-SN-MLSP2,current,"PIR + lux, Matter over Thread",,,,32.11,219,
-Aqara,sensors,Sensors,Door and Window Sensor (T1),DTC-US-SN-DWS,current,"Contact sensor, Zigbee",,,,17.99,99,
-Aqara,sensors,Sensors,Door and Window Sensor P2,DTC-US-SN-DWSP2,current,"Contact sensor, Matter over Thread",,,,25.54,149,
-Aqara,sensors,Sensors,Multi-State Sensor P100,DTC-US-SN-MSSP100-WHITE,current,Contact + vibration + tilt sensor; FCC 2AKIT-VBS03,,,,29.99,,
-Aqara,sensors,Sensors,Temperature and Humidity Sensor (T1),DTC-US-SN-THS,current,"Temp/humidity/pressure, Zigbee",,,,19.99,109,
-Aqara,sensors,Sensors,Climate Sensor W100,DTC-US-CT-CSW100 DTC-EU-CT-CSW100,current,"Temp/humidity sensor with display and buttons, Thread/Matter; FCC 2AKIT-THS04",,,,39.99,,
-Aqara,sensors,Sensors,Water Leak Sensor (T1),DTC-US-SN-WLS,current,"Leak sensor, Zigbee",,,,18.99,119,
+Aqara,sensors,Sensors,Presence Sensor FP2,DTC-US-SN-PSFP2,current,"mmWave multi-person, multi-zone presence sensor, Wi-Fi",,,,82.99,419,https://us.aqara.com/products/presence-sensor-fp2
+Aqara,sensors,Sensors,Presence Sensor FP1E,DTC-US-SN-PSFP1E,current,"mmWave presence sensor, Zigbee, mains",,,,49.99,,https://us.aqara.com/products/presence-sensor-fp1e
+Aqara,sensors,Sensors,Presence Multi-Sensor FP300,DTC-US-SN-PSFP300,current,"Battery mmWave+PIR presence with temp/humidity/light, Thread/Zigbee; FCC 2AKIT-PSS04",,,,49.99,,https://us.aqara.com/products/presence-multi-sensor-fp300
+Aqara,sensors,Sensors,Spatial Multi-Sensor FP400,DTC-US-SN-SMSFP400 DTC-EU-SN-FP400,current,Ceiling mmWave spatial/zone presence multi-sensor; FP400 Pro filed at FCC Jun 2026,,,,58.39,,https://us.aqara.com/products/spatial-multi-sensor-fp400
+Aqara,sensors,Sensors,Motion Sensor P1,DTC-US-SN-MSP1,current,"PIR motion, Zigbee, battery",,,,22.99,134,https://us.aqara.com/products/motion-sensor-p1
+Aqara,sensors,Sensors,Motion and Light Sensor P2,DTC-US-SN-MLSP2,current,"PIR + lux, Matter over Thread",,,,32.11,219,https://us.aqara.com/products/motion-and-light-sensor-p2
+Aqara,sensors,Sensors,Door and Window Sensor (T1),DTC-US-SN-DWS,current,"Contact sensor, Zigbee",,,,17.99,99,https://us.aqara.com/products/door-and-window-sensor
+Aqara,sensors,Sensors,Door and Window Sensor P2,DTC-US-SN-DWSP2,current,"Contact sensor, Matter over Thread",,,,25.54,149,https://us.aqara.com/products/door-and-window-sensor-p2
+Aqara,sensors,Sensors,Multi-State Sensor P100,DTC-US-SN-MSSP100-WHITE,current,Contact + vibration + tilt sensor; FCC 2AKIT-VBS03,,,,29.99,,https://us.aqara.com/products/multi-state-sensor-p100
+Aqara,sensors,Sensors,Temperature and Humidity Sensor (T1),DTC-US-SN-THS,current,"Temp/humidity/pressure, Zigbee",,,,19.99,109,https://us.aqara.com/products/temperature-and-humidity-sensor
+Aqara,sensors,Sensors,Climate Sensor W100,DTC-US-CT-CSW100 DTC-EU-CT-CSW100,current,"Temp/humidity sensor with display and buttons, Thread/Matter; FCC 2AKIT-THS04",,,,39.99,,https://us.aqara.com/products/climate-sensor-w100
+Aqara,sensors,Sensors,Water Leak Sensor (T1),DTC-US-SN-WLS,current,"Leak sensor, Zigbee",,,,18.99,119,https://us.aqara.com/products/water-leak-sensor
 Aqara,sensors,Sensors,Vibration Sensor (T1),DTC-US-SN-VS,current,"Vibration/tilt/drop sensor, Zigbee",,,,18.99,99,https://us.aqara.com/products/vibration-sensor
 Aqara,sensors,Sensors,TVOC Air Quality Monitor,AAQS-S01,current,"TVOC/temp/humidity monitor with e-ink display, Zigbee",,,,59.63,219,
-Aqara,sensors,Sensors,Valve Controller T1,DTC-US-CT-VCT1 DTC-EU-CT-VCT1,current,"Motorised actuator for existing water/gas ball valves (leak shut-off), Zigbee",,,,65.69,,
+Aqara,sensors,Sensors,Valve Controller T1,DTC-US-CT-VCT1 DTC-EU-CT-VCT1,current,"Motorised actuator for existing water/gas ball valves (leak shut-off), Zigbee",,,,65.69,,https://us.aqara.com/products/valve-controller-t1
 Aqara,power-modules,Plugs,Smart Plug (US / UK-EU Zigbee),DTC-US-CT-SP,current,Zigbee smart plug with power metering,,,,29.99,177,https://us.aqara.com/products/smart-plug
-Aqara,power-modules,Plugs,Power Plug H2 (EU / UK),DTC-EU-CT-SPH2EU DTC-UK-CT-SPH2UK,current,"Matter over Thread plug, 16A/13A, energy metering",,,,35.63,,
-Aqara,power-modules,Plugs,Outdoor Plug H2 (EU),DTC-EU-CT-OPH2EU,current,"IP-rated outdoor plug, Thread/Matter, metering",,,,35.63,,
-Aqara,power-modules,Outlets,Wall Outlet H2 (EU),DTC-EU-CT-WOH2,current,"In-wall Schuko socket with relay and metering, Zigbee/Thread",,,,43.19,,
-Aqara,intercom,Doorbells,Doorbell Camera Hub G410,DTC-US-EN-G410-BLACK DTC-EU-EN-G410-GRAY,current,"2K video doorbell with built-in Zigbee hub, chime repeater, wired/battery; FCC 2AKIT-CHC09",,,,111.68,,
-Aqara,intercom,Doorbells,Doorbell Camera G400 (Wired),DTC-US-EN-G400 DTC-EU-CM-G400,current,"Wired 2K doorbell, Matter-ready; FCC 2AKIT-DBC03",,,,99.99,,
-Aqara,intercom,Doorbells,Video Doorbell G4,DTC-US-EN-G4 DTC-EU-EN-G4,current,"Older 1080p battery/wired doorbell with chime, HomeKit Secure Video",,,,69.99,649,
-Aqara,cameras,Camera hubs,Camera Hub G3,DTC-US-CM-G3 DTC-EU-CM-G3,current,2K pan-tilt indoor camera with Zigbee hub and IR blaster,,,,119.99,599,
+Aqara,power-modules,Plugs,Power Plug H2 (EU / UK),DTC-EU-CT-SPH2EU DTC-UK-CT-SPH2UK,current,"Matter over Thread plug, 16A/13A, energy metering",,,,35.63,,https://eu.aqara.com/products/power-plug-h2-uk
+Aqara,power-modules,Plugs,Outdoor Plug H2 (EU),DTC-EU-CT-OPH2EU,current,"IP-rated outdoor plug, Thread/Matter, metering",,,,35.63,,https://eu.aqara.com/en-eu/products/outdoor-plug-h2-eu
+Aqara,power-modules,Outlets,Wall Outlet H2 (EU),DTC-EU-CT-WOH2,current,"In-wall Schuko socket with relay and metering, Zigbee/Thread",,,,43.19,,https://eu.aqara.com/products/aqara-wall-outlet-h2
+Aqara,intercom,Doorbells,Doorbell Camera Hub G410,DTC-US-EN-G410-BLACK DTC-EU-EN-G410-GRAY,current,"2K video doorbell with built-in Zigbee hub, chime repeater, wired/battery; FCC 2AKIT-CHC09",,,,111.68,,https://us.aqara.com/products/video-doorbell-g410
+Aqara,intercom,Doorbells,Doorbell Camera G400 (Wired),DTC-US-EN-G400 DTC-EU-CM-G400,current,"Wired 2K doorbell, Matter-ready; FCC 2AKIT-DBC03",,,,99.99,,https://us.aqara.com/products/doorbell-camera-g400-wired
+Aqara,intercom,Doorbells,Video Doorbell G4,DTC-US-EN-G4 DTC-EU-EN-G4,current,"Older 1080p battery/wired doorbell with chime, HomeKit Secure Video",,,,69.99,649,https://eu.aqara.com/products/aqara-video-doorbell-g4
+Aqara,cameras,Camera hubs,Camera Hub G3,DTC-US-CM-G3 DTC-EU-CM-G3,current,2K pan-tilt indoor camera with Zigbee hub and IR blaster,,,,119.99,599,https://us.aqara.com/products/camera-hub-g3
 Aqara,cameras,Camera hubs,Camera Hub G5 Pro (Wi-Fi / PoE),DTC-US-CM-G5PRO-WIFI-GRAY DTC-EU-CM-G5PRO-POE-GRAY,current,"4MP outdoor camera with Zigbee hub, local AI, Wi-Fi or PoE; FCC 2AKIT-CHC07",,,,199.99,,https://us.aqara.com/products/camera-hub-g5-pro
-Aqara,cameras,Camera hubs,Camera Hub G350,DTC-US-CM-G350 DTC-EU-EN-G350,current,Dual-lens 4K pan-tilt indoor camera hub; FCC 2AKIT-CHC14,,,,139.99,,
-Aqara,cameras,Camera hubs,Camera Hub G2H Pro,DTC-US-CM-G2HPRO DTC-EU-CM-G2HPRO,current,1080p indoor camera with Zigbee hub,,,,69.99,349,
-Aqara,cameras,Cameras,Camera E1,DTC-US-CM-E1 DTC-EU-CM-E1,current,2K pan-tilt indoor camera (no hub),,,,69.99,399,
-Aqara,cameras,Cameras,Camera G100,DTC-US-CM-G100-BLACK DTC-EU-CM-G100-WHITE,current,Budget 2K indoor camera; FCC 2AKIT-CHC08,,,,39.99,,
+Aqara,cameras,Camera hubs,Camera Hub G350,DTC-US-CM-G350 DTC-EU-EN-G350,current,Dual-lens 4K pan-tilt indoor camera hub; FCC 2AKIT-CHC14,,,,139.99,,https://us.aqara.com/products/camera-hub-g350
+Aqara,cameras,Camera hubs,Camera Hub G2H Pro,DTC-US-CM-G2HPRO DTC-EU-CM-G2HPRO,current,1080p indoor camera with Zigbee hub,,,,69.99,349,https://us.aqara.com/products/camera-hub-g2h-pro
+Aqara,cameras,Cameras,Camera E1,DTC-US-CM-E1 DTC-EU-CM-E1,current,2K pan-tilt indoor camera (no hub),,,,69.99,399,https://us.aqara.com/products/camera-e1
+Aqara,cameras,Cameras,Camera G100,DTC-US-CM-G100-BLACK DTC-EU-CM-G100-WHITE,current,Budget 2K indoor camera; FCC 2AKIT-CHC08,,,,39.99,,https://us.aqara.com/products/camera-g100
 Aqara,cameras,Cameras,Camera G510 (Battery) / Camera Hub G520 (Wired),,announced,"New outdoor cameras filed at FCC Sep / Nov 2026 (2AKIT-CHC33, CHC34)",,,,,,
-Aqara,locks-access,Smart locks,Smart Lock U400,DTC-US-EN-U400-BLACK,current,"US deadbolt retrofit-free smart lock with UWB hands-free unlock, Apple Home Key, fingerprint, Matter over Thread; FCC 2AKIT-DLD06",,,,269.99,,
-Aqara,locks-access,Smart locks,Smart Lock U300,DTC-US-EN-U300-BLACK,current,"US fingerprint + keypad deadbolt, Apple Home Key",,,,160.59,,
-Aqara,locks-access,Smart locks,Smart Lock U200,DTC-US-EN-U200-BLACK DTC-EU-EN-U200-SILVER,current,"Retrofit fingerprint/keypad lock, Matter over Thread, Apple Home Key; EU version fits euro cylinder",,,,169.99,1290,
-Aqara,locks-access,Smart locks,Smart Lock U200 Lite,DTC-EU-EN-U200L-BLACK DTC-EU-EN-U200L-WHITE,current,Cheaper retrofit EU lock without fingerprint,,,,86.39,,
-Aqara,locks-access,Smart locks,Smart Lock U100,DTC-US-EN-U100-GRAY,current,"Fingerprint/keypad lever lock, Apple Home Key, Zigbee via hub",,,,189.99,1099,
-Aqara,locks-access,Smart locks,Smart Lock U50,DTC-US-EN-U50,current,"Entry keypad deadbolt, Bluetooth / hub",,,,102.19,719,
-Aqara,locks-access,Smart locks,Smart Lock U600 (UK),DTC-UK-EN-U600,current,UK multipoint / euro-cylinder smart lock,,,,291.59,,
+Aqara,locks-access,Smart locks,Smart Lock U400,DTC-US-EN-U400-BLACK,current,"US deadbolt retrofit-free smart lock with UWB hands-free unlock, Apple Home Key, fingerprint, Matter over Thread; FCC 2AKIT-DLD06",,,,269.99,,https://us.aqara.com/products/smart-lock-u400
+Aqara,locks-access,Smart locks,Smart Lock U300,DTC-US-EN-U300-BLACK,current,"US fingerprint + keypad deadbolt, Apple Home Key",,,,160.59,,https://us.aqara.com/products/smart-lock-u300
+Aqara,locks-access,Smart locks,Smart Lock U200,DTC-US-EN-U200-BLACK DTC-EU-EN-U200-SILVER,current,"Retrofit fingerprint/keypad lock, Matter over Thread, Apple Home Key; EU version fits euro cylinder",,,,169.99,1290,https://us.aqara.com/products/smart-lock-u200
+Aqara,locks-access,Smart locks,Smart Lock U200 Lite,DTC-EU-EN-U200L-BLACK DTC-EU-EN-U200L-WHITE,current,Cheaper retrofit EU lock without fingerprint,,,,86.39,,https://eu.aqara.com/products/aqara-smart-lock-u200-lite
+Aqara,locks-access,Smart locks,Smart Lock U100,DTC-US-EN-U100-GRAY,current,"Fingerprint/keypad lever lock, Apple Home Key, Zigbee via hub",,,,189.99,1099,https://us.aqara.com/products/smart-lock-u100
+Aqara,locks-access,Smart locks,Smart Lock U50,DTC-US-EN-U50,current,"Entry keypad deadbolt, Bluetooth / hub",,,,102.19,719,https://us.aqara.com/products/smart-lock-u50
+Aqara,locks-access,Smart locks,Smart Lock U600 (UK),DTC-UK-EN-U600,current,UK multipoint / euro-cylinder smart lock,,,,291.59,,https://eu.aqara.com/products/smart-lock-u600-uk
 Aqara,locks-access,Smart locks,Smart Door Lock D100 Zigbee,ZNMS20LM,current,Push-pull mortise fingerprint lock (China / ME / SEA),,,,680.46,2499,
 Aqara,locks-access,Smart locks,Smart Door Lock A100 Zigbee,ZNMS02ES,current,Mortise fingerprint lock (China / ME / SEA),,,,408.17,1499,
 Aqara,locks-access,Smart locks,Smart Lock B50,,current,Budget lock filed at FCC Jun 2025 (2AKIT-DLD12),,,,,,
-Aqara,locks-access,Smart locks,Adjustable Cylinder (for U200 EU),DTC-EU-AC-AC,current,Euro-cylinder accessory needed for many EU U200 installs,,,,42.11,,
-Aqara,locks-access,Smart locks,NFC Card,DTC-US-AC-NFC DTC-EU-AC-NFC,current,NFC key card for Aqara locks,,,,7.90,29,
-Aqara,alarm,Safety detectors,Smoke Detector,DTC-EU-SN-SD JY-GZ-01AQ,current,Zigbee photoelectric smoke alarm with 85 dB siren,,,,48.59,229,
+Aqara,locks-access,Smart locks,Adjustable Cylinder (for U200 EU),DTC-EU-AC-AC,current,Euro-cylinder accessory needed for many EU U200 installs,,,,42.11,,https://eu.aqara.com/products/adjustable-cylinder
+Aqara,locks-access,Smart locks,NFC Card,DTC-US-AC-NFC DTC-EU-AC-NFC,current,NFC key card for Aqara locks,,,,7.90,29,https://us.aqara.com/products/nfc-card
+Aqara,alarm,Safety detectors,Smoke Detector,DTC-EU-SN-SD JY-GZ-01AQ,current,Zigbee photoelectric smoke alarm with 85 dB siren,,,,48.59,229,https://eu.aqara.com/products/aqara-smoke-detector
 Aqara,alarm,Safety detectors,Smart Gas Detector,JT-BZ-01AQ/A,current,"Mains natural-gas detector with siren, Zigbee",,,,81.42,299,
-Aqara,alarm,Security kits,Camera Protect Kit Y100,SP-CPKY100,current,Security kit (camera + sensors + siren bundle sold as a SKU),,,,119.99,,
+Aqara,alarm,Security kits,Camera Protect Kit Y100,SP-CPKY100,current,Security kit (camera + sensors + siren bundle sold as a SKU),,,,119.99,,https://us.aqara.com/products/camera-protect-kit-y100
 Aqara,hotel-grms,Smart Hotel solution,Aqara Smart Hotel / homestay solution,,current,"Project solution: in-room lighting, HVAC, curtains, locks, sleep monitoring and scenes on Aqara hubs + Zigbee devices, online check-in/out, PMS docking, guest mini-program; claims 30% energy saving; wireless retrofit",,,,,,
 Avario,controllers,Symphony,Symphony 4.0 Smarthome System (controller),,current,"Local 'completely off-cloud' hub/'brain'; one app unifying wired (KNX) and wireless devices from many manufacturers. No specs (CPU, ports, radios) published.",,,,,,
 Avario,touchscreens,Symphony,Symphony 550,,current,Appears only as a hero image/alt text on avario.ae; no description. Possibly a wall/tabletop panel.,,,,,,
@@ -2646,13 +2646,13 @@ Savant,keypads,GE Proseo,GE Proseo Flex keypad dimmer,93132378,current,"Pro-chan
 Savant,remotes,GE Proseo,GE Proseo Flex wire-free remote,93132380,current,Battery wire-free keypad/remote for Proseo lighting.,,,,,,
 Savant,lighting-control,GE Proseo,GE Proseo switch starter kit,,current,Starter kit of GE Proseo smart switches for pros.,,,,99.00,,
 Savant,lighting-control,GE Proseo,GE Proseo individual smart switch / dimmer,,current,Individual Proseo paddle/button switches and dimmers.,,,,30.00,,
-Savant,lighting-control,Cync switches,Cync Keypad Dimmer (neutral + traveller),93131906,current,"Wi-Fi/BLE keypad dimmer, 4 scene buttons, multi-way.",,,,44.99,,
-Savant,lighting-control,Cync switches,Cync Paddle Dimmer (neutral + traveller),93131905,current,Wi-Fi/BLE paddle dimmer.,,,,25.99,,
-Savant,lighting-control,Cync switches,Cync Button Dimmer smart switch,93131818,current,Button-style smart dimmer.,,,,33.99,,
-Savant,lighting-control,Cync switches,Cync Button Dimmer + Motion Sensing switch,93131812,current,Dimmer with built-in occupancy sensor.,,,,42.99,,
+Savant,lighting-control,Cync switches,Cync Keypad Dimmer (neutral + traveller),93131906,current,"Wi-Fi/BLE keypad dimmer, 4 scene buttons, multi-way.",,,,44.99,,https://shop.gelighting.com/products/ge-cync-keypad-dimmer-switch-neutral-traveler-wire
+Savant,lighting-control,Cync switches,Cync Paddle Dimmer (neutral + traveller),93131905,current,Wi-Fi/BLE paddle dimmer.,,,,25.99,,https://shop.gelighting.com/products/ge-cync-paddle-dimmer-smart-switch-neutral-traveler-wire
+Savant,lighting-control,Cync switches,Cync Button Dimmer smart switch,93131818,current,Button-style smart dimmer.,,,,33.99,,https://shop.gelighting.com/products/cync-button-dimmer-smart-switch-1-pack
+Savant,lighting-control,Cync switches,Cync Button Dimmer + Motion Sensing switch,93131812,current,Dimmer with built-in occupancy sensor.,,,,42.99,,https://shop.gelighting.com/products/cync-button-dimmer-motion-sensing-smart-switch-1-pack
 Savant,lighting-control,Cync switches,"Cync Multi-Way/Single-Pole on/off switch (button, paddle, toggle)",93131815 93131814 93131813,current,"On/off smart switch, three styles.",,,,22.99,,https://shop.gelighting.com/products/cync-multi-way-single-pole-button-smart-switch
-Savant,lighting-control,Cync switches,Cync Smart Ceiling Fan Switch,93132581,current,Fan speed + light control switch.,,,,39.99,,
-Savant,remotes,Cync switches,Cync Wire-Free Keypad Dimmer / Remote,93132580,current,Battery keypad dimmer remote.,,,,21.99,,
+Savant,lighting-control,Cync switches,Cync Smart Ceiling Fan Switch,93132581,current,Fan speed + light control switch.,,,,39.99,,https://shop.gelighting.com/products/ge-cync-smart-ceiling-fan-switch
+Savant,remotes,Cync switches,Cync Wire-Free Keypad Dimmer / Remote,93132580,current,Battery keypad dimmer remote.,,,,21.99,,https://shop.gelighting.com/products/ge-cync-smart-wire-free-keypad-dimmer-switch-remote
 Savant,remotes,Cync switches,Cync Wire-Free Light Switch / Dimmer Remote,93105004 93130111,current,Battery wire-free switch and dimmer remote.,,,,7.22,,https://shop.gelighting.com/products/ge-cync-smart-dimmer-remote-white-tones-control-bluetooth-enabled-battery-powered-dimmer-light-changing-remote
 Savant,smart-lamps,Cync bulbs,Cync Full Color reveal A19 bulb,93131798,current,"Wi-Fi colour A19 bulb, 60W eq.",,,,14.99,,https://shop.gelighting.com/products/ge-cync-reveal®-a19-smart-led-light-bulbs-color-changing-wifi-lights-works-with-alexa-google-home
 Savant,smart-lamps,Cync bulbs,Cync Direct Connect A19/A21 colour bulb (Matter),93132325 93131809,current,Matter-compatible colour bulb.,,,,15.99,,https://shop.gelighting.com/products/cync-reveal-a21-100w-fc-matter-savant-1-pack
@@ -2660,7 +2660,7 @@ Savant,smart-lamps,Cync bulbs,Cync Tunable White A19 bulb,93128973,current,Tunab
 Savant,smart-lamps,Cync bulbs,Cync Soft White A19 bulb,93129681,current,Soft white Wi-Fi bulb (1-4 packs).,,,,9.99,,https://shop.gelighting.com/products/ge-cync-soft-white-general-purpose-a19-60w-replacement-smart-led-bulbs
 Savant,smart-lamps,Cync bulbs,Cync Dynamic Effects A19 bulb (2-pack),93131629,current,Multi-zone colour effects bulb.,,,,37.99,,https://shop.gelighting.com/products/ge-cync-dynamic-effects-a19-smart-led-light-bulb-color-changing-smart-wifi-light-works-with-alexa-and-google-home-2-pack
 Savant,smart-lamps,Cync bulbs,Cync BR30 / PAR38 colour floodlight bulbs,93130127 93129693,current,Indoor BR30 and outdoor PAR38 colour bulbs.,,,,5.93,,https://shop.gelighting.com/products/full-color-reveal-br30-indoor-floodlight-1-pack
-Savant,smart-lamps,Cync bulbs,Cync decorative candle / globe bulbs,93131907 93130169 93130184,current,"Candelabra and globe smart bulbs, white and colour.",,,,4.78,,
+Savant,smart-lamps,Cync bulbs,Cync decorative candle / globe bulbs,93131907 93130169 93130184,current,"Candelabra and globe smart bulbs, white and colour.",,,,4.78,,https://shop.gelighting.com/products/ge-cync-full-color-decorative-globe-smart-led-bulbs
 Savant,smart-lamps,Cync fixtures,Cync reveal smart wafer downlight,93131649,current,"Colour wafer downlight 4/6in, Matter.",,,,34.99,,https://shop.gelighting.com/products/ge-cync-reveal-smart-led-wafer-downlight-color-changing-wifi-light-matter-compatible
 Savant,smart-lamps,Cync fixtures,Cync Full Color reveal recessed downlight 6in,93132437,current,Retrofit colour recessed downlight.,,,,22.99,,https://shop.gelighting.com/products/ge-cync-reveal®-smart-led-recessed-downlighta-color-changing-wifi-light-matter-compatible-works-with-alexa-and-google-home-6in-2-pack
 Savant,smart-lamps,Cync fixtures,Cync reveal undercabinet bar / puck lights,93131249 93131317,current,Undercabinet bar fixture and 3-pack puck lights.,,,,59.99,,https://shop.gelighting.com/products/ge-cync-reveal®-smart-led-undercabinet-bar-light-fixture-color-changing-undercab-light-works-with-alexa-and-google-home
@@ -2671,16 +2671,16 @@ Savant,smart-lamps,Cync outdoor,Cync Dynamic Effects café string lights 24/48ft
 Savant,smart-lamps,Cync outdoor,Cync Dynamic Effects outdoor eave lights,93132682 93132422,current,Permanent exterior eave lights.,,,,99.99,,https://shop.gelighting.com/products/ge-cync-dynamic-effects-outdoor-smart-eave-lights-color-changing-permanent-exterior-lights-works-with-alexa-and-google-50ft-extendable
 Savant,smart-lamps,Cync panels,Cync Dynamic Effects hexagon panels / shapeable strip,93130980 93131631,current,Decorative wall panels and neon-shape strip.,,,,59.99,,https://shop.gelighting.com/products/ge-cync-dynamic-effects-smart-led-hexagon-panels-smart-color-changing-decor-tile-lights-works-with-alexa-and-google-home
 Savant,lighting-control,Savant Lighting fixtures,Savant WRGB LED strip and fixtures (pro),,current,Pro WRGB/tunable-white strips and downlights for TrueImage colour control.,,,,,,
-Savant,sensors,Cync sensors,Cync Wire-Free Motion Sensor,93105005,current,Battery motion sensor for Cync lights.,,,,34.99,,
-Savant,sensors,Cync sensors,Cync Smart Room Temperature Sensor,93129901,current,Remote temperature sensor for Cync thermostat.,,,,29.99,,
-Savant,hvac-control,Cync thermostat,Cync Smart Thermostat,93129894,current,"Wi-Fi thermostat, Alexa/Google.",,,,119.99,,
+Savant,sensors,Cync sensors,Cync Wire-Free Motion Sensor,93105005,current,Battery motion sensor for Cync lights.,,,,34.99,,https://shop.gelighting.com/products/ge-cync-smart-wire-free-motion-sensor
+Savant,sensors,Cync sensors,Cync Smart Room Temperature Sensor,93129901,current,Remote temperature sensor for Cync thermostat.,,,,29.99,,https://shop.gelighting.com/products/ge-cync-smart-room-temperature-sensor-1-pack
+Savant,hvac-control,Cync thermostat,Cync Smart Thermostat,93129894,current,"Wi-Fi thermostat, Alexa/Google.",,,,119.99,,https://shop.gelighting.com/products/ge-cync-smart-thermostat-1-pack
 Savant,hvac-control,Savant Climate,Savant Multistat,,current,"Pro touchscreen thermostat with humidity sensor, remote temperature sensing, activates Savant scenes.",,,,,,
 Savant,hvac-control,Savant Climate,Savant climate modules and sensors,,current,"HVAC zone control modules, outdoor/plenum/vent/return-air sensors for multi-zone systems.",,,,,,
 Savant,power-modules,Cync plugs,Cync Indoor Smart Plug (Matter),93131804,current,Wi-Fi/Matter plug.,,,,14.99,,https://shop.gelighting.com/products/ge-cync-indoor-smart-plug-smart-outlet-control-wifi-outlet-works-with-alexa-and-google-home
 Savant,power-modules,Cync plugs,Cync Indoor 2-Outlet Smart Plug with USB,93132754,current,Dual-outlet plug.,,,,26.99,,https://shop.gelighting.com/products/ge-cync-indoor-2-outlet-smart-plug-usb-port-smart-outlet-control-wifi-outlet-matter-compatible-works-with-alexa-and-google-home
 Savant,power-modules,Cync plugs,Cync Outdoor Smart Plug,93128846,current,Outdoor weatherproof plug.,,,,29.99,,https://shop.gelighting.com/products/ge-cync-outdoor-smart-plug-matter-compatible-works-with-alexa-and-google-assistant-bluetooth-and-wi-fi-enabled-1-pack
-Savant,cameras,Cync cameras,Cync Indoor Wired Smart Camera,93128850,current,1080p indoor Wi-Fi camera.,,,,19.99,,
-Savant,cameras,Cync cameras,Cync Outdoor Smart Camera (battery),93129825,current,Battery outdoor camera; solar panel 93129830 and battery 93129831 accessories.,,,,34.99,,
+Savant,cameras,Cync cameras,Cync Indoor Wired Smart Camera,93128850,current,1080p indoor Wi-Fi camera.,,,,19.99,,https://shop.gelighting.com/products/cync-indoor-smart-wired-camera-ge-lighting-store
+Savant,cameras,Cync cameras,Cync Outdoor Smart Camera (battery),93129825,current,Battery outdoor camera; solar panel 93129830 and battery 93129831 accessories.,,,,34.99,,https://shop.gelighting.com/products/ge-cync-outdoor-smart-camera-1-pack
 Savant,cameras,Savant cameras (IC Realtime),Savant IP cameras (IC Realtime OEM),IPMX-W40F-IRW2 IPFX-B40V-IRW2 IPFX-P2030X-IRW1,current,"TAA-compliant 2-4MP IP67 night-vision IP cameras (turret, bullet, PTZ).",,,,,,
 Savant,intercom,Savant Door Stations (2N),Savant door station (single height / double height / heavy-duty gate),,current,"2N-built IP door intercom with wide-angle night-vision camera, optional keypad/fob reader, access control.",,,,,,
 Savant,intercom,Ring for Savant (pro),Ring Video Doorbell Elite / Pro (Savant SKUs),RING-8VREE70ENX-00 RING-8VRXP60ENX-00,current,"Pro-installed Ring doorbells sold with Savant part numbers, integrated in Savant app.",,,,,,
@@ -2688,7 +2688,7 @@ Savant,cameras,Ring for Savant (pro),Ring Stick Up Cam Elite / Floodlight Cam (S
 Savant,shading,GE Proseo Shades,Proseo Inception Series shade,,current,"Pre-assembled aluminium roller shade, 1-4 panel configurations, up to 10ft single / 16ft coupled; wired, RF or rechargeable motor or manual.",,,,,,
 Savant,shading,GE Proseo Shades,Proseo R-Series custom shade,JG-B1XX JG-B2XX JG-B4XX,current,"Fascia-free bespoke roller shade system, J Geiger hardware brackets (1-8 shades per bracket set), wired/RF/rechargeable/manual.",,,,,,
 Savant,shading,GE Smart Shades (retail),"GE Smart Shade (standard sizes, Matter)",93132547 93132553,current,"Motorised roller shade with remote, Matter; blackout or translucent, 24 size variants.",,,,299.99,,https://shop.gelighting.com/products/ge-smart-shades-with-blackout-fabric
-Savant,shading,GE Smart Shades (retail),GE Custom Sized Smart Shade,GSS1S3 GSS1BO GSS1DB,current,"Made-to-measure motorised shade, Matter + remote, 5 fabrics.",,,,259.99,,
+Savant,shading,GE Smart Shades (retail),GE Custom Sized Smart Shade,GSS1S3 GSS1BO GSS1DB,current,"Made-to-measure motorised shade, Matter + remote, 5 fabrics.",,,,259.99,,https://shop.gelighting.com/products/ge-custom-smart-shade-with-3-light-filtering
 Savant,multiroom-audio,Savant IP Audio,IP Audio 1 (single-zone streaming amp),HST-SIPA1SM,current,Single-zone IP audio amp with integrated host for audio-only systems.,,,,,,
 Savant,multiroom-audio,Savant IP Audio,IP Audio 50 (6-zone 50W smart amp),PAV-SIPA50SM,current,6-zone 50W all-in-one IP audio amplifier.,,,,,,
 Savant,multiroom-audio,Savant IP Audio,IP Audio 125 (2/6-zone 125W smart amp),PAV-SIPA125SM,current,125W/ch all-in-one IP audio amplifier (2- and 6-zone versions).,,,,,,
@@ -2708,130 +2708,130 @@ Savant,energy,Savant Power Storage,Power Storage 20,PS20-12.5KW-100A-XX BATT-20K
 Savant,energy,Savant Power Storage,Power Storage 50,BATT-50KWH-XX PS-INV-12,current,"50kWh battery storage system with 12kW inverter(s), 10-yr warranty.",,,,34000.00,,
 Savant,energy,Savant Power Storage,Power Storage G2,,announced,"Next-gen storage: UL9540A, outdoor heated battery cabinet, universal enclosure, self-serve firmware.",,,,,,
 Savant,energy,Savant Power,Savant Level 2 EV Charger,,current,"Level 2 EV charger integrated with Savant Power (scheduling, dynamic charge rate).",,,,,,
-Schneider Electric,controllers,SpaceLogic KNX servers,Wiser for KNX logic controller,LSS100100,current,"KNX/IP logic and visualisation server (formerly homeLYnk): logic, scheduling, web/app visualisation, Modbus, BACnet, Sonos/third-party integration",,,,1070.32,,https://www.knxwarehouse.com/en/schneider-lss100100.html
-Schneider Electric,controllers,SpaceLogic KNX servers,spaceLYnk logic controller,LSS100200,current,Commercial-building version of the LogicMachine-based server with BACnet and EcoStruxure Building Operation integration,,,,1332.96,,
-Schneider Electric,controllers,SpaceLogic KNX system devices,KNX Hybrid module SpaceLogic,LSS100400,current,I/O extension module for Wiser for KNX / spaceLYnk,,,,166.10,,
-Schneider Electric,controllers,SpaceLogic KNX logic,KNX logic module Basic,MTN676090,current,DIN-rail KNX logic module,,,,134.81,,
-Schneider Electric,networking,SpaceLogic KNX system devices,SpaceLogic KNX IP router,MTN6500-0103,current,"KNX/IP router, line/backbone coupler over Ethernet",,,,288.17,,
-Schneider Electric,networking,SpaceLogic KNX system devices,SpaceLogic KNX line coupler DIN rail,MTN6500-0101,current,KNX line/area coupler,,,,194.40,1275,
-Schneider Electric,networking,SpaceLogic KNX system devices,SpaceLogic KNX IP interface,MTN6502-0105,current,KNX/IP programming and tunnelling interface,,,,179.15,,
-Schneider Electric,networking,SpaceLogic KNX system devices,SpaceLogic KNX USB interface,MTN6502-0101,current,KNX USB programming interface,,,,144.63,,
-Schneider Electric,controllers,SpaceLogic KNX system devices,SpaceLogic KNX power supply 640 mA,MTN6513-1202,current,"KNX bus power supply with choke, 640 mA",,,,198.12,,
-Schneider Electric,controllers,SpaceLogic KNX system devices,SpaceLogic KNX power supply 1280 mA,MTN6513-1201,current,KNX bus power supply 1280 mA,,,,344.39,,
-Schneider Electric,controllers,SpaceLogic KNX system devices,SpaceLogic KNX power supply 320 mA,MTN6513-1203,current,KNX bus power supply 320 mA,,,,156.50,,
-Schneider Electric,controllers,SpaceLogic KNX system devices,KNX power supply REG 24 V AC 1 A,MTN663529,current,Auxiliary 24 V AC supply for KNX weather/sensor devices,,,,91.73,337,
-Schneider Electric,touchscreens,SpaceLogic KNX touch,SpaceLogic KNX Touch IP 7-inch smart screen,MTN6260-7760,current,7-inch KNX/IP wall touch panel,,,,604.77,2221,
-Schneider Electric,touchscreens,SpaceLogic KNX touch,SpaceLogic KNX Mini Touch 4-inch Secure,MTN6215-0410S,current,"4-inch KNX Secure room touch display (room control, scenes, thermostat)",,,,308.48,,
-Schneider Electric,touchscreens,C-Bus touch,C-Bus Ethernet touch panel 10.1-inch,5000ETP10W CLI5000ETP10W,current,10.1-inch PoE C-Bus/IP wall touch panel,,,,2349.23,,
-Schneider Electric,touchscreens,C-Bus touch,C-Bus touch panel wall box,5000ETP10WB,current,Flush-mount wall box for 10-inch touch panel,,,,360.17,,
-Schneider Electric,touchscreens,C-Bus touch,"Smart home control panel (touch screen), black/white",BB5000CTL2,current,C-Bus touch screen control panel,,,,1941.16,,
-Schneider Electric,keypads,SpaceLogic KNX push-buttons,KNX Push-button Pro (System M / System Design),MTN6180-0319 MTN6180-6035,current,Multi-function KNX push-button with display,,,,33.85,124,
-Schneider Electric,keypads,SpaceLogic KNX push-buttons,"Push-button plus System M, 1-gang",MTN617119 MTN627560,current,KNX push-button module 1-gang with bus coupler,,,,81.18,,
-Schneider Electric,keypads,SpaceLogic KNX push-buttons,"Push-button plus System M, 2-gang",MTN617219 MTN627660,current,KNX push-button module 2-gang,,,,88.37,,
-Schneider Electric,keypads,SpaceLogic KNX push-buttons,"Push-button plus System M, 4-gang",MTN617444 MTN627860,current,KNX push-button module 4-gang,,,,103.46,,
-Schneider Electric,keypads,SpaceLogic KNX push-buttons,"Push-button plus System M, 4-gang with IR receiver",MTN617519 MTN627960,current,KNX 4-gang push-button with IR receiver,,,,140.47,,
-Schneider Electric,keypads,SpaceLogic KNX push-buttons,"Push-button plus System M with room thermostat, 2-gang",MTN6212-0319,current,2-gang KNX push-button with integrated room temperature controller,,,,141.23,,
-Schneider Electric,keypads,SpaceLogic KNX push-buttons,"Push-button plus System M with room thermostat, 4-gang",MTN6214-0319 MTN6214-0414,current,4-gang KNX push-button with integrated room temperature controller,,,,167.66,,
-Schneider Electric,keypads,SpaceLogic KNX push-buttons,Tastsensor Pro T 1-gang with temperature sensor,MTN6185-0319 MTN6185-6035,current,"KNX push-button Pro T, 1-gang, temperature probe",,,,101.58,,
-Schneider Electric,keypads,SpaceLogic KNX push-buttons,Unica KNX push-button 6/8-key,NP16163-01SL-E1 NP16164-01BK-E1,current,KNX push-button for Unica range (Gulf/MEA market wiring devices),,,,135.78,499,
-Schneider Electric,keypads,SpaceLogic KNX push-buttons,Rocker for push-button module System M,MTN625160 MTN619125,current,Rocker cover 1/2-gang,,,,4.37,25,
-Schneider Electric,keypads,C-Bus Saturn,C-Bus Saturn Zen smart keypad 1-4 key (square/slimline),CLIR5042ZW CLIER5044ZB R5042NL-ZW,current,"C-Bus key input, 1-4 keys with LED status",,,,279.76,,
+Schneider Electric,controllers,SpaceLogic KNX servers,Wiser for KNX logic controller,LSS100100,current,"KNX/IP logic and visualisation server (formerly homeLYnk): logic, scheduling, web/app visualisation, Modbus, BACnet, Sonos/third-party integration",,,,1070.32,,https://www.se.com/uk/en/product/LSS100100/
+Schneider Electric,controllers,SpaceLogic KNX servers,spaceLYnk logic controller,LSS100200,current,Commercial-building version of the LogicMachine-based server with BACnet and EcoStruxure Building Operation integration,,,,1332.96,,https://www.se.com/uk/en/product/LSS100200/
+Schneider Electric,controllers,SpaceLogic KNX system devices,KNX Hybrid module SpaceLogic,LSS100400,current,I/O extension module for Wiser for KNX / spaceLYnk,,,,166.10,,https://www.se.com/uk/en/product/LSS100400/
+Schneider Electric,controllers,SpaceLogic KNX logic,KNX logic module Basic,MTN676090,current,DIN-rail KNX logic module,,,,134.81,,https://www.se.com/uk/en/product/MTN676090/
+Schneider Electric,networking,SpaceLogic KNX system devices,SpaceLogic KNX IP router,MTN6500-0103,current,"KNX/IP router, line/backbone coupler over Ethernet",,,,288.17,,https://www.se.com/uk/en/product/MTN6500-0103/
+Schneider Electric,networking,SpaceLogic KNX system devices,SpaceLogic KNX line coupler DIN rail,MTN6500-0101,current,KNX line/area coupler,,,,194.40,1275,https://www.se.com/uk/en/product/MTN6500-0101/
+Schneider Electric,networking,SpaceLogic KNX system devices,SpaceLogic KNX IP interface,MTN6502-0105,current,KNX/IP programming and tunnelling interface,,,,179.15,,https://www.se.com/uk/en/product/MTN6502-0105/
+Schneider Electric,networking,SpaceLogic KNX system devices,SpaceLogic KNX USB interface,MTN6502-0101,current,KNX USB programming interface,,,,144.63,,https://www.se.com/uk/en/product/MTN6502-0101/
+Schneider Electric,controllers,SpaceLogic KNX system devices,SpaceLogic KNX power supply 640 mA,MTN6513-1202,current,"KNX bus power supply with choke, 640 mA",,,,198.12,,https://www.se.com/uk/en/product/MTN6513-1202/
+Schneider Electric,controllers,SpaceLogic KNX system devices,SpaceLogic KNX power supply 1280 mA,MTN6513-1201,current,KNX bus power supply 1280 mA,,,,344.39,,https://www.se.com/uk/en/product/MTN6513-1201/
+Schneider Electric,controllers,SpaceLogic KNX system devices,SpaceLogic KNX power supply 320 mA,MTN6513-1203,current,KNX bus power supply 320 mA,,,,156.50,,https://www.se.com/uk/en/product/MTN6513-1203/
+Schneider Electric,controllers,SpaceLogic KNX system devices,KNX power supply REG 24 V AC 1 A,MTN663529,current,Auxiliary 24 V AC supply for KNX weather/sensor devices,,,,91.73,337,https://www.se.com/uk/en/product/MTN663529/
+Schneider Electric,touchscreens,SpaceLogic KNX touch,SpaceLogic KNX Touch IP 7-inch smart screen,MTN6260-7760,current,7-inch KNX/IP wall touch panel,,,,604.77,2221,https://www.se.com/uk/en/product/MTN6260-7760/
+Schneider Electric,touchscreens,SpaceLogic KNX touch,SpaceLogic KNX Mini Touch 4-inch Secure,MTN6215-0410S,current,"4-inch KNX Secure room touch display (room control, scenes, thermostat)",,,,308.48,,https://www.se.com/uk/en/product/MTN6215-0410S/
+Schneider Electric,touchscreens,C-Bus touch,C-Bus Ethernet touch panel 10.1-inch,5000ETP10W CLI5000ETP10W,current,10.1-inch PoE C-Bus/IP wall touch panel,,,,2349.23,,https://www.se.com/au/en/product/5000ETP10W/
+Schneider Electric,touchscreens,C-Bus touch,C-Bus touch panel wall box,5000ETP10WB,current,Flush-mount wall box for 10-inch touch panel,,,,360.17,,https://www.se.com/au/en/product/5000ETP10WB/
+Schneider Electric,touchscreens,C-Bus touch,"Smart home control panel (touch screen), black/white",BB5000CTL2,current,C-Bus touch screen control panel,,,,1941.16,,https://www.se.com/au/en/product/BB5000CTL2/
+Schneider Electric,keypads,SpaceLogic KNX push-buttons,KNX Push-button Pro (System M / System Design),MTN6180-0319 MTN6180-6035,current,Multi-function KNX push-button with display,,,,33.85,124,https://www.se.com/uk/en/product/MTN6180-0319/
+Schneider Electric,keypads,SpaceLogic KNX push-buttons,"Push-button plus System M, 1-gang",MTN617119 MTN627560,current,KNX push-button module 1-gang with bus coupler,,,,81.18,,https://www.se.com/uk/en/product/MTN617119/
+Schneider Electric,keypads,SpaceLogic KNX push-buttons,"Push-button plus System M, 2-gang",MTN617219 MTN627660,current,KNX push-button module 2-gang,,,,88.37,,https://www.se.com/uk/en/product/MTN617219/
+Schneider Electric,keypads,SpaceLogic KNX push-buttons,"Push-button plus System M, 4-gang",MTN617444 MTN627860,current,KNX push-button module 4-gang,,,,103.46,,https://www.se.com/uk/en/product/MTN617444/
+Schneider Electric,keypads,SpaceLogic KNX push-buttons,"Push-button plus System M, 4-gang with IR receiver",MTN617519 MTN627960,current,KNX 4-gang push-button with IR receiver,,,,140.47,,https://www.se.com/uk/en/product/MTN617519/
+Schneider Electric,keypads,SpaceLogic KNX push-buttons,"Push-button plus System M with room thermostat, 2-gang",MTN6212-0319,current,2-gang KNX push-button with integrated room temperature controller,,,,141.23,,https://www.se.com/uk/en/product/MTN6212-0319/
+Schneider Electric,keypads,SpaceLogic KNX push-buttons,"Push-button plus System M with room thermostat, 4-gang",MTN6214-0319 MTN6214-0414,current,4-gang KNX push-button with integrated room temperature controller,,,,167.66,,https://www.se.com/uk/en/product/MTN6214-0319/
+Schneider Electric,keypads,SpaceLogic KNX push-buttons,Tastsensor Pro T 1-gang with temperature sensor,MTN6185-0319 MTN6185-6035,current,"KNX push-button Pro T, 1-gang, temperature probe",,,,101.58,,https://www.se.com/uk/en/product/MTN6185-0319/
+Schneider Electric,keypads,SpaceLogic KNX push-buttons,Unica KNX push-button 6/8-key,NP16163-01SL-E1 NP16164-01BK-E1,current,KNX push-button for Unica range (Gulf/MEA market wiring devices),,,,135.78,499,https://www.se.com/eg/en/product/NP16163_01SL_E1/
+Schneider Electric,keypads,SpaceLogic KNX push-buttons,Rocker for push-button module System M,MTN625160 MTN619125,current,Rocker cover 1/2-gang,,,,4.37,25,https://www.se.com/uk/en/product/MTN625160/
+Schneider Electric,keypads,C-Bus Saturn,C-Bus Saturn Zen smart keypad 1-4 key (square/slimline),CLIR5042ZW CLIER5044ZB R5042NL-ZW,current,"C-Bus key input, 1-4 keys with LED status",,,,279.76,,https://www.se.com/au/en/product/R5042NL-ZW/
 Schneider Electric,keypads,C-Bus Saturn,C-Bus Saturn glass key input 2/4/6 gang,5082NLPW 5084NLPW 5086GF,current,C-Bus glass-fascia smart wall plate with LED indicators,,,,364.72,,
-Schneider Electric,keypads,C-Bus Saturn,Saturn glass fascia (cover only) 2/4/5/6 gang,5082FPW 5084FPW 5086FPW,current,Glass fascia for Saturn key input units,,,,90.94,,
-Schneider Electric,keypads,C-Bus eDLT,C-Bus eDLT 5-key dynamic labelling keypad,5085EDLBPW 5085EDLWEB R5045EDLWZW,current,5-key keypad with backlit LCD dynamic labels,,,,610.35,,
-Schneider Electric,keypads,C-Bus Neo/Classic,"C-Bus wall switch 1/2/4 button (Classic, 2000 series)",5031NLWE 5032NLWE 5034NLWE,current,"Entry C-Bus key input, plastic",,,,167.90,,
-Schneider Electric,keypads,C-Bus Reflex,C-Bus Reflex wall switch 1-8 gang,R5061NL R5064VNL R5068NL,current,Reflex series key input,,,,245.70,,
-Schneider Electric,keypads,C-Bus mech modules,C-Bus master mech module 1-button,5031NMML 5041NMML,current,C-Bus master mechanism for standard switch plates,,,,126.55,,
-Schneider Electric,keypads,C-Bus Wiser home,C-Bus controller with IR (Neo 4-key IR),5034NIRTWE,current,4-key C-Bus key input with IR receiver,,,,805.74,,
+Schneider Electric,keypads,C-Bus Saturn,Saturn glass fascia (cover only) 2/4/5/6 gang,5082FPW 5084FPW 5086FPW,current,Glass fascia for Saturn key input units,,,,90.94,,https://www.se.com/au/en/product/5082F-PW/
+Schneider Electric,keypads,C-Bus eDLT,C-Bus eDLT 5-key dynamic labelling keypad,5085EDLBPW 5085EDLWEB R5045EDLWZW,current,5-key keypad with backlit LCD dynamic labels,,,,610.35,,https://www.se.com/au/en/product/5085EDLB-PW/
+Schneider Electric,keypads,C-Bus Neo/Classic,"C-Bus wall switch 1/2/4 button (Classic, 2000 series)",5031NLWE 5032NLWE 5034NLWE,current,"Entry C-Bus key input, plastic",,,,167.90,,https://www.se.com/au/en/product/5031NL-WE/
+Schneider Electric,keypads,C-Bus Reflex,C-Bus Reflex wall switch 1-8 gang,R5061NL R5064VNL R5068NL,current,Reflex series key input,,,,245.70,,https://www.se.com/au/en/product/R5061NL/
+Schneider Electric,keypads,C-Bus mech modules,C-Bus master mech module 1-button,5031NMML 5041NMML,current,C-Bus master mechanism for standard switch plates,,,,126.55,,https://www.se.com/au/en/product/5031NMML/
+Schneider Electric,keypads,C-Bus Wiser home,C-Bus controller with IR (Neo 4-key IR),5034NIRTWE,current,4-key C-Bus key input with IR receiver,,,,805.74,,https://www.se.com/au/en/product/5034NIRT-WE/
 Schneider Electric,controllers,C-Bus,C-Bus Wiser Home Controller MkII,5200WHC2,current,"C-Bus home controller with Ethernet/Wi-Fi, app control",,,,1723.41,,
-Schneider Electric,controllers,C-Bus,C-Bus Network Automation Controller (NAC2),5500NAC2,current,"C-Bus multi-protocol automation controller (logic, Modbus, BACnet, visualisation)",,,,2567.83,,
-Schneider Electric,controllers,C-Bus,C-Bus Application Controller (AC2),5500AC2,current,"C-Bus application controller, RS232/485, Ethernet, 24 V DC",,,,1596.46,,
-Schneider Electric,controllers,C-Bus,C-Bus PAC automation controller,5500PACA,current,Pascal automation controller for logic/scheduling,,,,1129.25,,
-Schneider Electric,controllers,C-Bus,C-Bus power supply 350 mA DIN,5500PS,current,C-Bus network power supply,,,,672.49,,
-Schneider Electric,networking,C-Bus,C-Bus Ethernet network interface CNI2,5500CN2,current,C-Bus to Ethernet interface,,,,926.84,,
-Schneider Electric,networking,C-Bus,C-Bus network bridge,5500NB,current,Bridge between C-Bus networks,,,,934.96,,
-Schneider Electric,networking,C-Bus,C-Bus PC interface (serial/USB),5500PC 5500PCU,current,Programming interface,,,,688.74,,
-Schneider Electric,networking,C-Bus,C-Bus network burden (10 pack),5500BUR,current,Network terminating burden,,,,335.66,,
-Schneider Electric,lighting-control,C-Bus gateways,C-Bus to DMX-512 gateway,5500DMX,current,DMX lighting gateway,,,,948.16,,
-Schneider Electric,lighting-control,C-Bus gateways,C-Bus DALI-2 gateway,5502CDGP230 5502DAL2PS 5502DAL,current,C-Bus to DALI/DALI-2 gateway (with/without PSU),,,,1220.31,,
-Schneider Electric,lighting-control,C-Bus gateways,C-Bus DSI gateway 8-channel,L5508DSI,current,DSI digital ballast gateway,,,,1853.61,,
-Schneider Electric,sensors,C-Bus input units,C-Bus general input unit 4-channel,5504GI,current,Analogue/general input unit,,,,1025.51,,
-Schneider Electric,sensors,C-Bus input units,C-Bus auxiliary input unit 4-channel,L5504AUX,current,Dry-contact input unit,,,,414.57,,
-Schneider Electric,sensors,C-Bus input units,C-Bus bus coupler input 2/4-channel,5102BCLEDL 5104BCL,current,In-wall bus coupler for standard switches,,,,271.63,,
-Schneider Electric,lighting-control,C-Bus DIN,C-Bus 4-channel 2A universal dimmer DIN,L5504D2D L5504D2U,current,4 x 2 A DIN dimmer,,,,1011.27,,
-Schneider Electric,lighting-control,C-Bus DIN,C-Bus 8-channel 1A dimmer DIN,L5508D1D,current,8 x 1 A DIN dimmer,,,,1420.25,,
-Schneider Electric,lighting-control,C-Bus DIN,C-Bus 4-channel 10A voltage-free relay,L5504RVF L5504RVFP,current,4 x 10 A relay,,,,793.46,,
-Schneider Electric,lighting-control,C-Bus DIN,C-Bus 8-channel 10A voltage-free relay,L5508RVF L5508RVFP,current,8 x 10 A relay,,,,1129.25,,
-Schneider Electric,lighting-control,C-Bus DIN,C-Bus 12-channel 10A voltage-free relay,L5512RVF,current,12 x 10 A relay,,,,1574.89,,
-Schneider Electric,lighting-control,C-Bus DIN,C-Bus 4-channel 20A voltage-free relay,L5504RVF20 L5504RVF20P,current,4 x 20 A relay,,,,1149.59,,
-Schneider Electric,lighting-control,C-Bus DIN,C-Bus 1-channel relay / fan control relay,L5501RBCP L5501RFCP,current,Single-channel relay and sweep-fan relay,,,,281.78,,
-Schneider Electric,lighting-control,C-Bus DIN,C-Bus ELV 8-channel relay 30V,L5108RELVP,current,Extra-low-voltage 8-channel relay,,,,490.36,,
-Schneider Electric,lighting-control,C-Bus DIN,C-Bus 0-10V analogue output 4-channel,L5504AMP,current,0-10 V control outputs,,,,880.04,,
-Schneider Electric,shading,C-Bus DIN,C-Bus 4-channel changeover (shutter) relay,L5504RVFC L5504RVFCP,current,Changeover relays for curtains/blinds,,,,1021.41,,
-Schneider Electric,sensors,C-Bus sensors,C-Bus multi-sensor 360 (PIR + light),5753PEIRL,current,Ceiling multi-sensor,,,,357.11,,
-Schneider Electric,sensors,C-Bus sensors,C-Bus occupancy / light / IR sensor,5754ODPEIR,current,Ceiling occupancy sensor with IR receiver,,,,272.68,,
-Schneider Electric,sensors,C-Bus sensors,C-Bus light level sensor 360,5754PE,current,Light level sensor,,,,217.69,,
-Schneider Electric,sensors,C-Bus sensors,C-Bus outdoor PIR 110 IP66,5750WPLGY,current,Weatherproof PIR,,,,365.76,,
-Schneider Electric,hvac-control,C-Bus sensors,C-Bus temperature sensor wall unit,5031RDTSLWE,current,Wall temperature sensor 0-50 C,,,,393.19,,
-Schneider Electric,hvac-control,C-Bus sensors,C-Bus digital temperature sensor input 4-ch,5104DTSI 5100DTSF,current,4-channel input for remote temperature probes (probes AUD 88 list),,,,236.02,,
-Schneider Electric,lighting-control,SpaceLogic KNX actuators,SpaceLogic KNX dimming actuator 4-fold,MTN6710-0004,current,4-channel universal DIN dimmer,,,,323.24,,
-Schneider Electric,lighting-control,SpaceLogic KNX actuators,SpaceLogic KNX dimming actuator 2-fold Master Secure,MTN6710-0102S,current,"Modular 2-ch dimmer master, KNX Secure",,,,211.12,,
-Schneider Electric,lighting-control,SpaceLogic KNX actuators,SpaceLogic KNX dimming actuator extension,MTN6810-0102,current,2-ch dimmer extension for master,,,,106.95,,
-Schneider Electric,lighting-control,SpaceLogic KNX actuators,KNX switch actuator 4-fold with current detection,MTN647595,current,4 x 16 A switch actuator,,,,209.65,,
-Schneider Electric,lighting-control,SpaceLogic KNX actuators,KNX switch actuator 8-fold,MTN647893,current,8 x 16 A switch actuator,,,,266.82,,
-Schneider Electric,lighting-control,SpaceLogic KNX actuators,KNX switch actuator 12-fold,MTN648493,current,12 x 16 A switch actuator,,,,296.56,,
-Schneider Electric,lighting-control,SpaceLogic KNX actuators,KNX flush-mounted switch actuator 1/2-fold with 3 inputs,MTN6003-0011,current,In-box switch actuator with binary inputs,,,,126.28,,
-Schneider Electric,lighting-control,SpaceLogic KNX actuators,KNX flush-mounted dimming actuator 1-fold with 3 inputs,MTN6003-0013,current,In-box dimmer,,,,177.78,,
-Schneider Electric,lighting-control,SpaceLogic KNX actuators,SpaceLogic KNX DALI gateway Basic/Pro,MTN6725-0004,current,"DALI gateway 64 ballasts (Basic 431.76, Pro 456.82)",,,,391.85,,
-Schneider Electric,lighting-control,SpaceLogic KNX actuators,KNX binary input 4/8-fold,MTN644492,current,DIN binary inputs 24/230 V,,,,132.27,,
-Schneider Electric,lighting-control,SpaceLogic KNX actuators,SpaceLogic KNX switch/blind master 8ch 10AX,MTN6705-0008 MTN6705-0008S,current,Modular 8-ch universal switch/blind actuator,,,,189.01,1265,
-Schneider Electric,lighting-control,SpaceLogic KNX actuators,SpaceLogic KNX switch/blind extension 8ch,MTN6805-0008,current,Extension for MTN6705 master,,,,127.25,,
-Schneider Electric,shading,SpaceLogic KNX actuators,KNX blind actuator 2-fold,MTN649802,current,2-ch blind/shutter actuator,,,,129.22,,
-Schneider Electric,shading,SpaceLogic KNX actuators,KNX blind actuator 4-fold,MTN649804,current,4-ch blind actuator,,,,190.52,,
-Schneider Electric,shading,SpaceLogic KNX actuators,KNX blind actuator 8-fold,MTN649808,current,8-ch blind actuator,,,,259.96,,
-Schneider Electric,shading,SpaceLogic KNX actuators,KNX blind actuator 4-fold 24 V,MTN648704,current,4-ch 24 V DC motor actuator,,,,187.30,,
-Schneider Electric,hvac-control,SpaceLogic KNX actuators,KNX heating actuator 6-fold,MTN6730-0002,current,6-ch thermal valve actuator,,,,186.65,,
-Schneider Electric,hvac-control,SpaceLogic KNX actuators,KNX fan-coil actuator 0-10 V,MTN6730-0003,current,"Fan-coil actuator, 0-10 V valve control (key for GCC chilled-water villas)",,,,224.30,,
-Schneider Electric,hvac-control,SpaceLogic KNX room control,KNX room temperature controller System M (commercial),MTN6221-0319 MTN6221-0414,current,Room thermostat with display,,,,127.63,,
-Schneider Electric,sensors,SpaceLogic KNX sensors,KNX ARGUS presence detector 360,MTN630819,current,Ceiling presence detector,,,,99.70,,
-Schneider Electric,sensors,SpaceLogic KNX sensors,KNX ARGUS presence 360 with light control and IR,MTN630919,current,Ceiling presence with constant-light control,,,,109.89,511,
-Schneider Electric,sensors,SpaceLogic KNX sensors,KNX ARGUS presence detector Basic 360,MTN630719,current,Basic ceiling presence detector,,,,117.44,,
-Schneider Electric,sensors,SpaceLogic KNX sensors,KNX ARGUS presence 180 flush-mounted (System M / Design),MTN630419,current,"Wall presence detector, 2.2 m",,,,101.96,,
-Schneider Electric,sensors,SpaceLogic KNX sensors,KNX ARGUS motion detector 220 outdoor,MTN632519,current,Surface motion detector,,,,166.16,,
-Schneider Electric,sensors,SpaceLogic KNX sensors,KNX air-quality multisensor (CO2/T/RH/pressure),MTN6005-0011,current,Room air-quality sensor,,,,254.37,,
-Schneider Electric,sensors,SpaceLogic KNX sensors,KNX weather station Basic V2,MTN6904-0001,current,"Wind, rain, light, temperature",,,,545.78,,
-Schneider Electric,sensors,SpaceLogic KNX sensors,KNX weather central unit,MTN682991,current,Weather central with sensor inputs,,,,492.43,,
-Schneider Electric,sensors,SpaceLogic KNX sensors,KNX brightness and temperature sensor,MTN663991,current,Outdoor sensor,,,,204.67,1796,
-Schneider Electric,sensors,SpaceLogic KNX sensors,KNX twilight sensor,MTN663594,current,Twilight sensor,,,,345.46,1269,
-Schneider Electric,energy,SpaceLogic KNX energy,KNX energy meter 3-phase 16 A,MTN6600-0603,current,KNX energy meter,,,,173.05,,
+Schneider Electric,controllers,C-Bus,C-Bus Network Automation Controller (NAC2),5500NAC2,current,"C-Bus multi-protocol automation controller (logic, Modbus, BACnet, visualisation)",,,,2567.83,,https://www.se.com/au/en/product/5500NAC2/
+Schneider Electric,controllers,C-Bus,C-Bus Application Controller (AC2),5500AC2,current,"C-Bus application controller, RS232/485, Ethernet, 24 V DC",,,,1596.46,,https://www.se.com/au/en/product/5500AC2/
+Schneider Electric,controllers,C-Bus,C-Bus PAC automation controller,5500PACA,current,Pascal automation controller for logic/scheduling,,,,1129.25,,https://www.se.com/au/en/product/5500PACA/
+Schneider Electric,controllers,C-Bus,C-Bus power supply 350 mA DIN,5500PS,current,C-Bus network power supply,,,,672.49,,https://www.se.com/au/en/product/5500PS/
+Schneider Electric,networking,C-Bus,C-Bus Ethernet network interface CNI2,5500CN2,current,C-Bus to Ethernet interface,,,,926.84,,https://www.se.com/au/en/product/5500CN2/
+Schneider Electric,networking,C-Bus,C-Bus network bridge,5500NB,current,Bridge between C-Bus networks,,,,934.96,,https://www.se.com/au/en/product/5500NB/
+Schneider Electric,networking,C-Bus,C-Bus PC interface (serial/USB),5500PC 5500PCU,current,Programming interface,,,,688.74,,https://www.se.com/au/en/product/5500PC/
+Schneider Electric,networking,C-Bus,C-Bus network burden (10 pack),5500BUR,current,Network terminating burden,,,,335.66,,https://www.se.com/au/en/product/5500BUR/
+Schneider Electric,lighting-control,C-Bus gateways,C-Bus to DMX-512 gateway,5500DMX,current,DMX lighting gateway,,,,948.16,,https://www.se.com/au/en/product/5500DMX/
+Schneider Electric,lighting-control,C-Bus gateways,C-Bus DALI-2 gateway,5502CDGP230 5502DAL2PS 5502DAL,current,C-Bus to DALI/DALI-2 gateway (with/without PSU),,,,1220.31,,https://www.se.com/au/en/product/5502DAL2PS/
+Schneider Electric,lighting-control,C-Bus gateways,C-Bus DSI gateway 8-channel,L5508DSI,current,DSI digital ballast gateway,,,,1853.61,,https://www.se.com/au/en/product/L5508DSI/
+Schneider Electric,sensors,C-Bus input units,C-Bus general input unit 4-channel,5504GI,current,Analogue/general input unit,,,,1025.51,,https://www.se.com/au/en/product/5504GI/
+Schneider Electric,sensors,C-Bus input units,C-Bus auxiliary input unit 4-channel,L5504AUX,current,Dry-contact input unit,,,,414.57,,https://www.se.com/au/en/product/L5504AUX/
+Schneider Electric,sensors,C-Bus input units,C-Bus bus coupler input 2/4-channel,5102BCLEDL 5104BCL,current,In-wall bus coupler for standard switches,,,,271.63,,https://www.se.com/au/en/product/5104BCL/
+Schneider Electric,lighting-control,C-Bus DIN,C-Bus 4-channel 2A universal dimmer DIN,L5504D2D L5504D2U,current,4 x 2 A DIN dimmer,,,,1011.27,,https://www.se.com/au/en/product/L5504D2U/
+Schneider Electric,lighting-control,C-Bus DIN,C-Bus 8-channel 1A dimmer DIN,L5508D1D,current,8 x 1 A DIN dimmer,,,,1420.25,,https://www.se.com/au/en/product/5508D1D/
+Schneider Electric,lighting-control,C-Bus DIN,C-Bus 4-channel 10A voltage-free relay,L5504RVF L5504RVFP,current,4 x 10 A relay,,,,793.46,,https://www.se.com/au/en/product/L5504RVF/
+Schneider Electric,lighting-control,C-Bus DIN,C-Bus 8-channel 10A voltage-free relay,L5508RVF L5508RVFP,current,8 x 10 A relay,,,,1129.25,,https://www.se.com/au/en/product/L5508RVF/
+Schneider Electric,lighting-control,C-Bus DIN,C-Bus 12-channel 10A voltage-free relay,L5512RVF,current,12 x 10 A relay,,,,1574.89,,https://www.se.com/au/en/product/L5512RVF/
+Schneider Electric,lighting-control,C-Bus DIN,C-Bus 4-channel 20A voltage-free relay,L5504RVF20 L5504RVF20P,current,4 x 20 A relay,,,,1149.59,,https://www.se.com/au/en/product/L5504RVF20/
+Schneider Electric,lighting-control,C-Bus DIN,C-Bus 1-channel relay / fan control relay,L5501RBCP L5501RFCP,current,Single-channel relay and sweep-fan relay,,,,281.78,,https://www.se.com/au/en/product/L5501RBCP/
+Schneider Electric,lighting-control,C-Bus DIN,C-Bus ELV 8-channel relay 30V,L5108RELVP,current,Extra-low-voltage 8-channel relay,,,,490.36,,https://www.se.com/au/en/product/L5108RELVP/
+Schneider Electric,lighting-control,C-Bus DIN,C-Bus 0-10V analogue output 4-channel,L5504AMP,current,0-10 V control outputs,,,,880.04,,https://www.se.com/au/en/product/L5504AMP/
+Schneider Electric,shading,C-Bus DIN,C-Bus 4-channel changeover (shutter) relay,L5504RVFC L5504RVFCP,current,Changeover relays for curtains/blinds,,,,1021.41,,https://www.se.com/au/en/product/L5504RVFC/
+Schneider Electric,sensors,C-Bus sensors,C-Bus multi-sensor 360 (PIR + light),5753PEIRL,current,Ceiling multi-sensor,,,,357.11,,https://www.se.com/au/en/product/5753PEIRL/
+Schneider Electric,sensors,C-Bus sensors,C-Bus occupancy / light / IR sensor,5754ODPEIR,current,Ceiling occupancy sensor with IR receiver,,,,272.68,,https://www.se.com/au/en/product/5754ODPEIR/
+Schneider Electric,sensors,C-Bus sensors,C-Bus light level sensor 360,5754PE,current,Light level sensor,,,,217.69,,https://www.se.com/au/en/product/5754PE/
+Schneider Electric,sensors,C-Bus sensors,C-Bus outdoor PIR 110 IP66,5750WPLGY,current,Weatherproof PIR,,,,365.76,,https://www.se.com/au/en/product/5750WPL-GY/
+Schneider Electric,hvac-control,C-Bus sensors,C-Bus temperature sensor wall unit,5031RDTSLWE,current,Wall temperature sensor 0-50 C,,,,393.19,,https://www.se.com/au/en/product/5031RDTSL-WE/
+Schneider Electric,hvac-control,C-Bus sensors,C-Bus digital temperature sensor input 4-ch,5104DTSI 5100DTSF,current,4-channel input for remote temperature probes (probes AUD 88 list),,,,236.02,,https://www.se.com/au/en/product/5104DTSI/
+Schneider Electric,lighting-control,SpaceLogic KNX actuators,SpaceLogic KNX dimming actuator 4-fold,MTN6710-0004,current,4-channel universal DIN dimmer,,,,323.24,,https://www.se.com/uk/en/product/MTN6710-0004/
+Schneider Electric,lighting-control,SpaceLogic KNX actuators,SpaceLogic KNX dimming actuator 2-fold Master Secure,MTN6710-0102S,current,"Modular 2-ch dimmer master, KNX Secure",,,,211.12,,https://www.se.com/uk/en/product/MTN6710-0102S/
+Schneider Electric,lighting-control,SpaceLogic KNX actuators,SpaceLogic KNX dimming actuator extension,MTN6810-0102,current,2-ch dimmer extension for master,,,,106.95,,https://www.se.com/de/de/product/MTN6810-0102/
+Schneider Electric,lighting-control,SpaceLogic KNX actuators,KNX switch actuator 4-fold with current detection,MTN647595,current,4 x 16 A switch actuator,,,,209.65,,https://www.se.com/uk/en/product/MTN647595/
+Schneider Electric,lighting-control,SpaceLogic KNX actuators,KNX switch actuator 8-fold,MTN647893,current,8 x 16 A switch actuator,,,,266.82,,https://www.se.com/uk/en/product/MTN647893/
+Schneider Electric,lighting-control,SpaceLogic KNX actuators,KNX switch actuator 12-fold,MTN648493,current,12 x 16 A switch actuator,,,,296.56,,https://www.se.com/uk/en/product/MTN648493/
+Schneider Electric,lighting-control,SpaceLogic KNX actuators,KNX flush-mounted switch actuator 1/2-fold with 3 inputs,MTN6003-0011,current,In-box switch actuator with binary inputs,,,,126.28,,https://www.se.com/uk/en/product/MTN6003-0011/
+Schneider Electric,lighting-control,SpaceLogic KNX actuators,KNX flush-mounted dimming actuator 1-fold with 3 inputs,MTN6003-0013,current,In-box dimmer,,,,177.78,,https://www.se.com/uk/en/product/MTN6003-0013/
+Schneider Electric,lighting-control,SpaceLogic KNX actuators,SpaceLogic KNX DALI gateway Basic/Pro,MTN6725-0004,current,"DALI gateway 64 ballasts (Basic 431.76, Pro 456.82)",,,,391.85,,https://www.se.com/uk/en/product/MTN6725-0004/
+Schneider Electric,lighting-control,SpaceLogic KNX actuators,KNX binary input 4/8-fold,MTN644492,current,DIN binary inputs 24/230 V,,,,132.27,,https://www.se.com/uk/en/product/MTN644492/
+Schneider Electric,lighting-control,SpaceLogic KNX actuators,SpaceLogic KNX switch/blind master 8ch 10AX,MTN6705-0008 MTN6705-0008S,current,Modular 8-ch universal switch/blind actuator,,,,189.01,1265,https://www.se.com/uk/en/product/MTN6705-0008/
+Schneider Electric,lighting-control,SpaceLogic KNX actuators,SpaceLogic KNX switch/blind extension 8ch,MTN6805-0008,current,Extension for MTN6705 master,,,,127.25,,https://www.se.com/uk/en/product/MTN6805-0008/
+Schneider Electric,shading,SpaceLogic KNX actuators,KNX blind actuator 2-fold,MTN649802,current,2-ch blind/shutter actuator,,,,129.22,,https://www.se.com/uk/en/product/MTN649802/
+Schneider Electric,shading,SpaceLogic KNX actuators,KNX blind actuator 4-fold,MTN649804,current,4-ch blind actuator,,,,190.52,,https://www.se.com/uk/en/product/MTN649804/
+Schneider Electric,shading,SpaceLogic KNX actuators,KNX blind actuator 8-fold,MTN649808,current,8-ch blind actuator,,,,259.96,,https://www.se.com/uk/en/product/MTN649808/
+Schneider Electric,shading,SpaceLogic KNX actuators,KNX blind actuator 4-fold 24 V,MTN648704,current,4-ch 24 V DC motor actuator,,,,187.30,,https://www.se.com/uk/en/product/MTN648704/
+Schneider Electric,hvac-control,SpaceLogic KNX actuators,KNX heating actuator 6-fold,MTN6730-0002,current,6-ch thermal valve actuator,,,,186.65,,https://www.se.com/de/de/product/MTN6730-0002/
+Schneider Electric,hvac-control,SpaceLogic KNX actuators,KNX fan-coil actuator 0-10 V,MTN6730-0003,current,"Fan-coil actuator, 0-10 V valve control (key for GCC chilled-water villas)",,,,224.30,,https://www.se.com/uk/en/product/MTN6730-0003/
+Schneider Electric,hvac-control,SpaceLogic KNX room control,KNX room temperature controller System M (commercial),MTN6221-0319 MTN6221-0414,current,Room thermostat with display,,,,127.63,,https://www.se.com/uk/en/product/MTN6221-0319/
+Schneider Electric,sensors,SpaceLogic KNX sensors,KNX ARGUS presence detector 360,MTN630819,current,Ceiling presence detector,,,,99.70,,https://www.se.com/uk/en/product/MTN630819/
+Schneider Electric,sensors,SpaceLogic KNX sensors,KNX ARGUS presence 360 with light control and IR,MTN630919,current,Ceiling presence with constant-light control,,,,109.89,511,https://www.se.com/uk/en/product/MTN630919/
+Schneider Electric,sensors,SpaceLogic KNX sensors,KNX ARGUS presence detector Basic 360,MTN630719,current,Basic ceiling presence detector,,,,117.44,,https://www.se.com/uk/en/product/MTN630719/
+Schneider Electric,sensors,SpaceLogic KNX sensors,KNX ARGUS presence 180 flush-mounted (System M / Design),MTN630419,current,"Wall presence detector, 2.2 m",,,,101.96,,https://www.se.com/uk/en/product/MTN630419/
+Schneider Electric,sensors,SpaceLogic KNX sensors,KNX ARGUS motion detector 220 outdoor,MTN632519,current,Surface motion detector,,,,166.16,,https://www.se.com/uk/en/product/MTN632519/
+Schneider Electric,sensors,SpaceLogic KNX sensors,KNX air-quality multisensor (CO2/T/RH/pressure),MTN6005-0011,current,Room air-quality sensor,,,,254.37,,https://www.se.com/uk/en/product/MTN6005-0011/
+Schneider Electric,sensors,SpaceLogic KNX sensors,KNX weather station Basic V2,MTN6904-0001,current,"Wind, rain, light, temperature",,,,545.78,,https://www.se.com/de/de/product/MTN6904-0001/
+Schneider Electric,sensors,SpaceLogic KNX sensors,KNX weather central unit,MTN682991,current,Weather central with sensor inputs,,,,492.43,,https://www.se.com/uk/en/product/MTN682991/
+Schneider Electric,sensors,SpaceLogic KNX sensors,KNX brightness and temperature sensor,MTN663991,current,Outdoor sensor,,,,204.67,1796,https://www.se.com/uk/en/product/MTN663991/
+Schneider Electric,sensors,SpaceLogic KNX sensors,KNX twilight sensor,MTN663594,current,Twilight sensor,,,,345.46,1269,https://www.se.com/uk/en/product/MTN663594/
+Schneider Electric,energy,SpaceLogic KNX energy,KNX energy meter 3-phase 16 A,MTN6600-0603,current,KNX energy meter,,,,173.05,,https://www.se.com/uk/en/product/MTN6600-0603/
 Schneider Electric,controllers,"Wiser (Drayton, UK)",Wiser HubR 2nd gen (1/2/3-channel),CCTFR6311G2D CCTFR6312G2D CCTFR6313G2D,current,Wi-Fi/Zigbee heating hub with boiler relay channels; hub for whole Wiser ecosystem,,,,138.77,,
-Schneider Electric,controllers,"Wiser (Drayton, UK)",Wiser Hub 2nd gen non-relay,CCT501800 CCT501801,current,"Zigbee/Wi-Fi hub without boiler relay (lighting, shutters, sockets, security)",,,,106.68,,
+Schneider Electric,controllers,"Wiser (Drayton, UK)",Wiser Hub 2nd gen non-relay,CCT501800 CCT501801,current,"Zigbee/Wi-Fi hub without boiler relay (lighting, shutters, sockets, security)",,,,106.68,,https://wiser.draytoncontrols.co.uk/products/wiser-2nd-generation-hub-non-relay
 Schneider Electric,controllers,"Wiser (Drayton, UK)",Wiser Hub flush-mount power supply,CCT501800-0001,current,In-wall PSU for Wiser Hub,,,,37.66,,
-Schneider Electric,hvac-control,"Wiser (Drayton, UK)",Wiser smart radiator thermostat 2nd gen,WV704R0A6902 WV704R0A0902,current,Zigbee TRV head,,,,55.36,,
-Schneider Electric,hvac-control,"Wiser (Drayton, UK)",Wiser smart room thermostat,WN704R0S0902 WN704R0S0901,current,Battery room thermostat with display,,,,111.12,,
-Schneider Electric,hvac-control,"Wiser (Drayton, UK)","Wiser room thermostat (Wiser Home EU, display + humidity)",CCTFR6400 CCTFR6401,current,Continental Wiser room thermostat,,,,53.59,,
+Schneider Electric,hvac-control,"Wiser (Drayton, UK)",Wiser smart radiator thermostat 2nd gen,WV704R0A6902 WV704R0A0902,current,Zigbee TRV head,,,,55.36,,https://se.com/uk/en/product/WV704R0A0902/radiator-thermostat-wiser
+Schneider Electric,hvac-control,"Wiser (Drayton, UK)",Wiser smart room thermostat,WN704R0S0902 WN704R0S0901,current,Battery room thermostat with display,,,,111.12,,https://se.com/uk/en/product/WN704R0S0902/room-thermostat-wiser
+Schneider Electric,hvac-control,"Wiser (Drayton, UK)","Wiser room thermostat (Wiser Home EU, display + humidity)",CCTFR6400 CCTFR6401,current,Continental Wiser room thermostat,,,,53.59,,https://www.se.com/es/es/product/CCTFR6400/
 Schneider Electric,hvac-control,"Wiser (Drayton, UK)",Wiser underfloor heating controller,WF762F1A0902,current,"Wet UFH wiring centre, up to 8 zones",,,,355.60,,
-Schneider Electric,hvac-control,Wiser Home (EU),Wiser UFH distribution bar heat / heat-cool,CCTFR6610 CCTFR6600,current,Wiser UFH wiring centre 230 V,,,,233.42,,
-Schneider Electric,hvac-control,"Wiser (Drayton, UK)",Wiser electrical heat switch,WE714U1A0902,current,Zigbee switch for electric UFH/heaters,,,,70.91,,
-Schneider Electric,hvac-control,Wiser Home (EU),Wiser receiver relay 16 A,CCTFR6700,current,Zigbee boiler/heater relay with sensor input,,,,58.13,,
-Schneider Electric,sensors,Wiser,Wiser temperature and humidity sensor,CCT596012 CCT593012,current,Zigbee room sensor,,,,28.57,,
-Schneider Electric,sensors,Wiser,Wiser motion sensor,CCT595012,current,Zigbee PIR + light sensor,,,,30.69,,
-Schneider Electric,sensors,Wiser,Wiser window and door sensor,CCT591012,current,Zigbee contact,,,,28.57,,
-Schneider Electric,sensors,Wiser,Wiser water leakage sensor,CCT592012,current,Zigbee leak sensor,,,,30.69,,
+Schneider Electric,hvac-control,Wiser Home (EU),Wiser UFH distribution bar heat / heat-cool,CCTFR6610 CCTFR6600,current,Wiser UFH wiring centre 230 V,,,,233.42,,https://www.se.com/nl/en/product/CCTFR6600/
+Schneider Electric,hvac-control,"Wiser (Drayton, UK)",Wiser electrical heat switch,WE714U1A0902,current,Zigbee switch for electric UFH/heaters,,,,70.91,,https://www.draytoncontrols.co.uk/product/wiser-electrical-heat-switch
+Schneider Electric,hvac-control,Wiser Home (EU),Wiser receiver relay 16 A,CCTFR6700,current,Zigbee boiler/heater relay with sensor input,,,,58.13,,https://www.se.com/es/es/product/CCTFR6700/
+Schneider Electric,sensors,Wiser,Wiser temperature and humidity sensor,CCT596012 CCT593012,current,Zigbee room sensor,,,,28.57,,https://www.se.com/nl/en/product/CCT593012/
+Schneider Electric,sensors,Wiser,Wiser motion sensor,CCT595012,current,Zigbee PIR + light sensor,,,,30.69,,https://www.se.com/nl/en/product/CCT595012/
+Schneider Electric,sensors,Wiser,Wiser window and door sensor,CCT591012,current,Zigbee contact,,,,28.57,,https://www.se.com/nl/en/product/CCT591012/
+Schneider Electric,sensors,Wiser,Wiser water leakage sensor,CCT592012,current,Zigbee leak sensor,,,,30.69,,https://www.se.com/es/es/product/CCT592012/
 Schneider Electric,sensors,Wiser,Wiser battery smoke alarm,CCT599002,current,Zigbee smoke alarm,,,,61.38,,
-Schneider Electric,lighting-control,Wiser,Wiser lighting dimmer micro module,CCT5010-0003,current,In-box Zigbee dimmer,,,,46.15,,
-Schneider Electric,lighting-control,Wiser,Wiser switch micro module 1-fold,CCT5011-0002W,current,In-box Zigbee relay,,,,44.54,,
-Schneider Electric,power-modules,Wiser,Wiser load and power micro module 3000 W,CCTFR6730,current,In-box load switch with metering,,,,52.65,,
-Schneider Electric,shading,Wiser,Wiser blind and shades micro module,CCT5015-0002W,current,In-box Zigbee shutter actuator,,,,48.75,,
+Schneider Electric,lighting-control,Wiser,Wiser lighting dimmer micro module,CCT5010-0003,current,In-box Zigbee dimmer,,,,46.15,,https://www.se.com/nl/en/product/CCT5010-0003/
+Schneider Electric,lighting-control,Wiser,Wiser switch micro module 1-fold,CCT5011-0002W,current,In-box Zigbee relay,,,,44.54,,https://www.se.com/nl/en/product/CCT5011-0002W/
+Schneider Electric,power-modules,Wiser,Wiser load and power micro module 3000 W,CCTFR6730,current,In-box load switch with metering,,,,52.65,,https://www.se.com/es/es/product/CCTFR6730/
+Schneider Electric,shading,Wiser,Wiser blind and shades micro module,CCT5015-0002W,current,In-box Zigbee shutter actuator,,,,48.75,,https://wiser.draytoncontrols.co.uk/products/wiser-blind-and-shades-control-micro-module
 Schneider Electric,power-modules,Wiser,Wiser smart plug (UK) / range extender,WB704H1A0902,current,"UK smart plug, also Zigbee repeater",,,,46.04,,
-Schneider Electric,energy,Wiser,Resi9 PowerTag for Wiser,R9M60 R9M40 R9M70,current,Wireless breaker-mounted energy sensor (1P+N / 3P / 3P+N),,,,55.49,,
-Schneider Electric,controllers,Clipsal Wiser (AU),"Clipsal Wiser Hub (Zigbee 3.0, Wi-Fi)",CLP502WH,current,Australian Wiser hub,,,,235.43,,
-Schneider Electric,lighting-control,Clipsal Wiser (AU),Clipsal Wiser smart dimmer 300 W (Bluetooth/Zigbee),41EPBDWCLMVW 41EPBDWCLMZVW,current,Iconic smart dimmer mech,,,,132.73,,
-Schneider Electric,shading,Clipsal Wiser (AU),Clipsal Wiser smart blind controller 500 W Zigbee,CLP5015WBZ,current,Blind/shutter controller,,,,143.06,,
-Schneider Electric,power-modules,Clipsal Wiser (AU),Clipsal Wiser smart socket twin 10 A,3025CSG 3025CSGZ,current,Zigbee twin power point with app control,,,,174.66,,
+Schneider Electric,energy,Wiser,Resi9 PowerTag for Wiser,R9M60 R9M40 R9M70,current,Wireless breaker-mounted energy sensor (1P+N / 3P / 3P+N),,,,55.49,,https://www.se.com/fr/fr/product/R9M40/
+Schneider Electric,controllers,Clipsal Wiser (AU),"Clipsal Wiser Hub (Zigbee 3.0, Wi-Fi)",CLP502WH,current,Australian Wiser hub,,,,235.43,,https://www.se.com/au/en/product/CLP502WH/
+Schneider Electric,lighting-control,Clipsal Wiser (AU),Clipsal Wiser smart dimmer 300 W (Bluetooth/Zigbee),41EPBDWCLMVW 41EPBDWCLMZVW,current,Iconic smart dimmer mech,,,,132.73,,https://www.se.com/au/en/product/41EPBDWCLMZ-VW/
+Schneider Electric,shading,Clipsal Wiser (AU),Clipsal Wiser smart blind controller 500 W Zigbee,CLP5015WBZ,current,Blind/shutter controller,,,,143.06,,https://www.se.com/au/en/product/CLP5015WBZ/
+Schneider Electric,power-modules,Clipsal Wiser (AU),Clipsal Wiser smart socket twin 10 A,3025CSG 3025CSGZ,current,Zigbee twin power point with app control,,,,174.66,,https://www.se.com/au/en/product/3025CSG/
 Schneider Electric,energy,Schneider Home (US),Schneider Home inverter + battery system,,current,"Residential hybrid solar inverter, modular battery and Energy Center (whole-home backup), sold via certified installers",,,,,,
 Schneider Electric,energy,EVlink / Schneider Charge,Schneider Charge / EVlink Home EV charger,EVH5A07N4 EVB1A22P4,current,Level 2 / 7-22 kW home EV charger,,,,,,
-Schneider Electric,energy,Square D,Square D Energy Center / smart panel (Pulse),,current,Connected load centre with circuit-level control,,,,,,
+Schneider Electric,energy,Square D,Square D Energy Center / smart panel (Pulse),,current,Connected load centre with circuit-level control,,,,,,https://www.se.com/us/en/product-range/131469381-square-d-energy-center-smart-panel
 Schneider Electric,hotel-grms,EcoStruxure for Hotels,SpaceLogic / EcoStruxure hotel room controller (GRMS),,current,"KNX/BACnet guest-room controller with keycard, DND/MUR, HVAC and lighting, plus hotel server software",,,,,,
 Shelly,power-modules,Gen4 relays,Shelly 1 Gen4,3800238070687 (EU) 3800238071264 (ANZ) 3800238074609 (US UL),current,"1-channel 16 A dry-contact relay, Wi-Fi 6 + Bluetooth + Zigbee, Matter; flush-box size; 110-240 VAC / 24-30 VDC; 2- and 4-packs sold",wifi bluetooth zigbee matter,yes,native,14.45,80,https://www.shelly.com/products/shelly-1-gen4
 Shelly,power-modules,Gen4 relays,Shelly 1PM Gen4,3800238070717 (EU/US) 3800238071295 (ANZ) 3800238074630 (US UL),current,"1-channel 16 A relay with power metering, Wi-Fi 6 + BLE + Zigbee, Matter; flush-box size",wifi bluetooth zigbee matter,yes,native,14.51,87,https://www.shelly.com/products/shelly-1pm-gen4
