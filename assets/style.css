@@ -292,3 +292,6 @@ body.on-home .layout { grid-template-columns: minmax(0, 1fr); }
 .filters, .scroll { overflow-x: hidden; }
 .scroll { margin: 0 -8px; padding: 0 8px; }
 .filters { margin-left: -8px; padding-left: 8px; }
+
+mark { background: color-mix(in srgb, var(--gulf) 28%, transparent); color: inherit; border-radius: 3px; padding: 0 1px; }
+.pcell .why { font-size: 12.5px; color: var(--faint); margin-top: 1px; }

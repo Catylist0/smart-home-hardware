@@ -72,7 +72,8 @@ async function load() {
     p._lo = us.length ? Math.min(...us) : null;
     p._gulf = gulf.length ? gulf.reduce((a, b) => (a.usd <= b.usd ? a : b)) : null;
     p._regions = [...new Set(p.prices.map(x => regionLabel(x.region)))].filter(Boolean);
-    p._hay = [p.vendor, p.model, p.family, (p.part_numbers || []).join(" "), p.description, CAT[p.domain]?.name].join(" ").toLowerCase();
+    // Search covers what is written about the product itself, not its category name.
+    p._hay = [p.vendor, p.model, p.family, (p.part_numbers || []).join(" "), p.description].join(" ").toLowerCase();
     BYID[p.id] = p;
     return p;
   });
@@ -319,6 +320,18 @@ function exportCsv(key) {
   const a = Object.assign(document.createElement("a"), { href: url, download: name });
   document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
+// When a search term only matches a hidden field (part number, line, brand), say where it matched.
+function matchNote(p) {
+  const t = terms();
+  if (!t.length) return "";
+  const seen = (p.model + " " + (p.description || "")).toLowerCase();
+  const hidden = t.filter(w => !seen.includes(w));
+  if (!hidden.length) return "";
+  const pn = (p.part_numbers || []).filter(x => hidden.some(w => x.toLowerCase().includes(w)));
+  if (pn.length) return `<div class="why">Part number ${hl(pn.slice(0, 3).join(", "))}</div>`;
+  if (hidden.some(w => (p.family || "").toLowerCase().includes(w))) return `<div class="why">Line: ${hl(p.family)}</div>`;
+  return "";
+}
 function rowHtml(p, cols) {
   const tags = [];
   if (p.status === "announced") tags.push(`<span class="tag a">Announced</span>`);
@@ -326,8 +339,9 @@ function rowHtml(p, cols) {
   if (p.home_assistant && p.home_assistant !== "no") tags.push(`<span class="tag ok">Home Assistant</span>`);
   const cell = {
     name: () => `<td class="c-name"><div class="pcell">${thumb(p, "th")}<div>
-        <a class="t" href="#p=${esc(p.id)}" data-p="${esc(p.id)}">${esc(p.model)}</a>
-        ${p.description ? `<div class="desc">${esc(p.description)}</div>` : ""}
+        <a class="t" href="#p=${esc(p.id)}" data-p="${esc(p.id)}">${hl(p.model)}</a>
+        ${p.description ? `<div class="desc">${hl(p.description)}</div>` : ""}
+        ${matchNote(p)}
         ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}</div></div></td>`,
     brand: () => `<td><a href="#" class="plain" data-go-brand="${esc(p.vendor)}" data-keep>${esc(p.vendor)}</a></td>`,
     line: () => `<td class="c-line muted">${esc(p.family || "")}</td>`,
@@ -337,6 +351,13 @@ function rowHtml(p, cols) {
     n: () => `<td class="r c-n muted">${p.prices.length || ""}</td>`,
   };
   return `<tr class="prow">${cols.map(c => cell[c.id]()).join("")}</tr>`;
+}
+// Escape text and wrap the current search terms in <mark>.
+function hl(text) {
+  const t = terms();
+  if (!t.length || !text) return esc(text);
+  const re = new RegExp(`(${t.map(w => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`, "gi");
+  return String(text).split(re).map((part, i) => i % 2 ? `<mark>${esc(part)}</mark>` : esc(part)).join("");
 }
 function thumb(p, cls) {
   const src = safeUrl(p.image);
