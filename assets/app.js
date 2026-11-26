@@ -303,7 +303,8 @@ function renderResults() {
   const vis = rows.slice(0, shown), table = ps => `<table class="grid">${head}<tbody>${ps.map(p => rowHtml(p, cols)).join("")}</tbody></table>`;
   let html = "";
   if (!rows.length) html = `<div class="empty">No products match these filters. <button class="link" data-clear>Clear filters</button></div>`;
-  else if (!gk) html = table(vis);
+  // A single group would just repeat the page title and the bar's export button, so show a plain table.
+  else if (!gk || rows._groups.size === 1) html = table(vis);
   else {
     const parts = new Map(); vis.forEach(p => { const k = gk.key(p); if (!parts.has(k)) parts.set(k, []); parts.get(k).push(p); });
     html = [...parts].map(([k, ps]) => `<section class="gsec">${groupHead(gk, k, rows._groups.get(k))}${table(ps)}</section>`).join("");
