@@ -246,7 +246,7 @@ body.on-home .layout { grid-template-columns: minmax(0, 1fr); }
 /* Sortable product table */
 .sortinfo { font-size: 13px; margin: -4px 0 10px; color: var(--muted); }
 .grid { width: 100%; border-collapse: collapse; font-size: 14px; }
-.grid thead th { position: sticky; top: 67px; z-index: 3; background: var(--bg); border-bottom: 1px solid var(--line-strong); padding: 0; text-align: left; white-space: nowrap; }
+.grid thead th { position: sticky; top: 67px; z-index: 3; background: var(--bg); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line-strong); padding: 0; text-align: left; white-space: nowrap; }
 .grid thead th button { all: unset; box-sizing: border-box; display: flex; align-items: center; gap: 5px; width: 100%; padding: 10px 12px; cursor: pointer; user-select: none;
   font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); }
 .grid thead th.r button { justify-content: flex-end; }
@@ -274,11 +274,12 @@ body.on-home .layout { grid-template-columns: minmax(0, 1fr); }
 .pcell .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
 .pcell .th { flex: none; }
 .grid .c-line, .grid .c-cat { max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13.5px; }
-.grid tr.ghead td { padding: 0; border-bottom: 1px solid var(--line); }
-.grid tr.ghead td > div { display: flex; align-items: baseline; gap: 10px; padding: 22px 12px 8px; }
-.grid tr.ghead h2 { margin: 0; font-size: 16px; font-weight: 650; letter-spacing: -.01em; }
-.grid tr.ghead .n { color: var(--faint); font-size: 13px; }
-.grid tr.ghead .only { margin-left: auto; }
+.gsec { margin-bottom: 36px; }
+.ghead { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; padding: 4px 0 10px; }
+.ghead h2 { margin: 0; font-size: 20px; font-weight: 650; letter-spacing: -.015em; }
+.ghead .n { color: var(--faint); font-size: 13.5px; }
+.gact { margin-left: auto; display: flex; gap: 14px; align-items: center; }
+.ghost.sm { padding: 5px 10px; font-size: 13px; }
 @media (max-width: 1100px) { .grid .c-line, .grid .c-n { display: none; } }
 @media (max-width: 900px) {
   .grid .c-cat, .grid .c-gulf { display: none; }

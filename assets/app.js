@@ -48,7 +48,7 @@ const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "";
 
 let D, P = [], BYID = {}, VEND = {}, shown = PAGE;
 const S = { q: "", cat: new Set(), brand: new Set(), proto: new Set(), pmin: "", pmax: "", priced: false, gulf: false, local: false, ha: false, ann: true, sort: [], group: "cat", p: "" };
-let lastScroll = 0;
+let lastScroll = 0, LAST = { rows: [], gk: null };
 
 // ---------- money ----------
 const CUR = "AED";
@@ -252,6 +252,7 @@ function renderResults() {
     rows = keys.flatMap(k => by.get(k));
     rows._groups = by;
   }
+  LAST = { rows, gk };
   $("count").textContent = `${rows.length.toLocaleString()} product${rows.length === 1 ? "" : "s"}`;
   const crumbs = [];
   if (S.q) crumbs.push(["q", "", `“${S.q}”`]);
@@ -271,13 +272,15 @@ function renderResults() {
     return `<th class="${c.num ? "r " : ""}${c.cls || ""}${k ? " sorted" : ""}" aria-sort="${k ? (k.desc ? "descending" : "ascending") : "none"}">
       <button data-sort="${c.id}" title="Sort by ${esc(c.label)}">${esc(c.label)}${c.num && c.id !== "n" ? ` <span class="unit">AED</span>` : ""}<span class="arr">${k ? (k.desc ? "↓" : "↑") : "↕"}</span>${k && S.sort.length > 1 ? `<sup>${i + 1}</sup>` : ""}</button></th>`;
   }).join("")}</tr></thead>`;
-  let prev = null;
-  $("list").innerHTML = rows.length ? `<table class="grid">${head}<tbody>${rows.slice(0, shown).map(p => {
-    let h = "";
-    if (gk) { const k = gk.key(p); if (k !== prev) { prev = k; h = groupHead(gk, k, rows._groups.get(k), cols.length); } }
-    return h + rowHtml(p, cols);
-  }).join("")}</tbody></table>`
-    : `<div class="empty">No products match these filters. <button class="link" data-clear>Clear filters</button></div>`;
+  const vis = rows.slice(0, shown), table = ps => `<table class="grid">${head}<tbody>${ps.map(p => rowHtml(p, cols)).join("")}</tbody></table>`;
+  let html = "";
+  if (!rows.length) html = `<div class="empty">No products match these filters. <button class="link" data-clear>Clear filters</button></div>`;
+  else if (!gk) html = table(vis);
+  else {
+    const parts = new Map(); vis.forEach(p => { const k = gk.key(p); if (!parts.has(k)) parts.set(k, []); parts.get(k).push(p); });
+    html = [...parts].map(([k, ps]) => `<section class="gsec">${groupHead(gk, k, rows._groups.get(k))}${table(ps)}</section>`).join("");
+  }
+  $("list").innerHTML = html;
   $("more-wrap").hidden = rows.length <= shown;
   $("more").textContent = `Show more (${(rows.length - shown).toLocaleString()} left)`;
 }
@@ -287,14 +290,35 @@ function groupKey() {
   if (S.group === "line") return { kind: "line", key: p => `${p.vendor} · ${p.family || "Other"}`, label: k => k, sub: () => "" };
   return null;
 }
-function groupHead(gk, k, items, span) {
+function groupHead(gk, k, items) {
   const filt = gk.kind === "cat" ? (S.cat.size === 1 && S.cat.has(k) ? "" : `<button class="link only" data-go-cat="${esc(k)}" data-keep>Show only this</button>`)
     : gk.kind === "brand" ? (S.brand.size === 1 && S.brand.has(k) ? "" : `<button class="link only" data-go-brand="${esc(k)}" data-keep>Show only this</button>`) : "";
   const brands = gk.kind === "cat" ? new Set(items.map(p => p.vendor)).size : 0;
-  return `<tr class="ghead"><td colspan="${span}"><div><h2>${esc(gk.label(k))}</h2><span class="n">${items.length}${brands ? ` · ${brands} brand${brands > 1 ? "s" : ""}` : ""}</span>${filt}</div></td></tr>`;
+  return `<header class="ghead"><h2>${esc(gk.label(k))}</h2><span class="n">${items.length} product${items.length === 1 ? "" : "s"}${brands ? ` · ${brands} brand${brands > 1 ? "s" : ""}` : ""}</span>
+    <span class="gact">${filt}<button class="ghost sm" data-export="${esc(k)}">Export CSV</button></span></header>`;
 }
 const ORDER = GROUPS.flatMap(([, cs]) => cs.map(([id]) => id));
 const catOrder = d => { const i = ORDER.indexOf(d); return i < 0 ? 99 : i; };
+// ---------- CSV export ----------
+function exportCsv(key) {
+  const rows = key == null ? LAST.rows : LAST.rows._groups.get(key) || [];
+  const base = location.href.split("#")[0];
+  const head = ["Brand", "Product", "Product line", "Category", "Part numbers", "Status", "Description",
+    "Lowest price (AED, ex VAT)", "Gulf price (AED, ex VAT)", "Gulf price as listed", "Gulf price source",
+    "All prices", "Manufacturer page", "Image", "Directory link"];
+  const q = v => { const t = String(v ?? ""); return /[",\n\r]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t; };
+  const aed = v => v == null ? "" : Math.round(usdTo(v));
+  const lines = [head, ...rows.map(p => [p.vendor, p.model, p.family || "", CAT[p.domain]?.name || p.domain, (p.part_numbers || []).join(" "),
+    p.status || "", p.description || "", aed(p._lo), p._gulf ? aed(p._gulf.usd) : "",
+    p._gulf ? `${p._gulf.currency} ${p._gulf.amount}` : "", p._gulf?.source || "",
+    p.prices.map(x => `${x.currency} ${x.amount} ${x.type} ${x.region || ""} (${host(x.source)}, ${x.seen || ""})`).join("; "),
+    p.link || "", p.image || "", `${base}#p=${p.id}`])].map(r => r.map(q).join(","));
+  const label = key == null ? "smart-home-hardware" : `smart-home-hardware-${LAST.gk?.label(key) || key}`;
+  const name = label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") + ".csv";
+  const url = URL.createObjectURL(new Blob(["\ufeff" + lines.join("\r\n")], { type: "text/csv;charset=utf-8" }));
+  const a = Object.assign(document.createElement("a"), { href: url, download: name });
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
 function rowHtml(p, cols) {
   const tags = [];
   if (p.status === "announced") tags.push(`<span class="tag a">Announced</span>`);
@@ -411,10 +435,12 @@ function bind() {
   $("close-filters").addEventListener("click", closeFilters);
   $("scrim").addEventListener("click", closeFilters);
   document.addEventListener("click", e => {
-    const t = e.target.closest("[data-cat],[data-brand],[data-proto],[data-go-cat],[data-go-brand],[data-go-line],[data-go-flag],[data-sort],[data-unsort],[data-p],[data-un],[data-close],[data-clear],[data-home],[data-copy]");
+    const t = e.target.closest("[data-cat],[data-brand],[data-proto],[data-go-cat],[data-go-brand],[data-go-line],[data-go-flag],[data-sort],[data-unsort],[data-export],[data-export-all],[data-p],[data-un],[data-close],[data-clear],[data-home],[data-copy]");
     if (!t) return;
     const d = t.dataset;
     if (d.sort) { clickSort(d.sort, e.shiftKey); return; }
+    if ("exportAll" in d) { exportCsv(null); return; }
+    if ("export" in d) { exportCsv(d.export); return; }
     if ("unsort" in d) { S.sort = []; update(); return; }
     if (d.copy) { navigator.clipboard?.writeText(d.copy); t.textContent = "Copied"; setTimeout(() => t.textContent = d.copy, 900); return; }
     e.preventDefault();
