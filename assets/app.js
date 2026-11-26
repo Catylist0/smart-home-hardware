@@ -213,7 +213,7 @@ function renderBar() {
       <label class="sel"><span>Group by</span><select id="group" aria-label="Group by">
         ${[["cat", "Category"], ["brand", "Brand"], ["line", "Product line"], ["none", "No grouping"]].map(([v, l]) => `<option value="${v}"${S.group === v ? " selected" : ""}>${l}</option>`).join("")}
       </select></label>
-      <button class="ghost sm" data-export-all>Export CSV</button>
+      <button class="ghost sm" data-export-all>Export list to CSV</button>
     </span>`;
   if (OPEN === "brand") { const i = $("brand-q"); i.value = BQ; i.focus(); filterBrandOpts(); }
 }
@@ -324,7 +324,7 @@ function groupHead(gk, k, items) {
     : gk.kind === "brand" ? (S.brand.size === 1 && S.brand.has(k) ? "" : `<button class="link only" data-go-brand="${esc(k)}" data-keep>Show only this</button>`) : "";
   const brands = gk.kind === "cat" ? new Set(items.map(p => p.vendor)).size : 0;
   return `<header class="ghead"><h2>${esc(gk.label(k))}</h2><span class="n">${items.length} product${items.length === 1 ? "" : "s"}${brands ? ` · ${brands} brand${brands > 1 ? "s" : ""}` : ""}</span>
-    <span class="gact">${filt}<button class="ghost sm" data-export="${esc(k)}">Export CSV</button></span></header>`;
+    <span class="gact">${filt}</span></header>`;
 }
 const ORDER = GROUPS.flatMap(([, cs]) => cs.map(([id]) => id));
 const catOrder = d => { const i = ORDER.indexOf(d); return i < 0 ? 99 : i; };
@@ -491,12 +491,11 @@ function bind() {
   document.addEventListener("click", e => {
     // Close an open dropdown when clicking outside it
     if (OPEN && !e.target.closest(".dd")) { OPEN = ""; BQ = ""; renderBar(); }
-    const t = e.target.closest("[data-nav],[data-dd],[data-toggle],[data-preset],[data-f-proto],[data-reset],[data-clear-refine],[data-go-cat],[data-go-brand],[data-go-line],[data-go-flag],[data-sort],[data-unsort],[data-export],[data-export-all],[data-p],[data-close],[data-clear],[data-home],[data-copy]");
+    const t = e.target.closest("[data-nav],[data-dd],[data-toggle],[data-preset],[data-f-proto],[data-reset],[data-clear-refine],[data-go-cat],[data-go-brand],[data-go-line],[data-go-flag],[data-sort],[data-unsort],[data-export-all],[data-p],[data-close],[data-clear],[data-home],[data-copy]");
     if (!t) return;
     const d = t.dataset;
     if (d.sort) { clickSort(d.sort, e.shiftKey); return; }
     if ("exportAll" in d) { exportCsv(null); return; }
-    if ("export" in d) { exportCsv(d.export); return; }
     if ("unsort" in d) { S.sort = []; update(); return; }
     if (d.copy) { navigator.clipboard?.writeText(d.copy); t.textContent = "Copied"; setTimeout(() => t.textContent = d.copy, 900); return; }
     e.preventDefault();
