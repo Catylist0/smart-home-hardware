@@ -158,10 +158,7 @@ function render() {
   document.body.classList.toggle("on-home", home);
   $("filters").hidden = home;
   $("home").hidden = !home; $("results").hidden = home;
-  const search = document.querySelector(".search"), focused = document.activeElement === $("q");
-  $("search-slot").appendChild(search);
-  if (home) { renderHome(); $("home-search").appendChild(search); } else renderResults();
-  if (focused) $("q").focus();
+  if (home) renderHome(); else renderResults();
 }
 function openProduct(id) { if (!S.p) lastScroll = window.scrollY; S.p = id; render(); window.scrollTo(0, 0); }
 function closeProduct() { S.p = ""; render(); requestAnimationFrame(() => window.scrollTo(0, lastScroll)); }
@@ -228,7 +225,7 @@ function renderHome() {
   const opt = (attr, v, label, n) => `<button class="opt" ${attr}="${esc(v)}">${esc(label)}<span class="n">${n}</span></button>`;
   const names = Object.keys(bc).sort((a, b) => a.localeCompare(b));
   $("home").innerHTML = `
-    <div class="home-top"><div id="home-search"></div>
+    <div class="home-top">
       <div class="home-meta">${P.length.toLocaleString()} products · ${names.length} brands · ${P.filter(p => p._gulf).length} with Gulf prices</div></div>
     <section class="hsec"><h2>Categories</h2><div class="hcols">
       ${GROUPS.map(([g, cs]) => { const items = cs.filter(([id]) => cc[id]); return items.length ? `<div class="fgroup"><b>${esc(g)}</b>${items.map(([id, name]) => opt("data-go-cat", id, name, cc[id])).join("")}</div>` : ""; }).join("")}

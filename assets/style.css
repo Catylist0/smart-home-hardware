@@ -328,3 +328,13 @@ mark { background: color-mix(in srgb, var(--gulf) 28%, transparent); color: inhe
   .fbar-right { margin-left: 0; width: 100%; justify-content: space-between; }
   .rhead h1 { font-size: 22px; }
 }
+
+/* Search spans both columns, above the category list and the results */
+.search-row { grid-column: 1 / -1; }
+.search-row .search { max-width: none; height: 48px; margin: 0; }
+.search-row .search input { font-size: 16px; }
+.search input:focus-visible { outline: none; }
+.layout { row-gap: 22px; }
+.filters { top: 92px; }
+body.on-page .search-row { display: none; }
+@media (max-width: 900px) { .layout { row-gap: 14px; } }
