@@ -22,25 +22,14 @@
 </header>
 
 <div class="layout">
-  <aside id="filters" class="filters" aria-label="Filters">
-<div class="filters-head only-mobile"><button id="close-filters" class="ghost" aria-label="Close filters">✕ Close</button></div>
+  <aside id="filters" class="filters nav" aria-label="Categories">
+    <div class="filters-head only-mobile"><button id="close-filters" class="ghost" aria-label="Close categories">✕ Close</button></div>
     <div id="search-slot"><label class="search">
       <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       <input id="q" type="search" placeholder="Search products, brands, part numbers…" autocomplete="off" spellcheck="false">
       <kbd>/</kbd>
     </label></div>
-    <section><h3>Category</h3><div id="f-cat"></div></section>
-    <section><h3>Brand</h3><input id="brand-q" class="mini" type="search" placeholder="Find a brand…"><div id="f-brand" class="scroll"></div></section>
-    <section><h3>Price <span class="unit">(AED)</span></h3>
-      <div class="range"><input id="pmin" type="number" min="0" placeholder="Min" inputmode="numeric"><span>–</span><input id="pmax" type="number" min="0" placeholder="Max" inputmode="numeric"></div>
-      <label class="chk"><input type="checkbox" id="f-priced"> Has a public price</label>
-      <label class="chk"><input type="checkbox" id="f-gulf"> Priced in the UAE / Gulf</label>
-    </section>
-    <section id="sec-proto" hidden><h3>Works with</h3><div id="f-proto" class="chips"></div>
-      <label class="chk"><input type="checkbox" id="f-local"> Local control (no cloud)</label>
-      <label class="chk"><input type="checkbox" id="f-ha"> Home Assistant</label>
-    </section>
-    <section><h3>Status</h3><label class="chk"><input type="checkbox" id="f-ann" checked> Include announced products</label></section>
+    <nav id="f-cat"></nav>
   </aside>
 
   <main id="main">
@@ -48,18 +37,11 @@
     <div id="home" hidden></div>
     <article id="page" hidden></article>
     <div id="results" hidden>
-      <div class="bar">
-        <button id="open-filters" class="ghost only-mobile">Filters <span id="fcount"></span></button>
-        <div id="crumbs" class="crumbs"></div><button id="clear" class="link clear">Clear all filters</button>
-        <div class="bar-right">
-          <span id="count" class="muted"></span>
-          <button class="ghost sm" data-export-all>Export all to CSV</button>
-          <label class="sel"><span>Group by</span><select id="group" aria-label="Group by">
-            <option value="cat">Category</option><option value="brand">Brand</option><option value="line">Product line</option><option value="none">No grouping</option>
-          </select></label>
-
-        </div>
+      <div class="rhead">
+        <button id="open-filters" class="ghost sm only-mobile">☰ Categories</button>
+        <h1 id="rtitle"></h1><span id="count" class="muted"></span>
       </div>
+      <div id="fbar" class="fbar"></div>
       <div id="vendor"></div>
       <div id="sortinfo" class="sortinfo"></div>
       <div id="list"></div>

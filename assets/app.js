@@ -47,7 +47,8 @@ const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } ca
 const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "";
 
 let D, P = [], BYID = {}, VEND = {}, shown = PAGE;
-const S = { q: "", cat: new Set(), brand: new Set(), proto: new Set(), pmin: "", pmax: "", priced: false, gulf: false, local: false, ha: false, ann: true, sort: [], group: "cat", p: "" };
+const S = { q: "", cat: new Set(), brand: new Set(), proto: new Set(), pmin: "", pmax: "", priced: false, gulf: false, local: false, ha: false, ann: true, sort: [], group: "cat", all: false, p: "" };
+let OPEN = "";   // which filter-bar dropdown is open
 let lastScroll = 0, LAST = { rows: [], gk: null };
 
 // ---------- money ----------
@@ -77,7 +78,6 @@ async function load() {
     BYID[p.id] = p;
     return p;
   });
-  if (P.some(p => p.protocols || p.local_control || p.home_assistant)) $("sec-proto").hidden = false;
 }
 function regionLabel(r) {
   r = String(r || "").trim();
@@ -113,7 +113,8 @@ function score(p, t) {
   }
   return s + (p._lo != null ? .5 : 0) + (p._gulf ? .3 : 0);
 }
-const anyFilter = () => S.q || S.cat.size || S.brand.size || S.proto.size || S.pmin || S.pmax || S.priced || S.gulf || S.local || S.ha || !S.ann;
+const refine = () => S.brand.size || S.proto.size || S.pmin || S.pmax || S.priced || S.gulf || S.local || S.ha || !S.ann;
+const anyFilter = () => S.all || S.q || S.cat.size || S.brand.size || S.proto.size || S.pmin || S.pmax || S.priced || S.gulf || S.local || S.ha || !S.ann;
 
 // ---------- URL state ----------
 function writeHash() {
@@ -127,6 +128,7 @@ function writeHash() {
   if (!S.ann) h.set("ann", "0");
   if (S.sort.length) h.set("sort", S.sort.map(k => (k.desc ? "-" : "") + k.id).join(","));
   if (S.group !== "cat") h.set("group", S.group);
+  if (S.all && !S.q && !S.cat.size) h.set("all", "1");
   if (S.p) h.set("p", S.p);
   const s = h.toString().replace(/%2C/g, ",").replace(/\+/g, "%20");
   if (location.hash.slice(1) !== s) history.replaceState(null, "", s ? "#" + s : location.pathname + location.search);
@@ -139,12 +141,9 @@ function readHash() {
   S.pmin = h.get("pmin") || ""; S.pmax = h.get("pmax") || "";
   ["priced", "gulf", "local", "ha"].forEach(k => S[k] = h.get(k) === "1");
   S.ann = h.get("ann") !== "0"; S.sort = (h.get("sort") || "").split(",").filter(Boolean).map(x => ({ id: x.replace(/^-/, ""), desc: x[0] === "-" })).filter(k => COL[k.id]); S.p = h.get("p") || "";
-  S.group = h.get("group") || "cat";
+  S.group = h.get("group") || "cat"; S.all = h.get("all") === "1";
 }
-function syncInputs() {
-  $("q").value = S.q; $("pmin").value = S.pmin; $("pmax").value = S.pmax; $("group").value = S.group;
-  ["priced", "gulf", "local", "ha"].forEach(k => $("f-" + k).checked = S[k]); $("f-ann").checked = S.ann;
-}
+function syncInputs() { $("q").value = S.q; }
 
 // ---------- render ----------
 function render() {
@@ -169,24 +168,59 @@ function closeProduct() { S.p = ""; render(); requestAnimationFrame(() => window
 function countBy(skip, key) {
   const c = {}; for (const p of P) if (matches(p, skip)) c[p[key]] = (c[p[key]] || 0) + 1; return c;
 }
+// Left column: category navigation. One category at a time, like departments in a store.
 function renderFilters() {
-  const cc = countBy("cat", "domain");
-  $("f-cat").innerHTML = GROUPS.map(([g, cs]) => {
-    const items = cs.filter(([id]) => cc[id] || S.cat.has(id));
-    if (!items.length) return "";
-    return `<div class="fgroup"><b>${esc(g)}</b>${items.map(([id, name]) =>
-      `<button class="opt${S.cat.has(id) ? " on" : ""}" data-cat="${id}">${esc(name)}<span class="n">${cc[id] || 0}</span></button>`).join("")}</div>`;
-  }).join("");
-  const bc = countBy("brand", "vendor"), bq = $("brand-q").value.trim().toLowerCase();
-  $("f-brand").innerHTML = D.vendors.map(v => v.name).sort((a, b) => a.localeCompare(b))
-    .filter(n => (bc[n] || S.brand.has(n)) && (!bq || n.toLowerCase().includes(bq) || S.brand.has(n)))
-    .sort((a, b) => S.brand.has(b) - S.brand.has(a))
-    .map(n => `<button class="opt${S.brand.has(n) ? " on" : ""}" data-brand="${esc(n)}">${esc(n)}<span class="n">${bc[n] || 0}</span></button>`).join("");
-  const protos = [...new Set(P.flatMap(p => p.protocols || []))];
-  $("f-proto").innerHTML = Object.keys(PROTO).filter(k => protos.includes(k))
-    .map(k => `<button class="chip${S.proto.has(k) ? " on" : ""}" data-proto="${k}">${PROTO[k]}</button>`).join("");
-  const n = S.cat.size + S.brand.size + S.proto.size + (S.pmin ? 1 : 0) + (S.pmax ? 1 : 0) + ["priced", "gulf", "local", "ha"].filter(k => S[k]).length;
-  $("fcount").textContent = n ? `(${n})` : "";
+  const cc = countBy("cat", "domain"), total = P.filter(p => matches(p, "cat")).length;
+  const on = id => S.cat.size === 1 && S.cat.has(id);
+  $("f-cat").innerHTML = `<button class="opt top${S.cat.size ? "" : " on"}" data-nav="">All products<span class="n">${total.toLocaleString()}</span></button>` +
+    GROUPS.map(([g, cs]) => {
+      const items = cs.filter(([id]) => cc[id] || S.cat.has(id));
+      return items.length ? `<div class="fgroup"><b>${esc(g)}</b>${items.map(([id, name]) =>
+        `<button class="opt${on(id) ? " on" : ""}" data-nav="${id}">${esc(name)}<span class="n">${cc[id] || 0}</span></button>`).join("")}</div>` : "";
+    }).join("");
+}
+// Filter bar above the table: dropdowns for brand, price and compatibility, plus quick toggles.
+function renderBar() {
+  const bc = countBy("brand", "vendor");
+  const brands = Object.keys(bc).concat([...S.brand].filter(b => !bc[b])).sort((a, b) => a.localeCompare(b));
+  const protos = Object.keys(PROTO).filter(k => P.some(p => (p.protocols || []).includes(k)));
+  const lbl = (name, vals) => vals.length ? `${name}: <b>${esc(vals[0])}</b>${vals.length > 1 ? ` +${vals.length - 1}` : ""}` : name;
+  const priceVal = S.pmin || S.pmax ? [`${S.pmin ? money(+S.pmin) : "0"}–${S.pmax ? money(+S.pmax) : "any"}`] : [];
+  const works = [...[...S.proto].map(x => PROTO[x]), S.local ? "Local control" : "", S.ha ? "Home Assistant" : ""].filter(Boolean);
+  const dd = (id, label, active, body) => `<div class="dd${OPEN === id ? " open" : ""}">
+      <button class="fbtn${active ? " active" : ""}" data-dd="${id}" aria-expanded="${OPEN === id}">${label}<span class="car">▾</span></button>
+      ${OPEN === id ? `<div class="pop" data-pop>${body}</div>` : ""}</div>`;
+  const check = (attr, v, label, on, n) => `<label class="ck"><input type="checkbox" ${attr}="${esc(v)}" ${on ? "checked" : ""}><span>${esc(label)}</span>${n != null ? `<span class="n">${n}</span>` : ""}</label>`;
+  const brandBody = `<input class="mini" id="brand-q" type="search" placeholder="Find a brand…" autocomplete="off">
+      <div class="scroll" id="brand-opts">${brands.map(n => check("data-f-brand", n, n, S.brand.has(n), bc[n] || 0)).join("")}</div>
+      ${S.brand.size ? `<div class="pop-foot"><button class="link" data-reset="brand">Clear brands</button></div>` : ""}`;
+  const presets = [[0, 200], [200, 500], [500, 1000], [1000, 3000], [3000, ""]];
+  const priceBody = `<div class="range"><input id="pmin" type="number" min="0" placeholder="Min AED" value="${esc(S.pmin)}" inputmode="numeric"><span>–</span><input id="pmax" type="number" min="0" placeholder="Max AED" value="${esc(S.pmax)}" inputmode="numeric"></div>
+      <div class="chips">${presets.map(([a, b]) => `<button class="chip${String(S.pmin) === String(a || "") && String(S.pmax) === String(b) ? " on" : ""}" data-preset="${a}-${b}">${b ? `${a ? money(a) : "Under"} ${a ? "–" : ""} ${money(b)}` : `${money(a)}+`}</button>`).join("")}</div>
+      ${check("data-f-flag", "priced", "Has a public price", S.priced)}
+      ${priceVal.length ? `<div class="pop-foot"><button class="link" data-reset="price">Clear price</button></div>` : ""}`;
+  const worksBody = `<div class="chips">${protos.map(k => `<button class="chip${S.proto.has(k) ? " on" : ""}" data-f-proto="${k}">${PROTO[k]}</button>`).join("")}</div>
+      ${check("data-f-flag", "local", "Local control (works without the cloud)", S.local)}
+      ${check("data-f-flag", "ha", "Works with Home Assistant", S.ha)}
+      ${check("data-f-flag", "ann", "Include announced products", S.ann)}`;
+  $("fbar").innerHTML = `
+    ${dd("brand", lbl("Brand", [...S.brand]), S.brand.size, brandBody)}
+    ${dd("price", lbl("Price", priceVal), priceVal.length || S.priced, priceBody)}
+    ${protos.length ? dd("works", lbl("Works with", works), works.length || !S.ann, worksBody) : ""}
+    <button class="fbtn toggle${S.gulf ? " active" : ""}" data-toggle="gulf" aria-pressed="${S.gulf}"><span class="box">${S.gulf ? "✓" : ""}</span>Priced in UAE / Gulf</button>
+    ${refine() ? `<button class="link" data-clear-refine>Clear filters</button>` : ""}
+    <span class="fbar-right">
+      <label class="sel"><span>Group by</span><select id="group" aria-label="Group by">
+        ${[["cat", "Category"], ["brand", "Brand"], ["line", "Product line"], ["none", "No grouping"]].map(([v, l]) => `<option value="${v}"${S.group === v ? " selected" : ""}>${l}</option>`).join("")}
+      </select></label>
+      <button class="ghost sm" data-export-all>Export CSV</button>
+    </span>`;
+  if (OPEN === "brand") { const i = $("brand-q"); i.value = BQ; i.focus(); filterBrandOpts(); }
+}
+let BQ = "";
+function filterBrandOpts() {
+  const q = BQ.trim().toLowerCase();
+  document.querySelectorAll("#brand-opts .ck").forEach(el => { el.hidden = q && !el.textContent.toLowerCase().includes(q); });
 }
 function renderHome() {
   const cc = {}, bc = {};
@@ -255,15 +289,9 @@ function renderResults() {
   }
   LAST = { rows, gk };
   $("count").textContent = `${rows.length.toLocaleString()} product${rows.length === 1 ? "" : "s"}`;
-  const crumbs = [];
-  if (S.q) crumbs.push(["q", "", `“${S.q}”`]);
-  S.cat.forEach(c => crumbs.push(["cat", c, CAT[c]?.name || c]));
-  S.brand.forEach(b => crumbs.push(["brand", b, b]));
-  S.proto.forEach(x => crumbs.push(["proto", x, PROTO[x]]));
-  if (S.pmin || S.pmax) crumbs.push(["price", "", `${S.pmin ? money(+S.pmin) : "Any"} – ${S.pmax ? money(+S.pmax) : "any"}`]);
-  [["priced", "Has price"], ["gulf", "Gulf price"], ["local", "Local control"], ["ha", "Home Assistant"]].forEach(([k, l]) => S[k] && crumbs.push([k, "", l]));
-  if (!S.ann) crumbs.push(["ann", "", "Current only"]);
-  $("crumbs").innerHTML = crumbs.map(([k, v, l]) => `<button class="crumb" data-un="${k}" data-v="${esc(v)}">${esc(l)} <i>✕</i></button>`).join("");
+  const cname = S.cat.size === 1 ? CAT[[...S.cat][0]]?.name : S.cat.size > 1 ? `${S.cat.size} categories` : "All products";
+  $("rtitle").innerHTML = S.q ? `Results for “${esc(S.q)}”${S.cat.size ? ` <span class="in">in ${esc(cname)}</span>` : ""}` : esc(cname);
+  renderBar();
   $("sortinfo").innerHTML = S.sort.length ? `Sorted by ${S.sort.map(k => `${esc(COL[k.id]?.label)} ${k.desc ? "↓" : "↑"}`).join(", then ")} · <button class="link" data-unsort>Reset</button>`
     : `<span class="muted">Click a column to sort${gk ? " within each group" : ""}. Shift-click to add a second sort.</span>`;
   $("vendor").innerHTML = S.brand.size === 1 ? vendorPanel(VEND[[...S.brand][0]]) : "";
@@ -445,18 +473,25 @@ function update() { shown = PAGE; render(); }
 function bind() {
   let qt;
   $("q").addEventListener("input", e => { clearTimeout(qt); qt = setTimeout(() => { S.q = e.target.value.trim(); update(); }, 120); });
-  $("brand-q").addEventListener("input", renderFilters);
-  ["pmin", "pmax"].forEach(id => $(id).addEventListener("change", e => { S[id] = e.target.value; update(); }));
-  ["priced", "gulf", "local", "ha"].forEach(k => $("f-" + k).addEventListener("change", e => { S[k] = e.target.checked; update(); }));
-  $("f-ann").addEventListener("change", e => { S.ann = e.target.checked; update(); });
-  $("group").addEventListener("change", e => { S.group = e.target.value; update(); });
   $("more").addEventListener("click", () => { shown += PAGE * 2; renderResults(); });
-  $("clear").addEventListener("click", clearAll);
   $("open-filters").addEventListener("click", () => { $("filters").classList.add("open"); $("scrim").hidden = false; });
   $("close-filters").addEventListener("click", closeFilters);
   $("scrim").addEventListener("click", closeFilters);
+  // Filter bar inputs
+  document.addEventListener("input", e => {
+    if (e.target.id === "brand-q") { BQ = e.target.value; filterBrandOpts(); }
+  });
+  document.addEventListener("change", e => {
+    const t = e.target, d = t.dataset;
+    if (t.id === "group") { S.group = t.value; update(); }
+    else if (t.id === "pmin" || t.id === "pmax") { S[t.id] = t.value; update(); }
+    else if (d.fBrand !== undefined) { toggle(S.brand, d.fBrand); update(); }
+    else if (d.fFlag) { S[d.fFlag] = t.checked; update(); }
+  });
   document.addEventListener("click", e => {
-    const t = e.target.closest("[data-cat],[data-brand],[data-proto],[data-go-cat],[data-go-brand],[data-go-line],[data-go-flag],[data-sort],[data-unsort],[data-export],[data-export-all],[data-p],[data-un],[data-close],[data-clear],[data-home],[data-copy]");
+    // Close an open dropdown when clicking outside it
+    if (OPEN && !e.target.closest(".dd")) { OPEN = ""; BQ = ""; renderBar(); }
+    const t = e.target.closest("[data-nav],[data-dd],[data-toggle],[data-preset],[data-f-proto],[data-reset],[data-clear-refine],[data-go-cat],[data-go-brand],[data-go-line],[data-go-flag],[data-sort],[data-unsort],[data-export],[data-export-all],[data-p],[data-close],[data-clear],[data-home],[data-copy]");
     if (!t) return;
     const d = t.dataset;
     if (d.sort) { clickSort(d.sort, e.shiftKey); return; }
@@ -465,30 +500,29 @@ function bind() {
     if ("unsort" in d) { S.sort = []; update(); return; }
     if (d.copy) { navigator.clipboard?.writeText(d.copy); t.textContent = "Copied"; setTimeout(() => t.textContent = d.copy, 900); return; }
     e.preventDefault();
-    if (d.cat) { toggle(S.cat, d.cat); update(); }
-    else if (d.brand) { toggle(S.brand, d.brand); update(); }
-    else if (d.proto) { toggle(S.proto, d.proto); update(); }
+    if ("nav" in d) { S.cat = d.nav ? new Set([d.nav]) : new Set(); S.all = !d.nav; S.p = ""; closeFilters(); update(); window.scrollTo(0, 0); }
+    else if (d.dd) { OPEN = OPEN === d.dd ? "" : d.dd; BQ = ""; renderBar(); }
+    else if (d.toggle) { S[d.toggle] = !S[d.toggle]; update(); }
+    else if (d.preset) { const [a, b] = d.preset.split("-"); const same = S.pmin === (a === "0" ? "" : a) && S.pmax === b; S.pmin = same ? "" : (a === "0" ? "" : a); S.pmax = same ? "" : b; update(); }
+    else if (d.fProto) { toggle(S.proto, d.fProto); update(); }
+    else if (d.reset === "brand") { S.brand.clear(); update(); }
+    else if (d.reset === "price") { S.pmin = S.pmax = ""; S.priced = false; update(); }
+    else if ("clearRefine" in d) { S.brand.clear(); S.proto.clear(); S.pmin = S.pmax = ""; ["priced", "gulf", "local", "ha"].forEach(k => S[k] = false); S.ann = true; OPEN = ""; update(); }
     else if (d.goCat !== undefined) { if (d.keep === undefined) resetFilters(); S.p = ""; S.cat = new Set([d.goCat]); update(); window.scrollTo(0, 0); }
-    else if (d.goBrand !== undefined) { if (d.keep === undefined) resetFilters(); S.p = ""; S.brand = new Set([d.goBrand]); update(); window.scrollTo(0, 0); }
+    else if (d.goBrand !== undefined) { if (d.keep === undefined) resetFilters(); S.p = ""; S.brand = new Set([d.goBrand]); S.all = true; update(); window.scrollTo(0, 0); }
     else if (d.goLine !== undefined) { const p = BYID[S.p]; resetFilters(); S.brand.add(p.vendor); S.q = p.family; S.group = "line"; syncInputs(); update(); window.scrollTo(0, 0); }
-    else if (d.goFlag) { resetFilters(); S[d.goFlag] = true; syncInputs(); update(); window.scrollTo(0, 0); }
+    else if (d.goFlag) { resetFilters(); S[d.goFlag] = true; S.all = true; syncInputs(); update(); window.scrollTo(0, 0); }
     else if (d.p) { openProduct(d.p); }
     else if ("close" in d) { closeProduct(); }
     else if ("clear" in d || "home" in d) { clearAll(); }
-    else if (d.un) {
-      const k = d.un;
-      if (k === "q") S.q = ""; else if (k === "cat") S.cat.delete(d.v); else if (k === "brand") S.brand.delete(d.v);
-      else if (k === "proto") S.proto.delete(d.v); else if (k === "price") S.pmin = S.pmax = ""; else if (k === "ann") S.ann = true; else S[k] = false;
-      syncInputs(); update();
-    }
   });
   document.addEventListener("keydown", e => {
     if (e.key === "/" && !/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)) { e.preventDefault(); $("q").focus(); }
-    if (e.key === "Escape" && S.p) closeProduct();
+    if (e.key === "Escape") { if (OPEN) { OPEN = ""; renderBar(); } else if (S.p) closeProduct(); }
   });
   window.addEventListener("hashchange", () => { readHash(); syncInputs(); render(); });
 }
-function resetFilters() { S.q = ""; S.cat.clear(); S.brand.clear(); S.proto.clear(); S.pmin = S.pmax = ""; ["priced", "gulf", "local", "ha"].forEach(k => S[k] = false); S.ann = true; S.p = ""; syncInputs(); }
+function resetFilters() { S.all = false; OPEN = ""; S.q = ""; S.cat.clear(); S.brand.clear(); S.proto.clear(); S.pmin = S.pmax = ""; ["priced", "gulf", "local", "ha"].forEach(k => S[k] = false); S.ann = true; S.p = ""; syncInputs(); }
 function clearAll() { resetFilters(); update(); window.scrollTo(0, 0); }
 function closeFilters() { $("filters").classList.remove("open"); if (!S.p) $("scrim").hidden = true; }
 
